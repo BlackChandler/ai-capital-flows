@@ -48,6 +48,7 @@ def build():
         shutil.copyfile(HERE / "src" / name, DOCS / name)
 
     built = dt.datetime.now().strftime("%Y-%m-%d %H:%M")
+    ver = dt.datetime.now().strftime("%Y%m%d%H%M%S")  # cache-buster: GitHub Pages lets browsers cache files for 10 minutes
     bonds_asof = ""
     if (DOCS / "data" / "tv_bonds.csv").exists():
         lines = (DOCS / "data" / "tv_bonds.csv").read_text(encoding="utf-8").splitlines()[1:]
@@ -61,10 +62,10 @@ def build():
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title>AI 资金流量表</title>
-<link rel="stylesheet" href="theme.css">
+<link rel="stylesheet" href="theme.css?v={ver}">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
-<script>window.__DASH_DATASETS = {json.dumps(datasets, ensure_ascii=False)}; window.__DASH_PARAMS = {json.dumps(PARAMS, ensure_ascii=False)};</script>
-<script src="runtime.js"></script>
+<script>window.__DASH_DATASETS = {json.dumps(datasets, ensure_ascii=False)}; window.__DASH_PARAMS = {json.dumps(PARAMS, ensure_ascii=False)}; window.__DASH_VERSION = "{ver}";</script>
+<script src="runtime.js?v={ver}"></script>
 </head>
 <body>
 <div class="site-bar"><span>{html.escape(bar)}</span><span>仅供内部讨论，不构成投资建议</span></div>

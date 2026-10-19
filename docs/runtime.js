@@ -22,7 +22,7 @@
     const ds = DATASETS[id];
     if (!ds) { state[id] = { status: 'missing', data: [], columns: [], message: 'Unknown dataset ' + id }; return; }
     state[id] = { status: 'loading', data: [], columns: [], refreshing: false, meta: [] };
-    fetch('data/' + ds.file)
+    fetch('data/' + ds.file + (window.__DASH_VERSION ? '?v=' + window.__DASH_VERSION : ''))
       .then((r) => { if (!r.ok) throw new Error(r.status + ' ' + r.statusText); return r.text(); })
       .then((text) => {
         const rows = d3.csvParse(text.replace(/^﻿/, ''));
