@@ -26,6 +26,8 @@
   }
 }
 * { box-sizing: border-box; }
+/* The Claude host enforces [hidden]; the page's `.af .page { display: flex }` would otherwise override it. */
+[hidden] { display: none !important; }
 html, body { margin: 0; background: var(--color-bg); color: var(--color-fg); font-family: var(--font-anthropic-sans); font-size: var(--cds-font-size-body); line-height: 1.5; }
 #dash-root { --dash-gutter: clamp(16px, 4vw, 40px); padding: 0 var(--dash-gutter) var(--cds-gap-xl); max-width: 1400px; margin-inline: auto; }
 #dash-root b, #dash-root strong { font-weight: 700; }
