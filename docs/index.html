@@ -1,0 +1,2063 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>AI 资金流量表</title>
+<link rel="stylesheet" href="theme.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<script>window.__DASH_DATASETS = {"assumptions": {"file": "assumptions.csv", "title": "估算假设"}, "bonds": {"file": "bonds.csv", "title": "AI 基础设施债券定价"}, "catalysts": {"file": "catalysts.csv", "title": "催化剂日历"}, "cds_points": {"file": "cds_points.csv", "title": "CDS 点位"}, "circular": {"file": "circular.csv", "title": "循环融资：投资与回流"}, "commitments": {"file": "commitments.csv", "title": "算力合同、担保与入股"}, "conclusions": {"file": "conclusions.csv", "title": "结论说明"}, "contract_terms": {"file": "contract_terms.csv", "title": "算力合同硬度"}, "cw_topic": {"file": "cw_topic.csv", "title": "CoreWeave 专题正文"}, "cw_views": {"file": "cw_views.csv", "title": "CoreWeave 各方观点"}, "debt_instruments": {"file": "debt_instruments.csv", "title": "逐笔债务穿透"}, "equity_stats": {"file": "equity_stats.csv", "title": "个股指标与违约距离"}, "equity_supply": {"file": "equity_supply.csv", "title": "股权供给的历史参照"}, "events": {"file": "events.csv", "title": "事件时间线"}, "exposure": {"file": "exposure.csv", "title": "压力传导：敏口清单"}, "financing_events": {"file": "financing_events.csv", "title": "逐笔融资事件"}, "flow": {"file": "flow.csv", "title": "逐年资金流量线"}, "flow_table": {"file": "flow_table.csv", "title": "资金流量表（按年透视）"}, "funding_gap": {"file": "funding_gap.csv", "title": "实验室外部股权需求时间表"}, "funding_locked": {"file": "funding_locked.csv", "title": "已锁定的资金"}, "holders": {"file": "holders.csv", "title": "AI 债务持有人"}, "market_series": {"file": "market_series.csv", "title": "市场序列"}, "monitor": {"file": "monitor.csv", "title": "驾驶舱信号灯"}, "participants": {"file": "participants.csv", "title": "参与者财务"}, "research_text": {"file": "research_text.csv", "title": "三项研究的要点与说明"}, "risk_prices": {"file": "risk_prices.csv", "title": "债券与 CDS 价格点"}, "sankey": {"file": "sankey.csv", "title": "资金流向（2025、2026E）"}, "sec_evidence": {"file": "sec_evidence.csv", "title": "SEC 文件原文摘录"}, "sources": {"file": "sources.csv", "title": "原始数据与出处"}, "tv_bonds": {"file": "tv_bonds.csv", "title": "Oracle 与 CoreWeave 债券日度"}, "upgrade_text": {"file": "upgrade_text.csv", "title": "驾驶舱、压力传导与定价地图的文字"}}; window.__DASH_PARAMS = {"scenario": "公司计划", "shock_lab": "OpenAI", "shock_pct": 30, "year": 2026};</script>
+<script src="runtime.js"></script>
+</head>
+<body>
+<div class="site-bar"><span>研究数据更新于 2026-10-19 · 债券价格截至 2026-10-16 · 页面生成于 2026-10-19 11:58</span><span>仅供内部讨论，不构成投资建议</span></div>
+<div id="dash-root">
+<style>
+.af { font-family: var(--font-anthropic-sans); display: flex; flex-direction: column; gap: var(--cds-gap-lg); padding-block: var(--cds-pad-md); }
+.af h1 { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); margin: 0; text-wrap: balance; }
+.af h2 { font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); margin: 0; }
+.af h3 { font-size: var(--cds-font-size-body); font-weight: var(--cds-font-weight-medium); margin: 0; }
+.af .take { color: var(--color-fg-muted); margin: var(--cds-gap-xs) 0 0; max-width: 76ch; line-height: 1.6; }
+.af .take b { font-weight: var(--cds-font-weight-medium); color: var(--color-fg); }
+.af .tabs { display: flex; flex-wrap: wrap; gap: var(--cds-gap-xs); border-bottom: 1px solid var(--color-border-line); padding-bottom: var(--cds-gap-sm); }
+.af .tab { font: inherit; font-size: var(--cds-font-size-body); padding: var(--cds-pad-xs) var(--cds-pad-sm); border: 0; border-radius: var(--cds-radius); background: transparent; color: var(--color-fg-muted); cursor: pointer; }
+.af .tab[aria-selected="true"] { background: var(--color-panel); color: var(--color-fg); box-shadow: inset 0 -2px 0 var(--color-fg); }
+.af .tab:focus-visible, .af .chip:focus-visible { outline: 2px solid var(--color-fg); outline-offset: 2px; }
+.af .tab .n { font-variant-numeric: tabular-nums; margin-right: var(--cds-gap-xs); color: var(--color-fg-muted); }
+.af .page { display: flex; flex-direction: column; gap: var(--cds-gap-lg); }
+.af .lead { max-width: 76ch; color: var(--color-fg-muted); line-height: 1.6; margin: 0; }
+.af .controls { display: flex; flex-wrap: wrap; gap: var(--cds-gap-sm); align-items: center; }
+.af .controls .lbl { color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); margin-right: var(--cds-gap-xs); }
+.af .chip { font: inherit; font-size: var(--cds-font-size-caption); padding: var(--cds-pad-xs) var(--cds-pad-sm); border-radius: var(--cds-radius); border: 1px solid var(--color-border-line); background: var(--color-panel); color: var(--color-fg); cursor: pointer; }
+.af .chip[aria-pressed="true"] { background: var(--color-fg); color: var(--color-bg); border-color: var(--color-fg); }
+.af .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr)); gap: var(--cds-gap-md); }
+.af .kpi { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-md); display: flex; flex-direction: column; gap: var(--cds-gap-xs); }
+.af .kpi .k { color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
+.af .kpi .v { font-family: var(--font-anthropic-serif); font-size: var(--cds-font-size-title); font-variant-numeric: tabular-nums; }
+.af .kpi .u { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.af .pill { align-self: flex-start; font-size: var(--cds-font-size-caption); padding: 0 var(--cds-pad-xs); border-radius: var(--cds-radius); border: 1px solid var(--color-border-line); color: var(--color-fg-muted); }
+.af .pill.est { color: var(--color-warn); border-color: var(--color-warn); }
+.af .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr)); gap: var(--cds-gap-md); }
+.af .card { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); min-width: 0; position: relative; }
+.af .note { color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); margin: var(--cds-gap-xs) 0 var(--cds-gap-sm); line-height: 1.5; }
+.af .chart { position: relative; min-height: 16rem; }
+.af .chart.tall { min-height: 26rem; }
+.af svg text { font-family: var(--font-anthropic-sans); }
+.af .tip { position: absolute; pointer-events: none; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); border-radius: var(--cds-radius); box-shadow: var(--cds-shadow-popover); padding: var(--cds-pad-xs) var(--cds-pad-sm); font-size: var(--cds-font-size-caption); white-space: nowrap; z-index: 2; }
+.af .tip .t { color: var(--cds-text-secondary); }
+.af .tablebox { max-height: 30rem; overflow: auto; border-top: 1px solid var(--color-border-line); }
+.af table { border-collapse: collapse; width: 100%; font-size: var(--cds-font-size-caption); font-variant-numeric: tabular-nums; }
+.af th, .af td { text-align: left; padding: var(--cds-pad-xs) var(--cds-pad-sm); border-bottom: 1px solid var(--color-border-line); vertical-align: top; }
+.af th { position: sticky; top: 0; background: var(--color-panel); color: var(--color-fg-muted); font-weight: var(--cds-font-weight-medium); z-index: 1; }
+.af td.num, .af th.num { text-align: right; white-space: nowrap; }
+.af td.est { font-style: italic; color: var(--color-warn); }
+.af td.fc { color: var(--color-fg-muted); }
+.af td.sel, .af th.sel { background: color-mix(in srgb, var(--color-fg) 6%, transparent); }
+.af td.wrap { min-width: 14rem; }
+.af td.lab { color: var(--color-bad); }
+.af .search { font: inherit; font-size: var(--cds-font-size-caption); padding: var(--cds-pad-xs) var(--cds-pad-sm); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); background: var(--color-bg); color: var(--color-fg); width: min(100%, 20rem); margin-bottom: var(--cds-gap-sm); }
+.af .legend { display: flex; flex-wrap: wrap; gap: var(--cds-gap-md); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin-bottom: var(--cds-gap-sm); }
+.af .legend span { display: inline-flex; align-items: center; gap: var(--cds-gap-xs); }
+.af .sw { width: 0.9rem; height: 0.4rem; border-radius: 1px; display: inline-block; }
+.af .tvb-ctl { display: flex; flex-wrap: wrap; gap: var(--cds-gap-sm); align-items: center; margin-bottom: var(--cds-gap-md); }
+.af .tvb-ctl .lbl { color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
+.af .tvb-take { margin: 0 0 var(--cds-gap-sm); line-height: 1.6; }
+.af .tvb-take b { font-weight: var(--cds-font-weight-medium); }
+.af .tvb-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr)); gap: var(--cds-gap-lg); margin-bottom: var(--cds-gap-md); }
+.af .tvb-grid h3 { margin-bottom: var(--cds-gap-xs); }
+.af .tvb-chart { position: relative; min-height: 260px; }
+.af td.up { color: var(--color-bad); }
+.af td.dn { color: var(--color-ok); }
+.af a { color: inherit; }
+.af .events { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--cds-gap-sm); }
+.af .events li { display: grid; grid-template-columns: 6.5rem 5.5rem 1fr; gap: var(--cds-gap-sm); font-size: var(--cds-font-size-caption); line-height: 1.5; }
+.af .events .d { color: var(--color-fg-muted); font-variant-numeric: tabular-nums; }
+.af .events .c { color: var(--color-fg-muted); }
+@media (max-width: 34rem) { .af .events li { grid-template-columns: 1fr; gap: 0; } }
+.af .cw { gap: var(--cds-gap-xl); }
+.af .cw-hero h2 { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); text-wrap: balance; }
+.af .cw-lead { font-size: var(--cds-font-size-body); line-height: 1.75; max-width: 78ch; margin: var(--cds-gap-sm) 0 var(--cds-gap-md); }
+.af .cw-sec { display: flex; flex-direction: column; gap: var(--cds-gap-md); }
+.af .cw-sec > h2 { display: flex; align-items: baseline; gap: var(--cds-gap-sm); border-bottom: 1px solid var(--color-border-line); padding-bottom: var(--cds-gap-xs); }
+.af .cw-sec > h2 .num { font-family: var(--font-anthropic-serif); font-weight: 400; color: var(--color-fg-muted); font-variant-numeric: tabular-nums; }
+.af .cw-body { display: flex; flex-direction: column; gap: var(--cds-gap-md); max-width: 100%; }
+.af .cw-body p, .af .cw-col p { margin: 0; line-height: 1.75; max-width: 78ch; }
+.af .cw-body h3, .af .cw-col h3 { margin: var(--cds-gap-sm) 0 0; }
+.af .cw-src { color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); margin-top: calc(-1 * var(--cds-gap-sm)); }
+.af .cw-figs { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); gap: var(--cds-gap-md); }
+.af .cw-fig { margin: 0; background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-sm); display: flex; flex-direction: column; gap: var(--cds-gap-xs); min-width: 0; }
+.af .cw-fig img { width: 100%; height: auto; border-radius: calc(var(--cds-radius) / 2); display: block; }
+.af .cw-fig figcaption { font-size: var(--cds-font-size-caption); line-height: 1.5; color: var(--color-fg-muted); }
+.af .cw-fig figcaption b { color: var(--color-fg); font-weight: var(--cds-font-weight-medium); display: block; }
+.af .cw-camps { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr)); gap: var(--cds-gap-md); }
+.af .cw-col { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); display: flex; flex-direction: column; gap: var(--cds-gap-md); min-width: 0; }
+.af .cw-col .tag { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.af .cw-col.bull { box-shadow: inset 0 3px 0 var(--color-ok); }
+.af .cw-col.bear { box-shadow: inset 0 3px 0 var(--color-bad); }
+.af .cw-col .cw-figs { grid-template-columns: 1fr; }
+.af .cw-points { margin: 0; padding-left: 1.2em; display: flex; flex-direction: column; gap: var(--cds-gap-sm); line-height: 1.7; max-width: 78ch; }
+.af .cw-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); gap: var(--cds-gap-md); }
+.af .cw-cards .card p { margin: var(--cds-gap-xs) 0 0; line-height: 1.7; font-size: var(--cds-font-size-caption); }
+.af .cc-thesis { font-family: var(--font-anthropic-serif); font-size: var(--cds-font-size-heading); line-height: 1.7; max-width: 76ch; margin: var(--cds-gap-sm) 0 0; }
+.af .cc-chain { display: flex; flex-wrap: wrap; align-items: stretch; gap: var(--cds-gap-xs); }
+.af .cc-node { flex: 1 1 9rem; min-width: 0; background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-sm) var(--cds-pad-md); display: flex; flex-direction: column; gap: var(--cds-gap-xs); }
+.af .cc-node b { font-weight: var(--cds-font-weight-medium); }
+.af .cc-node span { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); line-height: 1.5; }
+.af .cc-arrow { align-self: center; color: var(--color-fg-muted); }
+.af .cc-findings { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 26rem), 1fr)); gap: var(--cds-gap-md); counter-reset: f; }
+.af .cc-f { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); display: flex; flex-direction: column; gap: var(--cds-gap-sm); counter-increment: f; }
+.af .cc-f h3::before { content: counter(f) "  "; font-family: var(--font-anthropic-serif); font-weight: 400; color: var(--color-fg-muted); }
+.af .cc-f p { margin: 0; line-height: 1.7; font-size: var(--cds-font-size-body); }
+.af .cc-fig { display: flex; align-items: baseline; gap: var(--cds-gap-sm); flex-wrap: wrap; border-top: 1px solid var(--color-border-line); padding-top: var(--cds-gap-sm); }
+.af .cc-fig .n { font-family: var(--font-anthropic-serif); font-size: var(--cds-font-size-title); font-variant-numeric: tabular-nums; }
+.af .cc-fig .l { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.af .cc-ev { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); display: flex; flex-wrap: wrap; gap: var(--cds-gap-sm); align-items: center; }
+.af .cc-go { font: inherit; font-size: var(--cds-font-size-caption); background: none; border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: 0 var(--cds-pad-xs); color: var(--color-fg); cursor: pointer; }
+.af .cc-signals { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); gap: var(--cds-gap-md); }
+.af .cc-signals .card h3 { margin: 0 0 var(--cds-gap-xs); }
+.af .cc-signals .card p { margin: 0; font-size: var(--cds-font-size-caption); line-height: 1.7; }
+.af .cc-caveats { margin: 0; padding-left: 1.2em; color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); line-height: 1.7; display: flex; flex-direction: column; gap: var(--cds-gap-xs); }
+.af .rs-points { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 26rem), 1fr)); gap: var(--cds-gap-md); }
+.af .rs-points > div { border-left: 2px solid var(--color-border-line); padding-left: var(--cds-pad-md); }
+.af .rs-points h3 { margin: 0 0 var(--cds-gap-xs); }
+.af .rs-points p { margin: 0; line-height: 1.7; font-size: var(--cds-font-size-body); }
+.af .kpi .lbl2 { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); line-height: 1.5; }
+.af td.h1 { color: var(--color-ok); font-weight: var(--cds-font-weight-medium); }
+.af td.h4, .af td.h5 { color: var(--color-bad); }
+.af td.cell { text-align: right; white-space: nowrap; }
+.af td.cell .c { color: var(--color-fg-muted); margin-left: var(--cds-gap-xs); }
+.af .tabs { flex-direction: column; gap: var(--cds-gap-xs); }
+.af .tabgroup { display: flex; flex-wrap: wrap; align-items: center; gap: var(--cds-gap-xs); }
+.af .tabgroup .g { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); width: 2.6rem; flex: none; }
+.af .ck-hero { display: grid; grid-template-columns: minmax(12rem, 16rem) 1fr; gap: var(--cds-gap-lg); align-items: center; }
+@media (max-width: 40rem) { .af .ck-hero { grid-template-columns: 1fr; } }
+.af .ck-hero h2 { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); margin: 0 0 var(--cds-gap-sm); text-wrap: balance; }
+.af .ck-layers { display: grid; grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr)); gap: var(--cds-gap-sm); margin-top: var(--cds-gap-md); }
+.af .ck-layer { border-top: 3px solid var(--color-border-line); padding-top: var(--cds-gap-xs); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.af .ck-layer b { display: block; font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-heading); color: var(--color-fg); font-variant-numeric: tabular-nums; }
+.af .ck-signals { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr)); gap: var(--cds-gap-sm); }
+.af .ck-sig { text-align: left; font: inherit; background: var(--color-panel); border: 1px solid var(--color-border-line); border-left: 4px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-sm) var(--cds-pad-md); cursor: pointer; display: flex; flex-direction: column; gap: 2px; color: var(--color-fg); }
+.af .ck-sig:focus-visible { outline: 2px solid var(--color-fg); outline-offset: 2px; }
+.af .ck-sig .ly { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.af .ck-sig .nm { font-size: var(--cds-font-size-caption); line-height: 1.4; min-height: 2.8em; }
+.af .ck-sig .vv { font-family: var(--font-anthropic-serif); font-size: var(--cds-font-size-heading); font-variant-numeric: tabular-nums; }
+.af .ck-sig .th { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.af .st-g { border-left-color: var(--color-ok) !important; }
+.af .st-y { border-left-color: var(--color-warn) !important; }
+.af .st-r { border-left-color: var(--color-bad) !important; }
+.af .dot { display: inline-block; width: 0.6rem; height: 0.6rem; border-radius: 50%; margin-right: var(--cds-gap-xs); vertical-align: baseline; }
+.af .ck-cal { display: flex; flex-direction: column; gap: 0; }
+.af .ck-cal .mo { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin: var(--cds-gap-md) 0 var(--cds-gap-xs); font-weight: var(--cds-font-weight-medium); }
+.af .ck-ev { display: grid; grid-template-columns: 5.5rem 6rem 1fr; gap: var(--cds-gap-sm); padding: var(--cds-pad-xs) 0; border-bottom: 1px solid var(--color-border-line); font-size: var(--cds-font-size-caption); line-height: 1.55; }
+.af .ck-ev .d { font-variant-numeric: tabular-nums; color: var(--color-fg-muted); }
+.af .ck-ev .c { color: var(--color-fg-muted); }
+.af .ck-ev details summary { cursor: pointer; color: var(--color-fg); }
+.af .ck-ev details p { margin: var(--cds-gap-xs) 0 0; color: var(--color-fg-muted); }
+@media (max-width: 34rem) { .af .ck-ev { grid-template-columns: 1fr; gap: 0; } }
+.af .seg { display: inline-flex; gap: var(--cds-gap-xs); flex-wrap: wrap; }
+.af .st-flow { display: flex; flex-direction: column; gap: var(--cds-gap-sm); }
+.af .st-step { display: grid; grid-template-columns: 1.6rem 1fr auto; gap: var(--cds-gap-sm); align-items: baseline; border-bottom: 1px solid var(--color-border-line); padding-bottom: var(--cds-gap-xs); font-size: var(--cds-font-size-caption); line-height: 1.55; }
+.af .st-step .o { font-family: var(--font-anthropic-serif); color: var(--color-fg-muted); }
+.af .st-step .a { font-variant-numeric: tabular-nums; white-space: nowrap; text-align: right; }
+.af .st-step b { font-weight: var(--cds-font-weight-medium); }
+.af .disc { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+[data-dash-source-state=empty] { color: transparent; }
+[data-dash-source-state=refreshing] { opacity: .5; transition: opacity var(--cds-dur-slow); }
+</style>
+
+<div class="af">
+  <header id="top">
+    <h1>AI 资金流量表</h1>
+    <p class="take" id="takeaway" data-source="ratios"><span class="dash-skeleton">—</span></p>
+  </header>
+
+  <nav class="tabs" id="tabs" role="tablist" aria-label="看板页面"></nav>
+
+  <div class="controls" id="controls">
+    <span class="lbl" id="yearLbl">年份</span>
+    <span id="yearChips"></span>
+    <span class="lbl" style="margin-left: var(--cds-gap-md)">实验室收入情景</span>
+    <button class="chip" type="button" id="scenPlan" aria-pressed="true">公司计划</button>
+    <button class="chip" type="button" id="scenCons" aria-pressed="false">保守（增速减半）</button>
+  </div>
+
+  <!-- 驾驶舱 -->
+  <section class="page" id="cockpit" hidden>
+    <section class="card ck-hero" id="ckHero">
+      <div class="chart" id="ckGauge" data-source="upgrade_text" style="min-height: 11rem"></div>
+      <div>
+        <h2 id="ckTitle" data-source="upgrade_text"></h2>
+        <p class="cw-lead" id="ckVerdict" data-source="upgrade_text"></p>
+        <div class="ck-layers" id="ckLayers" data-source="upgrade_text"></div>
+      </div>
+    </section>
+    <section class="cw-sec">
+      <h2>信号灯</h2>
+      <p class="note">每个信号按自己的阈值换算成 0–100 分：绿色低于 34，黄色 34–66，红色 67 以上；“恶化 / 改善”是和约三个月前比。点卡片进入相关页面。</p>
+      <div class="ck-signals" id="ckSignals" data-source="monitor"></div>
+    </section>
+    <div class="grid">
+      <section class="card" id="ckSpreadCard">
+        <h2>AI 信用在承压，整体信用没有</h2>
+        <p class="note">bp。线为 ICE BofA 指数期权调整利差（FRED，周度）；点为 CoreWeave 无担保债利差和 5 年期 CDS。</p>
+        <div class="legend" id="ckSpreadLegend"></div>
+        <div class="chart" id="ckSpreadChart" data-source="market_series"></div>
+      </section>
+      <section class="card" id="ckEqCard">
+        <h2>股票篮子：Neocloud 与矿企最先跌</h2>
+        <p class="note">等权指数，2025-06-30 = 100，周度。Neocloud 与矿企转型：CoreWeave、Nebius、IREN、Applied Digital、TeraWulf、Cipher、Hut 8、Core Scientific、Galaxy。</p>
+        <div class="legend" id="ckEqLegend"></div>
+        <div class="chart" id="ckEqChart" data-source="market_series"></div>
+      </section>
+    </div>
+    <section class="card"><h2>怎么读这一页</h2><div class="rs-points" id="ckPoints" data-source="upgrade_text"></div></section>
+    <section class="card" id="ckCalCard">
+      <h2>接下来该盯什么</h2>
+      <p class="note">2026-10-19 至 2027-01-31 的已确定或已有可靠报道的事件。点开每条看“为什么重要”和多空信号。</p>
+      <div class="ck-cal" id="ckCal" data-source="catalysts"></div>
+    </section>
+    <p class="disc">本看板为研究参考，不构成投资建议。</p>
+  </section>
+
+  <!-- 0 结论 -->
+  <section class="page" id="conclusions" hidden>
+    <section class="card cw-hero" id="ccThesis">
+      <h2>结论：债务和合同在 AI 叙事里起什么作用</h2>
+      <p class="cc-thesis" id="ccThesisText" data-source="conclusions"></p>
+    </section>
+    <section class="cw-sec" id="ccChainSec">
+      <h2>一条链：未来收入如何变成今天的债</h2>
+      <div class="cc-chain" id="ccChain" data-source="conclusions"></div>
+    </section>
+    <section class="cw-sec" id="ccFindSec">
+      <h2>八条结论</h2>
+      <ol class="cc-findings" id="ccFindings" data-source="conclusions"></ol>
+    </section>
+    <section class="cw-sec" id="ccSignalSec">
+      <h2 id="ccJudgeTitle">什么时候资金会不愿意再出钱</h2>
+      <p class="lead" id="ccJudge" data-source="conclusions"></p>
+      <div class="cc-signals" id="ccSignals" data-source="conclusions"></div>
+    </section>
+    <section class="cw-sec" id="ccCaveatSec">
+      <h2>读这些结论时要注意</h2>
+      <ul class="cc-caveats" id="ccCaveats" data-source="conclusions"></ul>
+    </section>
+  </section>
+
+  <!-- 1 全景 -->
+  <section class="page" id="overview">
+    <p class="lead">资金链分四层：终端用户付钱给 AI 实验室；实验室把大部分钱付给算力提供方（大厂、Neocloud）；算力提供方投资本开支，向开发商租机房；资本开支最终流向芯片、电力和建筑。上游的投入远大于下游的付费，差额靠股权和债务补。</p>
+    <section class="kpis" aria-label="当年关键数字">
+      <div class="kpi"><span class="k">资本开支合计（大厂 + Neocloud）</span><span class="v"><span id="kCapex" data-source="flow" data-field="yi" class="dash-skeleton">—</span></span><span class="u">亿美元</span><span class="pill" id="kCapexT"></span></div>
+      <div class="kpi"><span class="k">AI 实验室收入合计（终端直接付费）</span><span class="v"><span id="kRev" data-source="flow" data-field="yi" class="dash-skeleton">—</span></span><span class="u">亿美元</span><span class="pill" id="kRevT"></span></div>
+      <div class="kpi"><span class="k">实验室已签算力合同年化应付</span><span class="v"><span id="kDue" data-source="flow" data-field="yi" class="dash-skeleton">—</span></span><span class="u">亿美元</span><span class="pill" id="kDueT"></span></div>
+      <div class="kpi"><span class="k">大厂资本开支 − 经营现金流</span><span class="v"><span id="kGap" data-source="flow" data-field="yi" class="dash-skeleton">—</span></span><span class="u">亿美元；正数 = 需要外部融资</span><span class="pill" id="kGapT"></span></div>
+    </section>
+    <div class="grid">
+      <section class="card" id="pyramid">
+        <h2>倒金字塔：越往上游越宽</h2>
+        <p class="note">同一年里资金链各层的规模，倍数为相对实验室收入。</p>
+        <div class="chart" id="pyrChart" data-source="flow"></div>
+      </section>
+      <section class="card" id="timeline">
+        <h2>时间线：收入能否追上投入</h2>
+        <p class="note">实线为实际，虚线为指引、预测或估算。资本开支 2028 年后没有可靠预测。</p>
+        <div class="legend" id="tlLegend"></div>
+        <div class="chart" id="tlChart" data-source="flow"></div>
+      </section>
+    </div>
+    <section class="card" id="sankey">
+      <h2>钱从哪来、流向哪里</h2>
+      <p class="note" id="skNote">线条粗细代表金额。</p>
+      <div class="chart tall" id="skChart" data-source="sankey"></div>
+    </section>
+  </section>
+
+  <!-- 2 CoreWeave 债务专题 -->
+  <section class="page cw" id="coreweave" hidden>
+    <section class="card cw-hero" id="cwSummary">
+      <h2>CoreWeave 债务专题：无担保债滑入困境区间</h2>
+      <p class="cw-lead" id="cwLead" data-source="cw_topic"></p>
+      <div class="kpis" id="cwKpis" data-source="cw_topic"></div>
+    </section>
+    <section class="cw-sec" id="cwWhat">
+      <h2><span class="num">1</span>发生了什么</h2>
+      <div class="cw-body" id="cw-what" data-source="cw_topic"></div>
+      <div class="card"><h3>时间线（2026-09-16 至今）</h3><p class="note">按日期排列，含待观察的日程。</p><ul class="events" id="cwEvents" data-source="events"></ul></div>
+      <div class="cw-figs" id="cw-what-figs" data-source="cw_topic"></div>
+    </section>
+    <section class="cw-sec" id="cwPrice">
+      <h2><span class="num">2</span>价格在说什么：市场按 CCC 级、按困境债定价</h2>
+      <div class="cw-body" id="cw-price" data-source="cw_topic"></div>
+    </section>
+    <section class="cw-sec" id="cwWhy">
+      <h2><span class="num">3</span>为什么会这样：三层压力在同一周叠加</h2>
+      <div class="cw-body" id="cw-why" data-source="cw_topic"></div>
+    </section>
+    <section class="cw-sec" id="cwDebate">
+      <h2><span class="num">4</span>核心分歧：估值重置，还是回报撑不起债务？</h2>
+      <div class="cw-body" id="cw-debate" data-source="cw_topic"></div>
+    </section>
+    <section class="cw-sec" id="cwViews">
+      <h2><span class="num">5</span>各方观点</h2>
+      <div class="cw-body" id="cw-views" data-source="cw_topic"></div>
+      <div class="card"><div class="tablebox"><table id="cwViewTable" data-source="cw_views" data-row-key="id"><thead><tr></tr></thead><tbody></tbody></table></div></div>
+    </section>
+    <section class="cw-sec" id="cwTrade">
+      <h2><span class="num">6</span>交易思路与观察清单</h2>
+      <div class="cw-body" id="cw-trade" data-source="cw_topic"></div>
+      <p class="note">更多 CoreWeave 数据：“开发商与项目融资”页的 CoreWeave 链逐笔债务，“风险信号”页的利差与 CDS 价格点。</p>
+    </section>
+  </section>
+
+  <!-- 2 实验室 -->
+  <section class="page" id="labs" hidden>
+    <p class="lead">实验室是整条链的最终付款人。它们的收入还远小于已签的算力合同，差额靠一轮轮股权融资补；整条链上大量债务的偿还，最终取决于这里。</p>
+    <div class="grid">
+      <section class="card" id="labRevCard">
+        <h2>各实验室收入路径</h2>
+        <p class="note">亿美元。实线为实际，虚线为公司预测或估算；随上方情景切换。</p>
+        <div class="legend" id="labLegend"></div>
+        <div class="chart" id="labRevChart" data-source="flow"></div>
+      </section>
+      <section class="card" id="payerCard">
+        <h2>最终靠谁还：各付款人对应的义务</h2>
+        <p class="note">2024 年至今的融资、算力承诺与担保，按最终付款人归类（已去重，只计已交割）。三列有嵌套，不能当可相加的损失。</p>
+        <div class="legend" id="payerLegend"></div>
+        <div class="chart" id="payerChart" data-source="obligations_by_payer"></div>
+      </section>
+    </div>
+    <section class="card" id="labTableCard">
+      <h2>实验室逐年账本</h2>
+      <p class="note">亿美元。斜体橙色 = 含估算；灰色 = 公司预测或指引。</p>
+      <div class="tablebox"><table id="labTable" data-source="flow_table" data-row-key="key"><thead><tr></tr></thead><tbody></tbody></table></div>
+    </section>
+    <section class="card" id="commitCard">
+      <h2>算力合同、担保与入股</h2>
+      <p class="note">实验室签下的多年合同，以及芯片厂和云厂商的入股、兜底。金额为合同总额（亿美元）。</p>
+      <div class="tablebox"><table id="commitTable" data-source="commitments" data-row-key="id"><thead><tr></tr></thead><tbody></tbody></table></div>
+    </section>
+  </section>
+
+  <!-- 研究 1 股权缺口 -->
+  <section class="page" id="gap" hidden>
+    <p class="lead" id="gapLead" data-source="research_text"></p>
+    <div class="kpis" id="gapKpis" data-source="research_text"></div>
+    <div class="grid">
+      <section class="card" id="gapNeedCard">
+        <h2>每年还需新增的外部资金</h2>
+        <p class="note">亿美元，扣除已锁定资金之后；随上方情景切换。两条虚线是 2025 年市场实际给出的钱。</p>
+        <div class="legend" id="gapLegend"></div>
+        <div class="chart" id="gapNeedChart" data-source="funding_gap"></div>
+      </section>
+      <section class="card" id="gapSupplyCard">
+        <h2>市场历史上给过多少钱</h2>
+        <p class="note">亿美元。2026 年为前三季度或年内已宣布的数字。</p>
+        <div class="legend" id="supplyLegend"></div>
+        <div class="chart" id="gapSupplyChart" data-source="equity_supply"></div>
+      </section>
+    </div>
+    <section class="card"><h2>要点</h2><div class="rs-points" id="gapPoints" data-source="research_text"></div></section>
+    <section class="card" id="gapTableCard">
+      <h2>逐年现金流与缺口</h2>
+      <p class="note">亿美元。现金流 = 收入 − 算力支出 − 其他现金支出；累计消耗从各实验室已锁定资金的截至日起算（OpenAI 2026-04、Anthropic 2026-01、xAI 2026-07）。灰色为公司自己的预测，仅作对照。</p>
+      <div class="tablebox"><table id="gapTable" data-source="funding_gap" data-row-key="key"><thead><tr></tr></thead><tbody></tbody></table></div>
+    </section>
+    <section class="card" id="lockCard">
+      <h2>已锁定的资金</h2>
+      <p class="note">亿美元。“附条件”和“计划中”不计入已锁定资金。</p>
+      <div class="tablebox"><table id="lockTable" data-source="funding_locked" data-row-key="id"><thead><tr></tr></thead><tbody></tbody></table></div>
+    </section>
+    <section class="card"><h2>方法与局限</h2><ul class="cc-caveats" id="gapCaveats" data-source="research_text"></ul></section>
+  </section>
+
+  <!-- 研究 2 合同硬度 -->
+  <section class="page" id="contracts" hidden>
+    <p class="lead" id="ctLead" data-source="research_text"></p>
+    <div class="kpis" id="ctKpis" data-source="research_text"></div>
+    <div class="grid">
+      <section class="card" id="ctGridCard">
+        <h2>条款硬度 × 付款方</h2>
+        <p class="note">合同总额（亿美元），括号内为份数；金额未披露的合同只计份数。</p>
+        <div class="tablebox"><table id="ctGrid" data-source="contract_grid" data-row-key="hardness"><thead><tr></tr></thead><tbody></tbody></table></div>
+      </section>
+      <section class="card" id="ctChartCard">
+        <h2>按条款硬度汇总</h2>
+        <p class="note">亿美元，按付款方类别堆叠。</p>
+        <div class="legend" id="ctLegend"></div>
+        <div class="chart" id="ctChart" data-source="contract_grid"></div>
+      </section>
+    </div>
+    <section class="card"><h2>要点</h2><div class="rs-points" id="ctPoints" data-source="research_text"></div></section>
+    <section class="card" id="ctTableCard">
+      <h2>逐份合同</h2>
+      <p class="note">按硬度、再按金额排序。金额为合同总额（亿美元）。“付款方走了谁承担”指付款方退出或违约时首先受损的一方。</p>
+      <div class="tablebox"><table id="ctTable" data-source="contract_terms" data-row-key="id"><thead><tr></tr></thead><tbody></tbody></table></div>
+    </section>
+    <section class="card" id="evCard">
+      <h2>SEC 文件原文摘录</h2>
+      <p class="note">直接从 10-Q、10-K、6-K 中摘出的关键条款和数字。</p>
+      <div class="tablebox"><table id="evTable" data-source="sec_evidence" data-row-key="id"><thead><tr></tr></thead><tbody></tbody></table></div>
+    </section>
+    <section class="card"><h2>方法与局限</h2><ul class="cc-caveats" id="ctCaveats" data-source="research_text"></ul></section>
+  </section>
+
+  <!-- 研究 3 循环融资 -->
+  <section class="page" id="circular" hidden>
+    <p class="lead" id="crLead" data-source="research_text"></p>
+    <div class="kpis" id="crKpis" data-source="research_text"></div>
+    <section class="card" id="crChartCard">
+      <h2>入股与回流的订单</h2>
+      <p class="note">亿美元。左边是投资人对被投方的入股或融资承诺，右边是被投方向这位投资人采购的承诺（合同总额，多为 5–10 年）；右侧数字为倍数。</p>
+      <div class="legend" id="crLegend"></div>
+      <div class="chart" id="crChart" data-source="circular"></div>
+    </section>
+    <section class="card"><h2>要点</h2><div class="rs-points" id="crPoints" data-source="research_text"></div></section>
+    <section class="card" id="crTableCard">
+      <h2>投资与回流配对</h2>
+      <p class="note">金额为亿美元。“挂钩”：Y = 文件写明投资与采购挂钩；N = 无明文挂钩；报道 = 媒体称挂钩但无文件。</p>
+      <div class="tablebox"><table id="crTable" data-source="circular" data-row-key="id"><thead><tr></tr></thead><tbody></tbody></table></div>
+    </section>
+    <section class="card" id="crSumCard">
+      <h2>汇总口径：订单簿和收入里有多少来自被投企业</h2>
+      <div class="tablebox"><table id="crSumTable" data-source="circular" data-row-key="id"><thead><tr></tr></thead><tbody></tbody></table></div>
+    </section>
+    <section class="card"><h2>方法与局限</h2><ul class="cc-caveats" id="crCaveats" data-source="research_text"></ul></section>
+  </section>
+
+  <!-- 研究 4 压力传导 -->
+  <section class="page" id="stress" hidden>
+    <p class="lead" id="stLead" data-source="upgrade_text"></p>
+    <div class="controls">
+      <span class="lbl">实验室</span><span class="seg" id="stLab"></span>
+      <span class="lbl" style="margin-left: var(--cds-gap-md)">算力合同削减（或违约）比例</span><span class="seg" id="stPct"></span>
+    </div>
+    <div class="kpis" id="stKpis" data-source="exposure"></div>
+    <div class="grid">
+      <section class="card" id="stProvCard">
+        <h2>算力提供方损失的订单</h2>
+        <p class="note">亿美元；括号内为占该公司订单簿的比例（有披露时）。</p>
+        <div class="chart" id="stProvChart" data-source="exposure"></div>
+      </section>
+      <section class="card" id="stFlowCard">
+        <h2>损失按什么顺序往下传</h2>
+        <p class="note">从先受损到后受损。金额为按所选比例折算的敞口，股权按投入金额列示、不随比例变化。</p>
+        <div class="st-flow" id="stFlow" data-source="exposure"></div>
+      </section>
+    </div>
+    <section class="card" id="stTableCard">
+      <h2>逐项敞口</h2>
+      <div class="tablebox"><table id="stTable" data-source="exposure" data-row-key="id"><thead><tr></tr></thead><tbody></tbody></table></div>
+    </section>
+    <section class="card" id="stBondCard">
+      <h2>受影响债券的最新价格</h2>
+      <p class="note">最终付款人为所选实验室的债券（OpenAI 另含 CoreWeave 自身的债），来自定价地图。</p>
+      <div class="tablebox"><table id="stBondTable" data-source="bonds" data-row-key="id"><thead><tr></tr></thead><tbody></tbody></table></div>
+    </section>
+    <section class="card" id="stHoldCard">
+      <h2>这些债主要由谁持有</h2>
+      <p class="note">牵头行、主要出资人、BDC 持仓与标记（公开文件和报道）。</p>
+      <div class="tablebox"><table id="stHoldTable" data-source="holders" data-row-key="id"><thead><tr></tr></thead><tbody></tbody></table></div>
+    </section>
+  </section>
+
+  <!-- 研究 5 定价地图 -->
+  <section class="page" id="pricing" hidden>
+    <p class="lead" id="prLead" data-source="upgrade_text"></p>
+    <div class="kpis" id="prKpis" data-source="upgrade_text"></div>
+    <section class="card" id="prChartCard">
+      <h2>收益率 × 保护程度</h2>
+      <p class="note">横轴是保护评分（0–10 = 最终付款人信用 + 债务结构 + 第三方兜底），纵轴是对同期限美债的利差（对数刻度）；虚线是拟合线，线上方的债相对它的保护程度利差偏宽（收益偏高、市场更担心），下方偏窄。圆点大小为发行规模，颜色为最终付款人。</p>
+      <div class="legend" id="prLegend"></div>
+      <div class="chart tall" id="prChart" data-source="bonds"></div>
+    </section>
+    <div class="grid">
+      <section class="card"><h2>利差宽于同等保护水平</h2><div class="tablebox"><table id="prHigh" data-source="bonds" data-row-key="id"><thead><tr></tr></thead><tbody></tbody></table></div></section>
+      <section class="card"><h2>利差窄于同等保护水平</h2><div class="tablebox"><table id="prLow" data-source="bonds" data-row-key="id"><thead><tr></tr></thead><tbody></tbody></table></div></section>
+    </div>
+    <section class="card"><h2>要点</h2><div class="rs-points" id="prPoints" data-source="upgrade_text"></div></section>
+    <section class="card" id="prAllCard">
+      <h2>全部债券</h2>
+      <div class="tablebox"><table id="prAll" data-source="bonds" data-row-key="id"><thead><tr></tr></thead><tbody></tbody></table></div>
+    </section>
+    <section class="card" id="prCdsCard">
+      <h2>CDS 点位</h2>
+      <div class="tablebox"><table id="prCds" data-source="cds_points" data-row-key="id"><thead><tr></tr></thead><tbody></tbody></table></div>
+    </section>
+    <section class="card"><h2>评分方法与局限</h2><ul class="cc-caveats" id="prCaveats" data-source="upgrade_text"></ul></section>
+    <p class="disc">本页为研究参考，不构成投资建议。</p>
+  </section>
+
+  <!-- 3 算力提供方 -->
+  <section class="page" id="providers" hidden>
+    <p class="lead">大厂过去用自己的经营现金流就能覆盖资本开支，2026 年起开始不够；Neocloud 一直需要外部融资。</p>
+    <section class="card" id="capexCard">
+      <h2>资本开支与经营现金流（按公司）</h2>
+      <p class="note" id="capexNote">亿美元。</p>
+      <div class="legend"><span><i class="sw" id="swCapex"></i>资本开支</span><span><i class="sw" id="swOcf"></i>经营现金流</span></div>
+      <div class="chart" id="capexChart" data-source="flow"></div>
+    </section>
+    <section class="card" id="partCard">
+      <h2>参与者财务</h2>
+      <p class="note">31 家参与者的收入、现金流、资本开支、债务与表外项目（亿美元）。来自 Grok 两轮检索，约八成来源为公司披露。“2026最新”口径不一，见最右列。</p>
+      <div class="controls" id="partFilter"></div>
+      <div class="tablebox"><table id="partTable" data-source="participants" data-row-key="key"><thead><tr></tr></thead><tbody></tbody></table></div>
+    </section>
+  </section>
+
+  <!-- 4 开发商与项目融资 -->
+  <section class="page" id="projects" hidden>
+    <p class="lead">开发商用楼、地和租约做抵押借钱，偿债靠租户的租金；租户背后往往还是 AI 实验室。这一页按链条逐笔列出这些债：OpenAI 链（Oracle 租户的 Stargate 园区）、Anthropic 链（Fluidstack 承租、谷歌兜底的矿企园区，以及芯片租赁平台）、CoreWeave 链（Neocloud 自身债务及其租户项目债）。</p>
+    <div class="grid">
+      <section class="card" id="debtChainCard">
+        <h2>按链条汇总</h2>
+        <p class="note">亿美元，只计“计入合计”的行。</p>
+        <div class="chart" id="debtChainChart" data-source="debt_by_chain"></div>
+      </section>
+      <section class="card" id="debtPayerCard">
+        <h2>按最终付款人汇总</h2>
+        <p class="note">亿美元，只计“计入合计”的行。</p>
+        <div class="chart" id="debtPayerChart" data-source="debt_by_payer"></div>
+      </section>
+    </div>
+    <section class="card" id="debtCard">
+      <h2>逐笔债务穿透</h2>
+      <p class="note">每笔的抵押与增信、直接付款人、最终付款人、余额、票息和最新价格。Anthropic 链来自 Grok 公开渠道检索，转载来源已在备注中注明。</p>
+      <div class="controls" id="debtChain"></div>
+      <input class="search" id="debtSearch" type="search" placeholder="搜索发行人、租户或付款人" aria-label="搜索债务">
+      <div class="tablebox"><table id="debtTable" data-source="debt_instruments" data-row-key="id"><thead><tr></tr></thead><tbody></tbody></table></div>
+    </section>
+  </section>
+
+  <!-- 5 融资结构 -->
+  <section class="page" id="financing" hidden>
+    <p class="lead">越往下游越依赖抵押；越往上游越依赖股权。2026 年 AI 相关发债预计是 2025 年的两倍多。</p>
+    <div class="grid">
+      <section class="card" id="issueCard">
+        <h2>AI 相关债务发行（按渠道）</h2>
+        <p class="note">亿美元。2025 年为实际，2026 年为大摩预测（区间取中值）。</p>
+        <div class="legend"><span><i class="sw" id="sw25"></i>2025</span><span><i class="sw" id="sw26"></i>2026E</span></div>
+        <div class="chart" id="issueChart" data-source="flow"></div>
+      </section>
+      <section class="card" id="structCard">
+        <h2>各层拿到的钱是什么</h2>
+        <p class="note">2024 年至今，融资方视角、已去重（亿美元）。</p>
+        <div class="legend" id="structLegend"></div>
+        <div class="chart" id="structChart" data-source="fin_by_layer"></div>
+      </section>
+    </div>
+    <section class="card" id="finCard">
+      <h2>逐笔融资事件</h2>
+      <p class="note">每笔标明工具、体内外、担保、追索、证券化、角色和最终付款人（亿美元）。</p>
+      <input class="search" id="finSearch" type="search" placeholder="搜索公司、工具或出资方" aria-label="搜索融资事件">
+      <div class="tablebox"><table id="finTable" data-source="financing_events" data-row-key="id"><thead><tr></tr></thead><tbody></tbody></table></div>
+    </section>
+  </section>
+
+  <!-- 6 风险信号 -->
+  <section class="page" id="risk" hidden>
+    <p class="lead">价格是融资意愿最快的温度计。CoreWeave 的无担保债一个月里利差走宽约 200bp，2032 年那只收益率突破 15%；Oracle 的 CDS 一年里从 57bp 升到 260bp。</p>
+    <section class="card" id="tvBondCard">
+      <h2>Oracle 与 CoreWeave 公司债：每日收益率和利差</h2>
+      <p class="note">日度收盘。Oracle 是 FINRA TRACE 成交价；CoreWeave 是德国交易所报价，单日波动偏大，看趋势为主。收益率和利差由本机脚本按 30/360 计算：利差 = 到期收益率 − 同期限国债（美债用 FRED 曲线插值，欧元券用 ECB AAA 曲线）。可转债只列在表里，不画进图。</p>
+      <p class="tvb-take" id="tvBondTake" data-source="tv_bond_snap"></p>
+      <div class="tvb-ctl">
+        <span class="lbl">指标</span><span class="seg" id="tvMetric"></span>
+        <span class="lbl">区间</span><span class="seg" id="tvRange"></span>
+      </div>
+      <div class="tvb-grid">
+        <div id="tvOrcl"><h3>Oracle</h3><div class="legend" id="tvOrclLeg"></div><div class="tvb-chart" id="tvOrclChart" data-source="tv_bonds"></div></div>
+        <div id="tvCrwv"><h3>CoreWeave</h3><div class="legend" id="tvCrwvLeg"></div><div class="tvb-chart" id="tvCrwvChart" data-source="tv_bonds"></div></div>
+      </div>
+      <h3>最新快照</h3>
+      <p class="note">变动为到期收益率的变化，单位 bp；收益率上升记为红色。</p>
+      <div class="tablebox"><table id="tvBondTable" data-source="tv_bond_snap" data-row-key="bond"><thead><tr></tr></thead><tbody></tbody></table></div>
+    </section>
+        <div class="grid">
+      <section class="card" id="mkSpreadCard">
+        <h2>信用利差：整体市场与 CoreWeave</h2>
+        <p class="note">bp。线为 ICE BofA 期权调整利差（FRED，周度），点为 CoreWeave 无担保债利差与 CDS。</p>
+        <div class="legend" id="mkSpreadLegend"></div>
+        <div class="chart" id="mkSpreadChart" data-source="market_series"></div>
+      </section>
+      <section class="card" id="mkRateCard">
+        <h2>美债收益率</h2>
+        <p class="note">%，FRED，周度。</p>
+        <div class="legend" id="mkRateLegend"></div>
+        <div class="chart" id="mkRateChart" data-source="market_series"></div>
+      </section>
+    </div>
+    <section class="card" id="mkPdCard">
+      <h2>股价隐含的 1 年违约概率</h2>
+      <p class="note">简化 Merton 模型（Bharath &amp; Shumway 2008）：用市值、近 120 个交易日的股价波动率和有息债务计算。高波动的成长股会被高估，适合比较相对高低和看变化，不是精确的违约概率。CoreWeave 的结果约 20%，与 CDS 隐含的约 17%（回收率 40%）接近。</p>
+      <div class="chart" id="mkPdChart" data-source="equity_stats"></div>
+    </section>
+    <section class="card" id="mkEqCard">
+      <h2>个股表现与杠杆</h2>
+      <p class="note">价格为最新收盘；市值、债务为亿美元；回撤相对 52 周高点。</p>
+      <div class="tablebox"><table id="mkEqTable" data-source="equity_stats" data-row-key="code"><thead><tr></tr></thead><tbody></tbody></table></div>
+    </section>
+    <div class="grid">
+      <section class="card" id="spreadCard">
+        <h2>CoreWeave 无担保债利差：9 月 17 日 → 10 月 13 日</h2>
+        <p class="note">bp。前者为美银 OAS 口径，后者为 G-spread，口径不完全一致。</p>
+        <div class="chart" id="spreadChart" data-source="risk_prices"></div>
+      </section>
+      <section class="card" id="cdsCard">
+        <h2>5 年期 CDS</h2>
+        <p class="note">bp。点位稀疏，部分来自转述，见下表。</p>
+        <div class="legend"><span><i class="sw" id="swCrwv"></i>CoreWeave</span><span><i class="sw" id="swOrcl"></i>Oracle</span></div>
+        <div class="chart" id="cdsChart" data-source="risk_prices"></div>
+      </section>
+    </div>
+    <section class="card" id="eventsCard">
+      <h2>事件时间线</h2>
+      <ul class="events" id="eventList" data-source="events"></ul>
+    </section>
+    <section class="card" id="pricesCard">
+      <h2>价格点明细</h2>
+      <div class="tablebox"><table id="priceTable" data-source="risk_prices" data-row-key="id"><thead><tr></tr></thead><tbody></tbody></table></div>
+    </section>
+  </section>
+
+  <!-- 7 流量表 -->
+  <section class="page" id="flowtable" hidden>
+    <section class="card" id="table">
+      <h2>资金流量表</h2>
+      <p class="note">单位：亿美元。斜体橙色 = 含估算；灰色 = 指引或预测；其余为实际。财年按期间中点折算为日历年。</p>
+      <div class="tablebox"><table id="flowTable" data-source="flow_table" data-row-key="key"><thead><tr></tr></thead><tbody></tbody></table></div>
+    </section>
+  </section>
+
+  <!-- 8 假设与来源 -->
+  <section class="page" id="sources" hidden>
+    <section class="card" id="assumptions">
+      <h2>估算用到的假设</h2>
+      <p class="note">要改哪一条，告诉 Claude，重算后看板会更新。</p>
+      <div class="tablebox"><table id="asTable" data-source="assumptions" data-row-key="id"><thead><tr></tr></thead><tbody></tbody></table></div>
+    </section>
+    <section class="card" id="srcCard">
+      <h2>原始数据与出处</h2>
+      <p class="note">SEC 年报、大摩追踪报告和 Grok 三轮检索，共 <span id="srcCount" data-source="sources_count" data-field="n">—</span> 条。</p>
+      <input class="search" id="srcSearch" type="search" placeholder="搜索公司、指标或来源" aria-label="搜索来源">
+      <div class="tablebox"><table id="srcTable" data-source="sources" data-row-key="id"><thead><tr></tr></thead><tbody></tbody></table></div>
+    </section>
+  </section>
+</div>
+
+<script>
+window.AF = (() => {
+  const YEARS = [2024, 2025, 2026, 2027, 2028, 2029, 2030];
+  const PAGES = [['cockpit', '驾驶舱'], ['conclusions', '结论'], ['overview', '全景'], ['coreweave', 'CoreWeave 专题'], ['gap', '股权缺口'], ['contracts', '合同硬度'], ['circular', '循环融资'], ['stress', '压力传导'], ['pricing', '定价地图'], ['labs', 'AI 实验室'], ['providers', '算力提供方'], ['projects', '开发商与项目融资'],
+    ['financing', '融资结构'], ['risk', '市场与风险'], ['flowtable', '流量表明细'], ['sources', '假设与来源']];
+  const fmt = (v) => (v == null || v === '' || isNaN(v)) ? '—' : d3.format(',')(Math.round(+v));
+  const fmt1 = (v) => (v == null || v === '' || isNaN(v)) ? '' : d3.format(',.1f')(+v);
+  const ylab = (y) => (y <= 2025 ? String(y) : y + 'E');
+  const params = () => ({ year: +(dash.params().year ?? 2026), scen: dash.params().scenario ?? '公司计划' });
+  const rows = (id) => { const d = dash.data(id); return d.status === 'ok' ? d.data : null; };
+  const num = (r) => ({ ...r, year: +r.year, value: +r.value, yi: +r.yi });
+  const find = (flow, line, year, scen, entity = '合计') =>
+    flow.find((r) => r.line === line && r.year === year && r.entity === entity && r.scenario === scen);
+  const tierClass = (t) => (t === '含估算' || t === '估算') ? 'est' : (t && t !== '实际' && t !== '汇总' ? 'fc' : '');
+  const setMark = (el, src, field, where) => { el.dataset.source = src; el.dataset.field = field; el.dataset.where = where; };
+  const whereOf = (o) => Object.entries(o).map(([k, v]) => encodeURIComponent(k) + '=' + encodeURIComponent(v)).join('&');
+  const tip = (box) => {
+    let el = box.querySelector(':scope > .tip');
+    if (!el) { el = document.createElement('div'); el.className = 'tip'; el.hidden = true; box.appendChild(el); }
+    return el;
+  };
+  const showTip = (box, ev, lines) => {
+    const t = tip(box); t.hidden = false; t.replaceChildren();
+    lines.forEach((s, i) => { const d = document.createElement('div'); if (i === 0) d.className = 't'; d.textContent = s; t.append(d); });
+    const [bx, by] = d3.pointer(ev, box);
+    t.style.left = Math.max(4, Math.min(bx + 12, box.clientWidth - t.offsetWidth - 4)) + 'px'; t.style.top = (by + 12) + 'px';
+  };
+  const hideTip = (box) => { tip(box).hidden = true; };
+  const clear = (box) => box.querySelectorAll(':scope > svg').forEach((s) => s.remove());
+  let page = 'cockpit';
+  const draws = [];
+  const visible = (p) => p === '*' || p === page;
+  const on = (p, fn) => { draws.push([p, fn]); dash.onData(() => { if (visible(p)) fn(); }); };
+  const show = (p, link = true) => {
+    if (!PAGES.some(([id]) => id === p)) return;
+    page = p;
+    PAGES.forEach(([id]) => {
+      document.getElementById(id).hidden = id !== p;
+      const b = document.getElementById('tab-' + id); if (b) b.setAttribute('aria-selected', String(id === p));
+    });
+    document.getElementById('controls').hidden = !['overview', 'labs', 'flowtable', 'gap'].includes(p);
+    document.getElementById('yearChips').hidden = document.getElementById('yearLbl').hidden = p === 'gap';
+    if (link) dash.setLink(p);
+    draws.forEach(([dp, fn]) => { if (visible(dp)) fn(); });
+  };
+  // 通用：横向条形图
+  const hbars = (box, items, { color = () => dash.colors[0], value = (d) => d.v, label = (d) => d.label, tipLines } = {}) => {
+    clear(box);
+    const W = box.clientWidth || 360, rowH = 40, H = items.length * rowH + 6;
+    const max = d3.max(items, value) || 1;
+    const x = d3.scaleLinear([0, max], [0, W - 90]);
+    const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img');
+    const g = svg.selectAll('g').data(items).join('g').attr('transform', (d, i) => `translate(0,${i * rowH + 2})`);
+    g.append('text').attr('y', 11).attr('font-size', 12).attr('fill', 'var(--color-fg-muted)').text(label);
+    g.append('rect').attr('y', 16).attr('height', 16).attr('rx', 4).attr('width', (d) => Math.max(1, x(value(d)))).attr('fill', color);
+    g.append('text').attr('y', 29).attr('font-size', 12).attr('fill', 'var(--color-fg)').attr('x', (d) => x(value(d)) + 6).text((d) => fmt(value(d)));
+    if (tipLines) g.on('pointermove', (ev, d) => showTip(box, ev, tipLines(d))).on('pointerleave', () => hideTip(box));
+  };
+  // 通用：由列定义画表（每行一个数据行，key 列放在 tr 上）
+  const table = (el, cols, data, key, rowClass) => {
+    const tr = el.querySelector('thead tr');
+    tr.replaceChildren(...cols.map((c) => { const th = document.createElement('th'); th.textContent = c.label; th.dataset.field = c.f; if (c.num) th.className = 'num'; if (c.sel) th.classList.add('sel'); return th; }));
+    const tb = el.querySelector('tbody'); tb.replaceChildren();
+    (data || []).forEach((r) => {
+      const row = document.createElement('tr'); row.dataset.key = r[key];
+      cols.forEach((c) => {
+        const td = document.createElement('td');
+        const v = r[c.f];
+        if (c.link && /^https?:\/\//.test(v || '')) {
+          const a = document.createElement('a'); a.href = v; a.target = '_blank'; a.rel = 'noopener'; a.textContent = v.replace(/^https?:\/\//, '').slice(0, 38); td.append(a);
+        } else td.textContent = c.fmt ? c.fmt(v, r) : (v ?? '');
+        td.className = [c.num ? 'num' : '', c.wrap ? 'wrap' : '', c.cls ? c.cls(r) : '', c.sel ? 'sel' : ''].filter(Boolean).join(' ');
+        row.append(td);
+      });
+      if (rowClass) row.className = rowClass(r);
+      tb.append(row);
+    });
+  };
+  const matches = (r, q) => !q || Object.values(r).join(' ').toLowerCase().includes(q);
+  return { YEARS, PAGES, fmt, fmt1, ylab, params, rows, num, find, tierClass, setMark, whereOf, tip, showTip, hideTip, clear, on, show, hbars, table, matches, get page() { return page; } };
+})();
+</script>
+
+<script>
+dash.calc('ratios', {
+  title: '资本开支与实验室收入之比',
+  description: '每年资本开支合计除以实验室收入合计，以及已签合同年化应付占实验室收入的比例。',
+  inputs: ['flow'],
+  fn: (flow) => {
+    const out = [];
+    const get = (line, y, s) => flow.find((r) => r.line === line && +r.year === y && r.entity === '合计' && r.scenario === s);
+    for (const s of ['公司计划', '保守']) {
+      for (const y of [2024, 2025, 2026, 2027, 2028, 2029, 2030]) {
+        const cap = get('total_capex', y, '公司计划'), rev = get('total_lab_rev', y, s), due = get('total_contract_due', y, '公司计划');
+        out.push({ year: y, scenario: s,
+          ratio: cap && rev ? Math.round((+cap.value / +rev.value) * 10) / 10 : null,
+          due_pct: due && rev ? Math.round((+due.value / +rev.value) * 100) : null });
+      }
+    }
+    return out;
+  },
+});
+dash.calc('sources_count', { title: '来源条数', description: '原始数据与出处表的行数。', inputs: ['sources'], fn: (sources) => [{ n: sources.length }] });
+dash.calc('obligations_by_payer', {
+  title: '按最终付款人汇总的义务',
+  description: '融资事件中计入合计的行，按最终付款人和角色（拿到的钱、承诺付款、担保）加总，亿美元。',
+  inputs: ['financing_events'],
+  fn: (financing_events) => {
+    const m = new Map();
+    financing_events.filter((r) => r.include === 'Y' && ['融资方', '承诺付款方', '担保方'].includes(r.role) && r.amount_yi !== '')
+      .forEach((r) => { const k = r.payer + '|' + r.role; m.set(k, (m.get(k) || 0) + +r.amount_yi); });
+    return [...m].map(([k, v]) => { const [payer, role] = k.split('|'); return { payer, role, yi: Math.round(v) }; });
+  },
+});
+dash.calc('fin_by_layer', {
+  title: '各层融资结构',
+  description: '融资事件中角色为融资方且计入合计的行，按层级和工具大类加总，亿美元。',
+  inputs: ['financing_events'],
+  fn: (financing_events) => {
+    const m = new Map();
+    financing_events.filter((r) => r.include === 'Y' && r.role === '融资方' && r.amount_yi !== '')
+      .forEach((r) => { const k = r.layer + '|' + r.category; m.set(k, (m.get(k) || 0) + +r.amount_yi); });
+    return [...m].map(([k, v]) => { const [layer, category] = k.split('|'); return { layer, category, yi: Math.round(v) }; });
+  },
+});
+dash.calc('debt_by_chain', {
+  title: '逐笔债务按链条汇总',
+  description: '逐笔债务中计入合计的行，按所属链条加总，亿美元。',
+  inputs: ['debt_instruments'],
+  fn: (debt_instruments) => {
+    const m = new Map();
+    debt_instruments.filter((r) => r.include === 'Y' && r.amount_yi !== '').forEach((r) => m.set(r.chain, (m.get(r.chain) || 0) + +r.amount_yi));
+    return [...m].map(([chain, v]) => ({ chain, yi: Math.round(v) })).sort((a, b) => b.yi - a.yi);
+  },
+});
+dash.calc('debt_by_payer', {
+  title: '逐笔债务按最终付款人汇总',
+  description: '逐笔债务中计入合计的行，按最终付款人归类加总，亿美元。',
+  inputs: ['debt_instruments'],
+  fn: (debt_instruments) => {
+    const m = new Map();
+    debt_instruments.filter((r) => r.include === 'Y' && r.amount_yi !== '').forEach((r) => m.set(r.payer, (m.get(r.payer) || 0) + +r.amount_yi));
+    return [...m].map(([payer, v]) => ({ payer, yi: Math.round(v) })).sort((a, b) => b.yi - a.yi);
+  },
+});
+dash.calc('contract_grid', {
+  title: '合同金额：条款硬度 × 付款方',
+  description: '逐份合同按条款硬度和付款方类别汇总的合同总额（亿美元）和份数。',
+  inputs: ['contract_terms'],
+  fn: (contract_terms) => {
+    const P = [['inv', '投资级公司'], ['lab', 'AI 实验室'], ['neo', 'Neocloud 与中间商']];
+    return ['硬', '较硬', '中', '软', '未披露'].map((h, i) => {
+      const row = { hardness: h, order: i + 1, total_yi: 0, total_n: 0 };
+      P.forEach(([k, name]) => {
+        const rs = contract_terms.filter((r) => r.hardness === h && r.payer_class === name);
+        row[k + '_yi'] = Math.round(d3.sum(rs, (r) => +r.value_yi || 0)); row[k + '_n'] = rs.length;
+        row.total_yi += row[k + '_yi']; row.total_n += rs.length;
+      });
+      return row;
+    });
+  },
+});
+</script>
+
+<script>
+(() => {
+  const { YEARS, PAGES, fmt, ylab, params, rows, num, find, setMark, whereOf, on, show } = window.AF;
+  const nav = document.getElementById('tabs');
+  const GROUPS = [['总览', ['cockpit', 'conclusions', 'overview']], ['专题', ['coreweave', 'gap', 'contracts', 'circular', 'stress', 'pricing']],
+    ['明细', ['labs', 'providers', 'projects', 'financing', 'risk', 'flowtable', 'sources']]];
+  const NAME = Object.fromEntries(PAGES);
+  GROUPS.forEach(([g, ids]) => {
+    const row = document.createElement('div'); row.className = 'tabgroup'; row.setAttribute('role', 'presentation');
+    const lab = document.createElement('span'); lab.className = 'g'; lab.textContent = g; row.append(lab);
+    ids.filter((id) => NAME[id]).forEach((id) => {
+      const b = document.createElement('button');
+      b.className = 'tab'; b.type = 'button'; b.id = 'tab-' + id; b.setAttribute('role', 'tab');
+      b.textContent = NAME[id];
+      b.addEventListener('click', () => show(id));
+      row.append(b);
+    });
+    nav.append(row);
+  });
+  const chipBox = document.getElementById('yearChips');
+  YEARS.forEach((y) => {
+    const b = document.createElement('button');
+    b.className = 'chip'; b.type = 'button'; b.id = 'year' + y;
+    b.textContent = y === 2024 ? '2024（参照）' : ylab(y);
+    b.addEventListener('click', () => dash.setParams({ year: y }));
+    chipBox.appendChild(b);
+  });
+  document.getElementById('scenPlan').addEventListener('click', () => dash.setParams({ scenario: '公司计划' }));
+  document.getElementById('scenCons').addEventListener('click', () => dash.setParams({ scenario: '保守' }));
+  const start = location.hash.slice(1);
+  show(PAGES.some(([id]) => id === start) ? start : 'cockpit', false);
+
+  const kpi = (id, line, year, scen) => {
+    const el = document.getElementById(id), pill = document.getElementById(id + 'T');
+    const flow = rows('flow');
+    el.classList.toggle('dash-skeleton', !flow);
+    if (!flow) { el.textContent = '—'; pill.textContent = ''; return; }
+    const r = find(flow.map(num), line, year, scen);
+    setMark(el, 'flow', 'yi', whereOf({ line, entity: '合计', year, scenario: scen }));
+    el.textContent = r ? fmt(r.yi) : '—';
+    pill.textContent = r ? (r.tier === '实际' ? '实际' : r.tier === '含估算' ? '含估算' : '指引或预测') : '暂无可靠数据';
+    pill.classList.toggle('est', !!r && r.tier === '含估算');
+  };
+  on('*', () => {
+    const { year, scen } = params();
+    YEARS.forEach((y) => document.getElementById('year' + y).setAttribute('aria-pressed', String(y === year)));
+    document.getElementById('scenPlan').setAttribute('aria-pressed', String(scen === '公司计划'));
+    document.getElementById('scenCons').setAttribute('aria-pressed', String(scen === '保守'));
+    const take = document.getElementById('takeaway');
+    const flow = rows('flow'), rd = dash.data('ratios'), ratios = rd.status === 'ok' ? rd.data : null;
+    if (!flow || !ratios) { take.innerHTML = '<span class="dash-skeleton">—</span>'; return; }
+    const F = flow.map(num);
+    const cap = find(F, 'total_capex', year, '公司计划'), rev = find(F, 'total_lab_rev', year, scen);
+    const due = find(F, 'total_contract_due', year, '公司计划');
+    const rr = ratios.find((r) => r.year === year && r.scenario === scen);
+    take.replaceChildren();
+    const t = (s) => take.append(document.createTextNode(s));
+    const b = (text, src, field, where) => { const e = document.createElement('b'); e.textContent = text; setMark(e, src, field, where); take.append(e); };
+    t(ylab(year) + ' 年：');
+    if (cap && rev && rr && rr.ratio != null) {
+      t('资本开支合计 '); b(fmt(cap.yi), 'flow', 'yi', whereOf({ line: 'total_capex', entity: '合计', year, scenario: '公司计划' }));
+      t(' 亿美元，是 AI 实验室收入 '); b(fmt(rev.yi), 'flow', 'yi', whereOf({ line: 'total_lab_rev', entity: '合计', year, scenario: scen }));
+      t(' 亿美元的 '); b(String(rr.ratio), 'ratios', 'ratio', whereOf({ year, scenario: scen })); t(' 倍。');
+    } else if (rev) {
+      t('AI 实验室收入 '); b(fmt(rev.yi), 'flow', 'yi', whereOf({ line: 'total_lab_rev', entity: '合计', year, scenario: scen }));
+      t(' 亿美元；这一年的资本开支还没有可靠预测。');
+    }
+    if (due && rr && rr.due_pct != null) {
+      t(' 实验室已签算力合同的年化应付为 '); b(fmt(due.yi), 'flow', 'yi', whereOf({ line: 'total_contract_due', entity: '合计', year, scenario: '公司计划' }));
+      t(' 亿美元，相当于其收入的 '); b(String(rr.due_pct), 'ratios', 'due_pct', whereOf({ year, scenario: scen })); t('%。');
+    }
+  });
+  on('overview', () => {
+    const { year, scen } = params();
+    kpi('kCapex', 'total_capex', year, '公司计划');
+    kpi('kRev', 'total_lab_rev', year, scen);
+    kpi('kDue', 'total_contract_due', year, '公司计划');
+    kpi('kGap', 'bigtech_gap', year, '公司计划');
+  });
+})();
+</script>
+
+<script>
+(() => {
+  const { fmt, ylab, params, rows, num, find, showTip, hideTip, clear, on } = window.AF;
+  const box = document.getElementById('pyrChart');
+  const ITEMS = [
+    { line: 'total_capex', entity: '合计', scen: false, label: '资本开支合计（大厂 + Neocloud）' },
+    { line: 'supplier_rev', entity: 'NVIDIA', scen: false, label: 'NVIDIA 数据中心收入' },
+    { line: 'total_contract_due', entity: '合计', scen: false, label: '实验室已签合同年化应付' },
+    { line: 'total_lab_compute', entity: '合计', scen: false, label: '实验室算力支出（估）' },
+    { line: 'total_lab_rev', entity: '合计', scen: true, label: '实验室收入（终端直接付费）' },
+  ];
+  on('overview', () => {
+    const { year, scen } = params();
+    clear(box);
+    const flow = rows('flow');
+    if (!flow) return;
+    const F = flow.map(num);
+    const data = ITEMS.map((it) => ({ ...it, r: find(F, it.line, year, it.scen ? scen : '公司计划', it.entity) }));
+    const rev = data[4].r ? data[4].r.yi : null;
+    const W = box.clientWidth || 360, rowH = 46, H = data.length * rowH + 8;
+    const max = d3.max(data, (d) => (d.r ? d.r.yi : 0)) || 1;
+    const x = d3.scaleLinear([0, max], [0, W - 8]);
+    const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img').attr('aria-label', ylab(year) + ' 年资金链各层规模');
+    const g = svg.selectAll('g').data(data).join('g').attr('transform', (d, i) => `translate(0,${i * rowH + 4})`);
+    g.append('text').attr('y', 12).attr('font-size', 12).attr('fill', 'var(--color-fg-muted)').text((d) => d.label);
+    g.append('rect').attr('y', 18).attr('height', 18).attr('rx', 4).attr('width', (d) => (d.r ? Math.max(2, x(d.r.yi)) : 0))
+      .attr('fill', (d, i) => (i >= 2 ? 'var(--cds-chart-status-critical)' : dash.colors[0])).attr('fill-opacity', (d) => (d.r && d.r.tier !== '实际' ? 0.55 : 0.9));
+    g.append('text').attr('y', 32).attr('font-size', 12).attr('fill', 'var(--color-fg)').attr('x', (d) => (d.r ? Math.min(x(d.r.yi) + 6, W - 130) : 0))
+      .text((d) => (d.r ? `${fmt(d.r.yi)} 亿` + (rev && d.line !== 'total_lab_rev' ? `（${(d.r.yi / rev).toFixed(1)} 倍）` : '') : '暂无可靠数据'));
+    g.on('pointermove', (ev, d) => { if (d.r) showTip(box, ev, [`${ylab(year)} · ${d.r.tier}`, `${d.label}：${fmt(d.r.yi)} 亿美元`, d.r.method]); })
+      .on('pointerleave', () => hideTip(box));
+  });
+})();
+</script>
+
+<script>
+(() => {
+  const { YEARS, fmt, ylab, params, rows, num, find, showTip, hideTip, clear, on } = window.AF;
+  // 通用折线：series=[{label,color,pts:[{y,v,tier}]}]
+  window.AF.lines = (box, legend, series, year, opts = {}) => {
+    clear(box); if (legend) legend.replaceChildren();
+    series.forEach((s) => {
+      if (!legend) return;
+      const sp = document.createElement('span'); const sw = document.createElement('i'); sw.className = 'sw'; sw.style.background = s.color;
+      sp.append(sw, document.createTextNode(s.label)); legend.append(sp);
+    });
+    const W = box.clientWidth || 360, H = opts.h || 260, m = { t: 12, r: 16, b: 26, l: 52 };
+    const x = d3.scalePoint(YEARS, [m.l, W - m.r]).padding(0.2);
+    const maxV = d3.max(series.flatMap((s) => s.pts.map((p) => p.v))) || 1;
+    const yS = d3.scaleLinear([0, maxV * 1.08], [H - m.b, m.t]).nice();
+    const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img');
+    svg.append('g').selectAll('line').data(yS.ticks(5)).join('line').attr('x1', m.l).attr('x2', W - m.r).attr('y1', (d) => yS(d)).attr('y2', (d) => yS(d)).attr('stroke', 'var(--cds-chart-grid)');
+    svg.append('g').selectAll('text').data(yS.ticks(5)).join('text').attr('x', m.l - 6).attr('y', (d) => yS(d) + 4).attr('text-anchor', 'end').attr('font-size', 11).attr('fill', 'var(--color-fg-muted)').text((d) => fmt(d));
+    svg.append('g').selectAll('text').data(YEARS).join('text').attr('x', (d) => x(d)).attr('y', H - 6).attr('text-anchor', 'middle').attr('font-size', 11).attr('fill', 'var(--color-fg-muted)').text((d) => ylab(d));
+    if (year) svg.append('line').attr('x1', x(year)).attr('x2', x(year)).attr('y1', m.t).attr('y2', H - m.b).attr('stroke', 'var(--cds-chart-reference)').attr('stroke-dasharray', '3 3');
+    series.forEach((s) => {
+      for (let i = 1; i < s.pts.length; i++) {
+        const a = s.pts[i - 1], b = s.pts[i];
+        if (b.y - a.y !== 1) continue;
+        svg.append('line').attr('x1', x(a.y)).attr('y1', yS(a.v)).attr('x2', x(b.y)).attr('y2', yS(b.v))
+          .attr('stroke', s.color).attr('stroke-width', 2).attr('stroke-linecap', 'round').attr('stroke-dasharray', a.tier === '实际' && b.tier === '实际' ? null : '5 4');
+      }
+      svg.append('g').selectAll('circle').data(s.pts).join('circle').attr('cx', (p) => x(p.y)).attr('cy', (p) => yS(p.v)).attr('r', (p) => (p.y === year ? 4 : 2.5)).attr('fill', s.color);
+    });
+    svg.on('pointermove', (ev) => {
+      const [mx] = d3.pointer(ev);
+      const yy = YEARS.reduce((a, b) => (Math.abs(x(b) - mx) < Math.abs(x(a) - mx) ? b : a));
+      showTip(box, ev, [ylab(yy) + ' 年（亿美元）', ...series.map((s) => { const p = s.pts.find((q) => q.y === yy); return `${s.label}：${p ? fmt(p.v) + (p.tier !== '实际' ? '（' + p.tier + '）' : '') : '—'}`; })]);
+    }).on('pointerleave', () => hideTip(box));
+  };
+  const SERIES = [
+    { line: 'total_capex', scen: '公司计划', label: '资本开支合计', color: () => dash.colors[0] },
+    { line: 'total_contract_due', scen: '公司计划', label: '已签合同年化应付', color: () => 'var(--cds-chart-status-critical)' },
+    { line: 'total_lab_compute', scen: '公司计划', label: '实验室算力支出（估）', color: () => dash.colors[2] },
+    { line: 'total_lab_rev', scen: 'SEL', label: '实验室收入', color: () => dash.colors[1] },
+  ];
+  on('overview', () => {
+    const { year, scen } = params();
+    const flow = rows('flow');
+    const box = document.getElementById('tlChart'), legend = document.getElementById('tlLegend');
+    if (!flow) { clear(box); return; }
+    const F = flow.map(num);
+    const series = SERIES.map((s) => {
+      const sc = s.scen === 'SEL' ? scen : s.scen;
+      return { label: s.label + (s.scen === 'SEL' ? `（${scen}）` : ''), color: s.color(),
+        pts: YEARS.map((y) => ({ y, r: find(F, s.line, y, sc) })).filter((p) => p.r).map((p) => ({ y: p.y, v: p.r.yi, tier: p.r.tier })) };
+    });
+    window.AF.lines(box, legend, series, year, { h: 280 });
+  });
+})();
+</script>
+
+<script>
+(() => {
+  const { fmt, ylab, params, rows, showTip, hideTip, clear, on } = window.AF;
+  const box = document.getElementById('skChart');
+  const note = document.getElementById('skNote');
+  const COL = {
+    '终端用户付费': 0, '股权投资者': 0, '大厂经营现金流': 0, '债券与贷款（大厂）': 0, '债券、贷款与证券化（其他）': 0,
+    'AI 实验室': 1, '大厂': 2, 'Neocloud 与开发商': 2,
+    '人员、研发与留存现金': 3, '资本开支': 3, '回购、分红与其他': 3, '其他（含私有开发商建设）': 3,
+    'NVIDIA（数据中心芯片）': 4, '楼、电力、网络与其他芯片': 4,
+  };
+  const ORDER = Object.keys(COL);
+  const LAB = new Set(['终端用户付费', '股权投资者', 'AI 实验室']);
+  on('overview', () => {
+    const { year } = params();
+    clear(box);
+    const all = rows('sankey');
+    if (!all) return;
+    const yr = year === 2025 ? 2025 : 2026;
+    note.textContent = `${ylab(yr)} 年，亿美元。红色为流经 AI 实验室的资金。` + (year !== yr ? `只有 2025 和 2026E 两年数据较全，这里显示 ${ylab(yr)}。` : '') + '“回购、分红与其他”“其他”是倒算出的余额。';
+    const links = all.filter((l) => +l.year === yr).map((l) => ({ ...l, v: +l.value * 10 }));
+    const nodes = ORDER.filter((n) => links.some((l) => l.source === n || l.target === n)).map((n) => ({ name: n, col: COL[n] }));
+    const byName = Object.fromEntries(nodes.map((n) => [n.name, n]));
+    nodes.forEach((n) => {
+      n.v = Math.max(d3.sum(links.filter((l) => l.target === n.name), (l) => l.v), d3.sum(links.filter((l) => l.source === n.name), (l) => l.v));
+    });
+    const W = box.clientWidth || 360, H = Math.max(360, Math.min(520, W * 0.6)), pad = 10, nw = 10;
+    const cols = d3.range(5).map((c) => nodes.filter((n) => n.col === c)).filter((cs) => cs.length);
+    const k = d3.min(cols, (cs) => (H - pad * (cs.length - 1)) / d3.sum(cs, (n) => n.v));
+    const labelSpace = Math.min(150, W * 0.22);
+    const xCol = (c) => (c === 4 ? W - nw - labelSpace * 0.95 : c * ((W - nw - labelSpace) / 4));
+    cols.forEach((cs) => { let y = 0; cs.forEach((n) => { n.x = xCol(n.col); n.y0 = y; n.h = Math.max(1, n.v * k); y += n.h + pad; n.oOff = 0; n.iOff = 0; }); });
+    links.forEach((l) => { l.s = byName[l.source]; l.t = byName[l.target]; l.w = Math.max(1, l.v * k); });
+    links.sort((a, b) => a.t.y0 - b.t.y0).forEach((l) => { l.ys = l.s.y0 + l.s.oOff + l.w / 2; l.s.oOff += l.w; });
+    links.sort((a, b) => a.s.y0 - b.s.y0).forEach((l) => { l.yt = l.t.y0 + l.t.iOff + l.w / 2; l.t.iOff += l.w; });
+    const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img').attr('aria-label', ylab(yr) + ' 年资金流向');
+    svg.append('g').selectAll('path').data(links).join('path')
+      .attr('d', (l) => { const x0 = l.s.x + nw, x1 = l.t.x, xm = (x0 + x1) / 2; return `M${x0},${l.ys}C${xm},${l.ys} ${xm},${l.yt} ${x1},${l.yt}`; })
+      .attr('fill', 'none').attr('stroke-width', (l) => l.w)
+      .attr('stroke', (l) => (LAB.has(l.source) || LAB.has(l.target) ? 'var(--cds-chart-status-critical)' : 'var(--cds-chart-muted)')).attr('stroke-opacity', 0.38)
+      .on('pointermove', (ev, l) => showTip(box, ev, [`${ylab(yr)} · ${l.tier}`, `${l.source} → ${l.target}：${fmt(l.v)} 亿美元`, l.method]))
+      .on('pointerleave', () => hideTip(box));
+    const g = svg.append('g').selectAll('g').data(nodes).join('g');
+    g.append('rect').attr('x', (n) => n.x).attr('y', (n) => n.y0).attr('width', nw).attr('height', (n) => n.h).attr('rx', 2)
+      .attr('fill', (n) => (LAB.has(n.name) ? 'var(--cds-chart-status-critical)' : 'var(--color-fg-muted)'));
+    g.append('text').attr('font-size', 11).attr('fill', 'var(--color-fg)').attr('x', (n) => n.x + nw + 4).attr('y', (n) => n.y0 + n.h / 2 + 4)
+      .text((n) => (n.h >= 9 ? `${n.name} ${fmt(n.v)}` : ''));
+  });
+})();
+</script>
+
+<script>
+(() => {
+  const { YEARS, fmt, ylab, params, rows, num, tierClass, hbars, table, on } = window.AF;
+  const LABS = [['OpenAI', () => dash.colors[0]], ['Anthropic', () => dash.colors[1]], ['xAI', () => dash.colors[3]]];
+  on('labs', () => {
+    const { year, scen } = params();
+    const flow = rows('flow');
+    const box = document.getElementById('labRevChart');
+    if (flow) {
+      const F = flow.map(num);
+      const series = LABS.map(([e, c]) => ({ label: e, color: c(),
+        pts: F.filter((r) => r.line === 'lab_rev' && r.entity === e && r.scenario === scen).sort((a, b) => a.year - b.year).map((r) => ({ y: r.year, v: r.yi, tier: r.tier })) }));
+      window.AF.lines(box, document.getElementById('labLegend'), series, year);
+    }
+    const ob = dash.data('obligations_by_payer');
+    const pbox = document.getElementById('payerChart'), pleg = document.getElementById('payerLegend');
+    if (ob.status === 'ok') {
+      const ROLES = [['融资方', '拿到的钱', () => dash.colors[0]], ['承诺付款方', '承诺付款', () => 'var(--cds-chart-status-critical)'], ['担保方', '担保兜底', () => dash.colors[4]]];
+      pleg.replaceChildren(...ROLES.map(([, n, c]) => { const s = document.createElement('span'); const i = document.createElement('i'); i.className = 'sw'; i.style.background = c(); s.append(i, document.createTextNode(n)); return s; }));
+      const payers = d3.rollups(ob.data, (v) => d3.sum(v, (r) => r.yi), (r) => r.payer).sort((a, b) => b[1] - a[1]).slice(0, 10);
+      window.AF.clear(pbox);
+      const W = pbox.clientWidth || 360, rowH = 36, H = payers.length * rowH + 6, lw = 92;
+      const x = d3.scaleLinear([0, d3.max(payers, (p) => p[1]) || 1], [0, W - lw - 60]);
+      const svg = d3.select(pbox).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img');
+      payers.forEach(([payer, total], i) => {
+        const g = svg.append('g').attr('transform', `translate(0,${i * rowH + 4})`);
+        g.append('text').attr('y', 16).attr('font-size', 12).attr('fill', ['OpenAI', 'Anthropic', 'xAI'].includes(payer) ? 'var(--color-bad)' : 'var(--color-fg)').text(payer);
+        let x0 = lw;
+        ROLES.forEach(([role, name, c]) => {
+          const r = ob.data.find((d) => d.payer === payer && d.role === role); if (!r) return;
+          g.append('rect').attr('x', x0).attr('y', 4).attr('height', 16).attr('width', Math.max(1, x(r.yi))).attr('fill', c())
+            .on('pointermove', (ev) => window.AF.showTip(pbox, ev, [payer, `${name}：${fmt(r.yi)} 亿美元`])).on('pointerleave', () => window.AF.hideTip(pbox));
+          x0 += x(r.yi) + 1;
+        });
+        g.append('text').attr('x', x0 + 6).attr('y', 16).attr('font-size', 12).attr('fill', 'var(--color-fg)').text(fmt(total));
+      });
+    }
+    const ft = rows('flow_table');
+    if (ft) {
+      const lab = ft.filter((r) => (r.section === '实验室' || r.label.startsWith('实验室股权')) && (r.scenario === '公司计划' || r.scenario === scen));
+      table(document.getElementById('labTable'), [{ f: 'label', label: '项目' }, { f: 'entity', label: '实验室' }, { f: 'scenario', label: '情景' },
+        ...YEARS.map((y) => ({ f: 'y' + y, label: ylab(y), num: true, sel: y === year, fmt: (v) => (v === '' ? '' : fmt(v)), cls: (r) => tierClass(r['t' + y]) }))], lab, 'key');
+    }
+    const cm = rows('commitments');
+    if (cm) table(document.getElementById('commitTable'), [{ f: 'id', label: '#' }, { f: 'lab', label: '实验室 / 受益方' }, { f: 'counterparty', label: '对手方' },
+      { f: 'kind', label: '类型' }, { f: 'total_yi', label: '总额（亿美元）', num: true, fmt: (v) => (v === '' ? '' : fmt(v)) }, { f: 'start', label: '起始' },
+      { f: 'term', label: '年限' }, { f: 'status', label: '状态' }, { f: 'note', label: '说明', wrap: true }, { f: 'source_url', label: '出处', link: true }], cm, 'id');
+  });
+})();
+</script>
+
+<script>
+(() => {
+  const { fmt, ylab, params, rows, num, table, on, clear, showTip, hideTip } = window.AF;
+  const COS = ['Microsoft', 'Alphabet', 'Amazon', 'Meta', 'Oracle', 'CoreWeave', 'Nebius', 'IREN'];
+  let layerSel = '全部';
+  const fbox = document.getElementById('partFilter');
+  ['全部', 'AI 实验室', '大厂', 'Neocloud', '开发商', '芯片厂'].forEach((l) => {
+    const b = document.createElement('button'); b.className = 'chip'; b.type = 'button'; b.textContent = l; b.id = 'pf-' + l;
+    b.addEventListener('click', () => { layerSel = l; drawParts(); }); fbox.append(b);
+  });
+  const drawParts = () => {
+    fbox.querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', String(b.textContent === layerSel)));
+    const p = rows('participants');
+    if (!p) return;
+    const data = p.filter((r) => layerSel === '全部' || r.layer === layerSel);
+    const nf = (v) => (v === '' ? '' : (Math.abs(+v) >= 10 ? fmt(v) : String(v)));
+    table(document.getElementById('partTable'), [{ f: 'layer', label: '层级' }, { f: 'participant', label: '参与者' }, { f: 'metric', label: '指标' },
+      ...['2024A', '2025A', '2026最新', '2026E', '2027E'].map((c) => ({ f: c, label: c, num: true, fmt: nf })), { f: 'latest_note', label: '2026最新 口径', wrap: true }], data, 'key',
+      (r) => '');
+  };
+  on('providers', () => {
+    drawParts();
+    const { year } = params();
+    const yr = [2024, 2025, 2026].includes(year) ? year : 2026;
+    document.getElementById('capexNote').textContent = `${ylab(yr)} 年，亿美元。2024–2025 为 SEC 年报实际值（财年按期间中点折算），2026 年资本开支为公司指引，经营现金流无逐家预测。` + (year !== yr ? `所选年份没有逐家数据，显示 ${ylab(yr)}。` : '');
+    document.getElementById('swCapex').style.background = dash.colors[0];
+    document.getElementById('swOcf').style.background = dash.colors[2];
+    const flow = rows('flow'); const box = document.getElementById('capexChart');
+    clear(box);
+    if (!flow) return;
+    const F = flow.map(num).filter((r) => r.year === yr && r.scenario === '公司计划');
+    const data = COS.map((c) => ({ c, capex: F.find((r) => r.line === 'capex' && r.entity === c), ocf: F.find((r) => r.line === 'ocf' && r.entity === c) })).filter((d) => d.capex || d.ocf);
+    const W = box.clientWidth || 360, rowH = 44, H = data.length * rowH + 6, lw = 84;
+    const max = d3.max(data, (d) => Math.max(d.capex ? d.capex.yi : 0, d.ocf ? d.ocf.yi : 0)) || 1;
+    const x = d3.scaleLinear([0, max], [0, W - lw - 56]);
+    const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img');
+    data.forEach((d, i) => {
+      const g = svg.append('g').attr('transform', `translate(0,${i * rowH + 4})`);
+      g.append('text').attr('y', 18).attr('font-size', 12).attr('fill', 'var(--color-fg)').text(d.c);
+      [[d.capex, dash.colors[0], 2, '资本开支'], [d.ocf, dash.colors[2], 20, '经营现金流']].forEach(([r, c, y, n]) => {
+        if (!r) return;
+        g.append('rect').attr('x', lw).attr('y', y).attr('height', 14).attr('rx', 3).attr('width', Math.max(1, x(r.yi))).attr('fill', c).attr('fill-opacity', r.tier === '实际' ? 0.9 : 0.5)
+          .on('pointermove', (ev) => showTip(box, ev, [`${d.c} · ${ylab(yr)} · ${r.tier}`, `${n}：${fmt(r.yi)} 亿美元`, r.method])).on('pointerleave', () => hideTip(box));
+        g.append('text').attr('x', lw + x(r.yi) + 4).attr('y', y + 11).attr('font-size', 11).attr('fill', 'var(--color-fg-muted)').text(fmt(r.yi));
+      });
+    });
+  });
+})();
+</script>
+
+<script>
+(() => {
+  const { fmt, rows, table, on, hbars, matches } = window.AF;
+  const search = document.getElementById('debtSearch');
+  let chainSel = '全部';
+  const cbox = document.getElementById('debtChain');
+  ['全部', 'OpenAI 链', 'Anthropic 链', 'CoreWeave 链'].forEach((c) => {
+    const b = document.createElement('button'); b.className = 'chip'; b.type = 'button'; b.textContent = c;
+    b.addEventListener('click', () => { chainSel = c; draw(); }); cbox.append(b);
+  });
+  const draw = () => {
+    cbox.querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', String(b.textContent === chainSel)));
+    const d = rows('debt_instruments');
+    if (!d) return;
+    const q = search.value.trim().toLowerCase();
+    table(document.getElementById('debtTable'), [{ f: 'id', label: '#' }, { f: 'chain', label: '链条' }, { f: 'kind', label: '类别' }, { f: 'instrument', label: '工具', wrap: true },
+      { f: 'group', label: '所属集团' }, { f: 'layer', label: '层级' }, { f: 'collateral', label: '抵押 / 增信' }, { f: 'direct_payer', label: '直接付款人' },
+      { f: 'final_payer', label: '最终付款人', cls: (r) => (['OpenAI', 'Anthropic', 'xAI'].includes(r.payer) ? 'lab' : '') },
+      { f: 'amount_yi', label: '余额（亿美元）', num: true, fmt: (v) => (v === '' ? '' : fmt(v)) }, { f: 'coupon', label: '票息 / 利差' },
+      { f: 'maturity', label: '到期' }, { f: 'latest', label: '最新价格 / 收益率' }, { f: 'rating', label: '评级' }, { f: 'include', label: '计入合计' },
+      { f: 'note', label: '备注', wrap: true }, { f: 'source', label: '出处', link: true }], d.filter((r) => (chainSel === '全部' || r.chain === chainSel) && matches(r, q)), 'id');
+  };
+  search.addEventListener('input', draw);
+  on('projects', () => {
+    draw();
+    const dc = dash.data('debt_by_chain');
+    if (dc.status === 'ok') hbars(document.getElementById('debtChainChart'), dc.data.map((r) => ({ label: r.chain, v: r.yi })),
+      { color: (d) => (d.label === 'CoreWeave 链' ? dash.colors[0] : 'var(--cds-chart-status-critical)') });
+    const dp = dash.data('debt_by_payer');
+    if (dp.status === 'ok') hbars(document.getElementById('debtPayerChart'), dp.data.map((r) => ({ label: r.payer, v: r.yi })),
+      { color: (d) => (['OpenAI', 'Anthropic', 'xAI'].includes(d.label) ? 'var(--cds-chart-status-critical)' : dash.colors[0]) });
+  });
+})();
+</script>
+
+<script>
+(() => {
+  const { fmt, rows, num, table, on, clear, showTip, hideTip, matches } = window.AF;
+  const CATS = ['权益', '可转债', '无担保债', '银行贷款与循环贷', '资产担保贷款', '项目债与证券化', '合资与芯片租赁 SPV', '承诺、担保与预付', '其他'];
+  const LAYERS = ['AI 实验室', '大厂', 'Neocloud', '开发商'];
+  const search = document.getElementById('finSearch');
+  const drawTable = () => {
+    const d = rows('financing_events');
+    if (!d) return;
+    const q = search.value.trim().toLowerCase();
+    table(document.getElementById('finTable'), [{ f: 'id', label: '#' }, { f: 'date', label: '日期' }, { f: 'layer', label: '层级' }, { f: 'participant', label: '参与者' },
+      { f: 'amount_yi', label: '金额（亿美元）', num: true, fmt: (v) => (v === '' ? '' : fmt(v)) }, { f: 'instrument', label: '工具' }, { f: 'on_off_bs', label: '体内 / 体外' },
+      { f: 'secured', label: '担保' }, { f: 'recourse', label: '追索' }, { f: 'securitized', label: '证券化' }, { f: 'role', label: '角色' }, { f: 'status', label: '状态' },
+      { f: 'include', label: '计入合计' }, { f: 'payer', label: '最终付款人', cls: (r) => (['OpenAI', 'Anthropic', 'xAI'].includes(r.payer) ? 'lab' : '') },
+      { f: 'funders', label: '出资方 / 牵头行', wrap: true }, { f: 'note', label: '备注', wrap: true }, { f: 'source_url', label: '出处', link: true }],
+      d.filter((r) => matches(r, q)), 'id');
+  };
+  search.addEventListener('input', drawTable);
+  on('financing', () => {
+    drawTable();
+    document.getElementById('sw25').style.background = 'var(--cds-chart-muted)';
+    document.getElementById('sw26').style.background = dash.colors[0];
+    const flow = rows('flow'); const box = document.getElementById('issueChart'); clear(box);
+    if (flow) {
+      const F = flow.map(num).filter((r) => r.line === 'debt_issuance');
+      const chans = [...new Set(F.map((r) => r.entity))];
+      const W = box.clientWidth || 360, rowH = 40, H = chans.length * rowH + 6, lw = 150;
+      const x = d3.scaleLinear([0, d3.max(F, (r) => r.yi) || 1], [0, W - lw - 50]);
+      const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img');
+      chans.forEach((c, i) => {
+        const g = svg.append('g').attr('transform', `translate(0,${i * rowH + 4})`);
+        g.append('text').attr('y', 16).attr('font-size', 11).attr('fill', 'var(--color-fg)').text(c.length > 14 ? c.slice(0, 14) + '…' : c);
+        [[2025, 'var(--cds-chart-muted)', 0], [2026, dash.colors[0], 16]].forEach(([y, col, dy]) => {
+          const r = F.find((q) => q.entity === c && q.year === y); if (!r) return;
+          g.append('rect').attr('x', lw).attr('y', dy + 2).attr('height', 13).attr('rx', 3).attr('width', Math.max(1, x(r.yi))).attr('fill', col)
+            .on('pointermove', (ev) => showTip(box, ev, [`${c} · ${y === 2025 ? '2025 实际' : '2026E'}`, `${fmt(r.yi)} 亿美元`, r.method])).on('pointerleave', () => hideTip(box));
+          g.append('text').attr('x', lw + x(r.yi) + 4).attr('y', dy + 13).attr('font-size', 11).attr('fill', 'var(--color-fg-muted)').text(fmt(r.yi));
+        });
+      });
+    }
+    const fl = dash.data('fin_by_layer'); const sbox = document.getElementById('structChart'); clear(sbox);
+    const leg = document.getElementById('structLegend');
+    if (fl.status === 'ok') {
+      const colors = d3.scaleOrdinal(CATS, [...dash.colors, 'var(--cds-chart-muted)']);
+      leg.replaceChildren(...CATS.filter((c) => fl.data.some((r) => r.category === c)).map((c) => { const s = document.createElement('span'); const i = document.createElement('i'); i.className = 'sw'; i.style.background = colors(c); s.append(i, document.createTextNode(c)); return s; }));
+      const W = sbox.clientWidth || 360, rowH = 44, H = LAYERS.length * rowH + 6, lw = 80;
+      const tot = (l) => d3.sum(fl.data.filter((r) => r.layer === l), (r) => r.yi);
+      const svg = d3.select(sbox).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img');
+      LAYERS.forEach((l, i) => {
+        const g = svg.append('g').attr('transform', `translate(0,${i * rowH + 4})`);
+        g.append('text').attr('y', 18).attr('font-size', 12).attr('fill', 'var(--color-fg)').text(l);
+        const T = tot(l) || 1; let x0 = lw; const w = W - lw - 60;
+        CATS.forEach((c) => {
+          const r = fl.data.find((q) => q.layer === l && q.category === c); if (!r) return;
+          const ww = (r.yi / T) * w;
+          g.append('rect').attr('x', x0).attr('y', 6).attr('height', 18).attr('width', Math.max(0.5, ww - 1)).attr('fill', colors(c))
+            .on('pointermove', (ev) => showTip(sbox, ev, [l, `${c}：${fmt(r.yi)} 亿美元（${Math.round((r.yi / T) * 100)}%）`])).on('pointerleave', () => hideTip(sbox));
+          x0 += ww;
+        });
+        g.append('text').attr('x', W - 54).attr('y', 20).attr('font-size', 11).attr('fill', 'var(--color-fg-muted)').text(fmt(tot(l)));
+      });
+    }
+  });
+})();
+</script>
+
+<script>
+(() => {
+  const { fmt, fmt1, rows, table, on, clear, showTip, hideTip } = window.AF;
+  on('risk', () => {
+    const P = rows('risk_prices');
+    const sbox = document.getElementById('spreadChart'), cbox = document.getElementById('cdsChart');
+    clear(sbox); clear(cbox);
+    document.getElementById('swCrwv').style.background = 'var(--cds-chart-status-critical)';
+    document.getElementById('swOrcl').style.background = dash.colors[0];
+    if (!P) return;
+    const R = P.map((r) => ({ ...r, value: +r.value }));
+    const bonds = [...new Set(R.filter((r) => r.issuer === 'CoreWeave' && r.metric === '利差' && r.date === '2026-10-13').map((r) => r.instrument))];
+    const W = sbox.clientWidth || 360, rowH = 40, H = bonds.length * rowH + 30, lw = 150;
+    const x = d3.scaleLinear([500, 1050], [lw, W - 40]);
+    const svg = d3.select(sbox).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img');
+    [600, 800, 1000].forEach((t) => {
+      svg.append('line').attr('x1', x(t)).attr('x2', x(t)).attr('y1', 4).attr('y2', H - 22).attr('stroke', t === 1000 ? 'var(--cds-chart-status-critical)' : 'var(--cds-chart-grid)').attr('stroke-dasharray', t === 1000 ? '3 3' : null);
+      svg.append('text').attr('x', x(t)).attr('y', H - 6).attr('text-anchor', 'middle').attr('font-size', 11).attr('fill', 'var(--color-fg-muted)').text(t === 1000 ? '1,000（困境线）' : fmt(t));
+    });
+    bonds.forEach((b, i) => {
+      const a = R.find((r) => r.instrument === b && r.metric === '利差' && r.date === '2026-09-17');
+      const z = R.find((r) => r.instrument === b && r.metric === '利差' && r.date === '2026-10-13');
+      const y = i * rowH + 18;
+      svg.append('text').attr('x', 0).attr('y', y + 4).attr('font-size', 12).attr('fill', 'var(--color-fg)').text(b.replace('CoreWeave ', ''));
+      if (a && z) svg.append('line').attr('x1', x(a.value)).attr('x2', x(z.value)).attr('y1', y).attr('y2', y).attr('stroke', 'var(--cds-chart-muted)').attr('stroke-width', 3);
+      [[a, 'var(--cds-chart-muted)'], [z, 'var(--cds-chart-status-critical)']].forEach(([r, c]) => {
+        if (!r) return;
+        svg.append('circle').attr('cx', x(r.value)).attr('cy', y).attr('r', 5).attr('fill', c)
+          .on('pointermove', (ev) => showTip(sbox, ev, [`${b} · ${r.date}`, `${fmt(r.value)} bp`, r.source])).on('pointerleave', () => hideTip(sbox));
+      });
+    });
+    const series = [['CoreWeave', 'var(--cds-chart-status-critical)'], ['Oracle', dash.colors[0]]].map(([iss, c]) => ({ iss, c,
+      pts: R.filter((r) => r.issuer === iss && r.metric === 'CDS').map((r) => ({ d: new Date(r.date), v: r.value, r })).sort((a, b) => a.d - b.d) }));
+    const W2 = cbox.clientWidth || 360, H2 = 240, m = { t: 10, r: 16, b: 26, l: 44 };
+    const xs = d3.scaleUtc(d3.extent(series.flatMap((s) => s.pts.map((p) => p.d))), [m.l, W2 - m.r]);
+    const ys = d3.scaleLinear([0, 1000], [H2 - m.b, m.t]);
+    const s2 = d3.select(cbox).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W2} ${H2}`).attr('role', 'img');
+    ys.ticks(5).forEach((t) => {
+      s2.append('line').attr('x1', m.l).attr('x2', W2 - m.r).attr('y1', ys(t)).attr('y2', ys(t)).attr('stroke', 'var(--cds-chart-grid)');
+      s2.append('text').attr('x', m.l - 6).attr('y', ys(t) + 4).attr('text-anchor', 'end').attr('font-size', 11).attr('fill', 'var(--color-fg-muted)').text(fmt(t));
+    });
+    xs.ticks(4).forEach((t) => s2.append('text').attr('x', xs(t)).attr('y', H2 - 6).attr('text-anchor', 'middle').attr('font-size', 11).attr('fill', 'var(--color-fg-muted)').text(d3.utcFormat('%Y-%m')(t)));
+    series.forEach((s) => {
+      s2.append('path').attr('d', d3.line().x((p) => xs(p.d)).y((p) => ys(p.v))(s.pts)).attr('fill', 'none').attr('stroke', s.c).attr('stroke-width', 2).attr('stroke-linejoin', 'round');
+      s2.append('g').selectAll('circle').data(s.pts).join('circle').attr('cx', (p) => xs(p.d)).attr('cy', (p) => ys(p.v)).attr('r', 4).attr('fill', s.c)
+        .on('pointermove', (ev, p) => showTip(cbox, ev, [`${s.iss} · ${p.r.date}`, `${fmt(p.v)} bp`, p.r.source])).on('pointerleave', () => hideTip(cbox));
+    });
+    table(document.getElementById('priceTable'), [{ f: 'id', label: '#' }, { f: 'date', label: '日期' }, { f: 'instrument', label: '证券' }, { f: 'metric', label: '指标' },
+      { f: 'value', label: '数值', num: true, fmt: (v) => fmt1(v) }, { f: 'unit', label: '单位' }, { f: 'source', label: '来源', wrap: true }, { f: 'note', label: '备注', wrap: true }], P, 'id');
+    const E = rows('events'); const ul = document.getElementById('eventList'); ul.replaceChildren();
+    (E || []).forEach((e) => {
+      const li = document.createElement('li'); li.dataset.key = e.id;
+      const d = document.createElement('span'); d.className = 'd'; d.textContent = e.date;
+      const c = document.createElement('span'); c.className = 'c'; c.textContent = e.category;
+      const t = document.createElement('span'); t.textContent = `${e.event}（${e.source}）`;
+      li.append(d, c, t); ul.append(li);
+    });
+  });
+})();
+</script>
+
+<script>
+(() => {
+  const { YEARS, fmt, ylab, params, rows, tierClass, table, on, matches } = window.AF;
+  on('flowtable', () => {
+    const { year, scen } = params();
+    const ft = rows('flow_table');
+    if (!ft) return;
+    table(document.getElementById('flowTable'), [{ f: 'section', label: '层级' }, { f: 'label', label: '项目' }, { f: 'entity', label: '主体' }, { f: 'scenario', label: '情景' },
+      ...YEARS.map((y) => ({ f: 'y' + y, label: ylab(y), num: true, sel: y === year, fmt: (v) => (v === '' ? '' : fmt(v)), cls: (r) => tierClass(r['t' + y]) }))],
+      ft.filter((r) => r.scenario === '公司计划' || r.scenario === scen), 'key');
+  });
+  const search = document.getElementById('srcSearch');
+  const drawSrc = () => {
+    const s = rows('sources'); if (!s) return;
+    const q = search.value.trim().toLowerCase();
+    table(document.getElementById('srcTable'), [{ f: 'id', label: '#' }, { f: 'dataset', label: '数据集' }, { f: 'entity', label: '主体' }, { f: 'item', label: '指标' },
+      { f: 'year', label: '年' }, { f: 'value', label: '数值（十亿美元）', num: true }, { f: 'basis', label: '口径' }, { f: 'source_type', label: '来源类型' },
+      { f: 'source_date', label: '日期' }, { f: 'source_url', label: '出处', link: true }, { f: 'note', label: '备注', wrap: true }], s.filter((r) => matches(r, q)), 'id');
+  };
+  search.addEventListener('input', drawSrc);
+  on('sources', () => {
+    const sc = dash.data('sources_count');
+    document.getElementById('srcCount').textContent = sc.status === 'ok' && sc.data[0] ? String(sc.data[0].n) : '—';
+    const a = rows('assumptions');
+    if (a) table(document.getElementById('asTable'), [{ f: 'id', label: '假设' }, { f: 'value', label: '取值', num: true }, { f: 'description', label: '说明', wrap: true }], a, 'id');
+    drawSrc();
+  });
+})();
+</script>
+
+<script src="cw_img_1.js"></script>
+<script src="cw_img_2.js"></script>
+<script src="cw_img_3.js"></script>
+<script src="cw_img_4.js"></script>
+<script src="cw_img_5.js"></script>
+<script src="cw_img_6.js"></script>
+<script>
+(() => {
+  const { rows, table, on } = window.AF;
+  const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+  const fig = (r) => {
+    const f = el('figure', 'cw-fig');
+    const img = document.createElement('img');
+    img.alt = r.title || '图表'; img.loading = 'lazy';
+    const src = (window.CWIMG || {})[r.image];
+    if (src && src.startsWith('data:image/')) img.src = src;
+    const cap = el('figcaption');
+    if (r.title) cap.append(el('b', '', r.title));
+    if (r.body) cap.append(document.createTextNode(r.body));
+    if (r.source) cap.append(document.createTextNode((r.body ? ' ' : '') + '来源：' + r.source));
+    f.append(img, cap);
+    return f;
+  };
+  const srcLine = (r) => (r.source ? el('div', 'cw-src', '来源：' + r.source) : null);
+  const render = (section, data) => {
+    const body = document.getElementById('cw-' + section);
+    body.replaceChildren();
+    let grid = null, list = null, camps = null, col = null, cards = null;
+    const host = () => col || body;
+    const flushTo = (node) => { host().append(node); };
+    data.forEach((r) => {
+      if (r.kind === 'image') {
+        if (section === 'what') { document.getElementById('cw-what-figs').append(fig(r)); return; }
+        if (!grid) { grid = el('div', 'cw-figs'); flushTo(grid); }
+        grid.append(fig(r)); return;
+      }
+      grid = null;
+      if (r.kind !== 'point' && r.kind !== 'watch') list = null;
+      if (r.kind !== 'card') cards = null;
+      if (r.kind === 'lead') { flushTo(el('p', 'cw-lead', r.body)); }
+      else if (r.kind === 'para') { flushTo(el('p', '', r.body)); const s = srcLine(r); if (s) flushTo(s); }
+      else if (r.kind === 'sub') { flushTo(el('h3', '', r.title)); flushTo(el('p', '', r.body)); const s = srcLine(r); if (s) flushTo(s); }
+      else if (r.kind === 'bull' || r.kind === 'bear') {
+        if (!camps) { camps = el('div', 'cw-camps'); body.append(camps); }
+        col = el('div', 'cw-col ' + r.kind);
+        col.append(el('span', 'tag', r.kind === 'bull' ? '一方' : '另一方'), el('h3', '', r.title), el('p', '', r.body));
+        const s = srcLine(r); if (s) col.append(s);
+        camps.append(col);
+      }
+      else if (r.kind === 'why') { col = null; camps = null; body.append(el('h3', '', r.title)); if (r.body) body.append(el('p', '', r.body)); }
+      else if (r.kind === 'point') { if (!list) { list = el('ul', 'cw-points'); host().append(list); } list.append(el('li', '', r.body)); }
+      else if (r.kind === 'card') {
+        if (!cards) { cards = el('div', 'cw-cards'); body.append(cards); }
+        const c = el('div', 'card'); c.append(el('h3', '', r.title), el('p', '', r.body)); cards.append(c);
+      }
+      else if (r.kind === 'watch') {
+        if (!list) { body.append(el('h3', '', '观察清单')); list = el('ul', 'cw-points'); body.append(list); }
+        list.append(el('li', '', r.body));
+      }
+    });
+  };
+  on('coreweave', () => {
+    const T = rows('cw_topic');
+    const lead = document.getElementById('cwLead'), kp = document.getElementById('cwKpis');
+    document.getElementById('cw-what-figs').replaceChildren();
+    if (T) {
+      const by = (sec) => T.filter((r) => r.section === sec).sort((a, b) => +a.order - +b.order);
+      const sum = by('summary');
+      lead.textContent = (sum.find((r) => r.kind === 'lead') || {}).body || '';
+      kp.replaceChildren(...sum.filter((r) => r.kind === 'kpi').map((r) => {
+        const k = el('div', 'kpi');
+        const v = el('span', 'v'); const n = el('span', '', String(+r.value >= 1000 ? d3.format(',')(+r.value) : r.value));
+        n.dataset.source = 'cw_topic'; n.dataset.field = 'value'; n.dataset.where = 'id=' + r.id;
+        v.append(n);
+        k.append(el('span', 'k', r.title), v, el('span', 'u', r.unit), el('span', 'u', r.body));
+        return k;
+      }));
+      ['what', 'price', 'why', 'debate', 'views', 'trade'].forEach((sec) => render(sec, by(sec)));
+    }
+    const E = rows('events'); const ul = document.getElementById('cwEvents'); ul.replaceChildren();
+    (E || []).filter((e) => e.date >= '2026-09-16').sort((a, b) => (a.date < b.date ? -1 : 1)).forEach((e) => {
+      const li = el('li'); li.dataset.key = e.id;
+      li.append(el('span', 'd', e.date), el('span', 'c', e.category), el('span', '', `${e.event}（${e.source}）`));
+      ul.append(li);
+    });
+    const V = rows('cw_views');
+    if (V) table(document.getElementById('cwViewTable'), [{ f: 'institution', label: '机构 / 人' }, { f: 'stance', label: '立场' }, { f: 'layer', label: '维度' },
+      { f: 'target', label: '目标' }, { f: 'logic', label: '核心逻辑', wrap: true }, { f: 'source', label: '来源' }], V, 'id');
+  });
+})();
+</script>
+
+<script>
+(() => {
+  const { rows, on, show } = window.AF;
+  const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+  const NAMES = Object.fromEntries(window.AF.PAGES);
+  on('conclusions', () => {
+    const C = rows('conclusions');
+    const ids = ['ccChain', 'ccFindings', 'ccSignals', 'ccCaveats'];
+    ids.forEach((i) => document.getElementById(i).replaceChildren());
+    if (!C) return;
+    const R = [...C].sort((a, b) => +a.order - +b.order);
+    const of = (k) => R.filter((r) => r.kind === k);
+    document.getElementById('ccThesisText').textContent = (of('thesis')[0] || {}).body || '';
+    const chain = document.getElementById('ccChain');
+    of('chain').forEach((r, i) => {
+      if (i) chain.append(el('span', 'cc-arrow', '→'));
+      const n = el('div', 'cc-node'); n.append(el('b', '', r.title), el('span', '', r.body)); chain.append(n);
+    });
+    const fl = document.getElementById('ccFindings');
+    of('finding').forEach((r) => {
+      const li = el('li', 'cc-f');
+      li.append(el('h3', '', r.title), el('p', '', r.body));
+      if (r.value !== '') {
+        const f = el('div', 'cc-fig');
+        const n = el('span', 'n', +r.value >= 10000 ? d3.format(',')(+r.value) : (+r.value >= 1000 && r.unit !== '年' ? d3.format(',')(+r.value) : String(r.value)));
+        n.dataset.source = 'conclusions'; n.dataset.field = 'value'; n.dataset.where = 'id=' + r.id;
+        f.append(n, el('span', 'l', r.unit), el('span', 'l', r.label));
+        li.append(f);
+      }
+      const ev = el('div', 'cc-ev'); ev.append(el('span', '', '依据：' + r.evidence));
+      if (r.link && NAMES[r.link]) { const b = el('button', 'cc-go', '去看「' + NAMES[r.link] + '」→'); b.type = 'button'; b.addEventListener('click', () => { show(r.link); window.scrollTo(0, 0); }); ev.append(b); }
+      li.append(ev);
+      fl.append(li);
+    });
+    const j = of('judge')[0] || {};
+    document.getElementById('ccJudgeTitle').textContent = j.title || '';
+    document.getElementById('ccJudge').textContent = j.body || '';
+    const sg = document.getElementById('ccSignals');
+    of('signal').forEach((r, i) => {
+      const c = el('div', 'card'); c.append(el('h3', '', `${i + 1}. ${r.title}`), el('p', '', r.body));
+      if (r.link && NAMES[r.link]) { const b = el('button', 'cc-go', '相关页面：' + NAMES[r.link]); b.type = 'button'; b.style.marginTop = 'var(--cds-gap-sm)'; b.addEventListener('click', () => { show(r.link); window.scrollTo(0, 0); }); c.append(b); }
+      sg.append(c);
+    });
+    const cv = document.getElementById('ccCaveats');
+    of('caveat').forEach((r) => cv.append(el('li', '', r.body)));
+  });
+})();
+</script>
+
+<script>
+(() => {
+  const { YEARS, rows, on, table, fmt, params } = window.AF;
+  const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+  const mark = (e, src, field, where) => { e.dataset.source = src; e.dataset.field = field; e.dataset.where = where; return e; };
+  const n0 = (v) => (v === '' || v == null ? '' : fmt(v));
+  const LABC = { OpenAI: () => dash.colors[0], Anthropic: () => dash.colors[1], xAI: () => dash.colors[3] };
+  const legend = (box, items) => box.replaceChildren(...items.map(([name, color, dash_]) => {
+    const s = el('span'); const i = el('i', 'sw'); i.style.background = color; if (dash_) { i.style.background = 'none'; i.style.borderTop = '2px dashed ' + color; i.style.height = '0'; }
+    s.append(i, document.createTextNode(name)); return s;
+  }));
+  // 研究页的文字：导语、关键数字、要点、注意事项
+  const text = (study, ids) => {
+    const T = rows('research_text');
+    [ids.lead, ids.kpis, ids.points, ids.caveats].forEach((i) => document.getElementById(i).replaceChildren());
+    if (!T) return;
+    const R = T.filter((r) => r.study === study);
+    const lead = R.find((r) => r.kind === 'lead');
+    document.getElementById(ids.lead).textContent = lead ? lead.body : '';
+    const kb = document.getElementById(ids.kpis);
+    R.filter((r) => r.kind === 'kpi').forEach((r) => {
+      const k = el('div', 'kpi'); k.append(el('span', 'k', r.title));
+      const v = el('span', 'v'); const n = mark(el('span', '', ['年', '%'].includes(r.unit) ? String(r.value) : fmt(r.value)), 'research_text', 'value', 'id=' + r.id);
+      v.append(n); k.append(v, el('span', 'u', r.unit), el('span', 'lbl2', r.label)); kb.append(k);
+    });
+    const pb = document.getElementById(ids.points);
+    R.filter((r) => r.kind === 'point').forEach((r) => { const d = el('div'); d.append(el('h3', '', r.title), el('p', '', r.body)); pb.append(d); });
+    const cb = document.getElementById(ids.caveats);
+    R.filter((r) => r.kind === 'caveat').forEach((r) => cb.append(el('li', '', r.body)));
+  };
+  const svgIn = (box, H) => { window.AF.clear(box); const W = box.clientWidth || 360; return [d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img'), W]; };
+
+  // ---------------- 股权缺口
+  on('gap', () => {
+    text('gap', { lead: 'gapLead', kpis: 'gapKpis', points: 'gapPoints', caveats: 'gapCaveats' });
+    const { scen } = params();
+    const G = rows('funding_gap'), S = rows('equity_supply');
+    const box = document.getElementById('gapNeedChart');
+    if (G && S) {
+      const yrs = [2026, 2027, 2028, 2029, 2030], labs = ['OpenAI', 'Anthropic', 'xAI'];
+      const refs = [['M2-048', '2025 年三家实验室实际融资', 'var(--cds-chart-reference)'], ['M2-025', '2025 年全球 AI 风投', 'var(--cds-chart-status-critical)']]
+        .map(([id, name, c]) => ({ r: S.find((x) => x.id === id), name, c })).filter((d) => d.r);
+      legend(document.getElementById('gapLegend'), [...labs.map((l) => [l, LABC[l]()]), ...refs.map((d) => [d.name, d.c, true])]);
+      const H = 260, m = { l: 44, r: 8, t: 10, b: 24 };
+      const [svg, W] = svgIn(box, H);
+      const stack = yrs.map((y) => { let y0 = 0; return { y, parts: labs.map((l) => { const r = G.find((g) => g.lab === l && +g.year === y && g.scenario === scen); const v = r ? +r.new_equity_yi || 0 : 0; const p = { l, r, v, y0 }; y0 += v; return p; }), tot: y0 }; });
+      const maxV = Math.max(d3.max(stack, (d) => d.tot) || 1, d3.max(refs, (d) => +d.r.value_yi) || 1) * 1.08;
+      const x = d3.scaleBand(yrs, [m.l, W - m.r]).padding(0.35), yS = d3.scaleLinear([0, maxV], [H - m.b, m.t]).nice();
+      svg.append('g').selectAll('line').data(yS.ticks(4)).join('line').attr('x1', m.l).attr('x2', W - m.r).attr('y1', yS).attr('y2', yS).attr('stroke', 'var(--cds-chart-grid)');
+      svg.append('g').selectAll('text').data(yS.ticks(4)).join('text').attr('x', m.l - 6).attr('y', (d) => yS(d) + 4).attr('text-anchor', 'end').attr('font-size', 11).attr('fill', 'var(--color-fg-muted)').text((d) => fmt(d));
+      svg.append('g').selectAll('text').data(yrs).join('text').attr('x', (d) => x(d) + x.bandwidth() / 2).attr('y', H - 6).attr('text-anchor', 'middle').attr('font-size', 11).attr('fill', 'var(--color-fg-muted)').text((d) => d + 'E');
+      stack.forEach((d) => d.parts.filter((p) => p.v > 0).forEach((p) => {
+        const rect = svg.append('rect').attr('x', x(d.y)).attr('width', x.bandwidth()).attr('y', yS(p.y0 + p.v)).attr('height', yS(p.y0) - yS(p.y0 + p.v)).attr('fill', LABC[p.l]());
+        mark(rect.node(), 'funding_gap', 'new_equity_yi', 'key=' + encodeURIComponent(p.r.key));
+        rect.on('pointermove', (ev) => window.AF.showTip(box, ev, [`${p.l} · ${d.y}E · ${scen}`, `还需新增：${fmt(p.v)} 亿美元`, `累计消耗 ${fmt(p.r.cum_burn_yi)} / 已锁定 ${fmt(p.r.locked_yi)}`])).on('pointerleave', () => window.AF.hideTip(box));
+      }));
+      stack.forEach((d) => { if (d.tot > 0) svg.append('text').attr('x', x(d.y) + x.bandwidth() / 2).attr('y', yS(d.tot) - 4).attr('text-anchor', 'middle').attr('font-size', 11).attr('fill', 'var(--color-fg)').text(fmt(d.tot)); });
+      refs.forEach((d) => {
+        const v = +d.r.value_yi;
+        const ln = svg.append('line').attr('x1', m.l).attr('x2', W - m.r).attr('y1', yS(v)).attr('y2', yS(v)).attr('stroke', d.c).attr('stroke-dasharray', '4 3');
+        mark(ln.node(), 'equity_supply', 'value_yi', 'id=' + d.r.id);
+        svg.append('text').attr('x', W - m.r).attr('y', yS(v) - 4).attr('text-anchor', 'end').attr('font-size', 11).attr('fill', d.c).text(`${d.name} ${fmt(v)}`);
+      });
+    }
+    const sbox = document.getElementById('gapSupplyChart');
+    if (S) {
+      const SER = [['三家实验室融资（宣布额）', () => dash.colors[0]], ['全球 AI 风投（CB Insights）', () => dash.colors[2]], ['美国 IPO 募资（Renaissance）', () => dash.colors[1]]];
+      legend(document.getElementById('supplyLegend'), SER.map(([n, c]) => [n, c()]));
+      const yrs = d3.range(2019, 2027), H = 260, m = { l: 44, r: 8, t: 10, b: 24 };
+      const [svg, W] = svgIn(sbox, H);
+      const pts = S.filter((r) => SER.some(([n]) => n === r.series) && r.value_yi !== '');
+      const x0 = d3.scaleBand(yrs, [m.l, W - m.r]).padding(0.2), x1 = d3.scaleBand(SER.map(([n]) => n), [0, x0.bandwidth()]).padding(0.08);
+      const yS = d3.scaleLinear([0, (d3.max(pts, (r) => +r.value_yi) || 1) * 1.05], [H - m.b, m.t]).nice();
+      svg.append('g').selectAll('line').data(yS.ticks(4)).join('line').attr('x1', m.l).attr('x2', W - m.r).attr('y1', yS).attr('y2', yS).attr('stroke', 'var(--cds-chart-grid)');
+      svg.append('g').selectAll('text').data(yS.ticks(4)).join('text').attr('x', m.l - 6).attr('y', (d) => yS(d) + 4).attr('text-anchor', 'end').attr('font-size', 11).attr('fill', 'var(--color-fg-muted)').text((d) => fmt(d));
+      svg.append('g').selectAll('text').data(yrs).join('text').attr('x', (d) => x0(d) + x0.bandwidth() / 2).attr('y', H - 6).attr('text-anchor', 'middle').attr('font-size', 11).attr('fill', 'var(--color-fg-muted)').text((d) => (d === 2026 ? '2026*' : d));
+      pts.forEach((r) => {
+        const y = +r.year; if (!yrs.includes(y)) return;
+        const c = SER.find(([n]) => n === r.series)[1]();
+        const rect = svg.append('rect').attr('x', x0(y) + x1(r.series)).attr('width', x1.bandwidth()).attr('y', yS(+r.value_yi)).attr('height', yS(0) - yS(+r.value_yi)).attr('fill', c).attr('opacity', r.partial ? 0.6 : 1);
+        mark(rect.node(), 'equity_supply', 'value_yi', 'id=' + r.id);
+        rect.on('pointermove', (ev) => window.AF.showTip(sbox, ev, [`${r.series} · ${r.year}`, `${fmt(r.value_yi)} 亿美元`, r.scope])).on('pointerleave', () => window.AF.hideTip(sbox));
+      });
+    }
+    if (G) table(document.getElementById('gapTable'), [{ f: 'lab', label: '实验室' }, { f: 'year', label: '年份' },
+      { f: 'rev_yi', label: '收入', num: true, fmt: n0 }, { f: 'compute_yi', label: '算力支出', num: true, fmt: n0 }, { f: 'other_yi', label: '其他现金支出', num: true, fmt: n0 },
+      { f: 'fcf_yi', label: '现金流', num: true, fmt: n0 }, { f: 'company_fcf_yi', label: '公司预测现金流', num: true, fmt: n0, cls: () => 'fc' },
+      { f: 'cum_burn_yi', label: '累计消耗', num: true, fmt: n0 }, { f: 'locked_yi', label: '已锁定资金', num: true, fmt: n0 },
+      { f: 'new_equity_yi', label: '当年需新增', num: true, fmt: n0, cls: (r) => (+r.new_equity_yi > 0 ? 'lab' : '') },
+      { f: 'new_equity_after_cond_yi', label: '附条件资金到账后', num: true, fmt: n0 }, { f: 'method', label: '算法', wrap: true }],
+      G.filter((r) => r.scenario === scen), 'key', (r) => (r.tier === '估算' || r.tier === '含估算' ? '' : ''));
+    const L = rows('funding_locked');
+    if (L) table(document.getElementById('lockTable'), [{ f: 'lab', label: '实验室' }, { f: 'item', label: '项目', wrap: true }, { f: 'amount_yi', label: '金额', num: true, fmt: n0 },
+      { f: 'status', label: '状态' }, { f: 'date', label: '截至' }, { f: 'note', label: '说明', wrap: true }, { f: 'source_type', label: '来源类型' }, { f: 'source_url', label: '出处', link: true }], L, 'id');
+  });
+
+  // ---------------- 合同硬度
+  const PAYERS = [['inv', '投资级公司', () => dash.colors[2]], ['lab', 'AI 实验室', () => 'var(--cds-chart-status-critical)'], ['neo', 'Neocloud 与中间商', () => dash.colors[1]]];
+  on('contracts', () => {
+    text('contracts', { lead: 'ctLead', kpis: 'ctKpis', points: 'ctPoints', caveats: 'ctCaveats' });
+    const gd = dash.data('contract_grid');
+    if (gd.status === 'ok') {
+      const cell = (k) => ({ f: k + '_yi', label: '', num: true, fmt: (v, r) => `${fmt(v)}（${r[k + '_n']}）` });
+      table(document.getElementById('ctGrid'), [{ f: 'hardness', label: '条款硬度', cls: (r) => 'h' + r.order },
+        ...PAYERS.map(([k, name]) => ({ ...cell(k), label: name })), { ...cell('total'), label: '合计' }], gd.data, 'hardness');
+      legend(document.getElementById('ctLegend'), PAYERS.map(([, n, c]) => [n, c()]));
+      const box = document.getElementById('ctChart');
+      const rowH = 38, lw = 56, H = gd.data.length * rowH + 6;
+      const [svg, W] = svgIn(box, H);
+      const x = d3.scaleLinear([0, d3.max(gd.data, (r) => r.total_yi) || 1], [0, W - lw - 110]);
+      gd.data.forEach((r, i) => {
+        const g = svg.append('g').attr('transform', `translate(0,${i * rowH + 4})`);
+        g.append('text').attr('y', 18).attr('font-size', 12).attr('fill', 'var(--color-fg)').text(r.hardness);
+        let x0 = lw;
+        PAYERS.forEach(([k, name, c]) => {
+          const v = r[k + '_yi']; if (!v) return;
+          const rect = g.append('rect').attr('x', x0).attr('y', 6).attr('height', 18).attr('width', Math.max(1, x(v))).attr('fill', c());
+          mark(rect.node(), 'contract_grid', k + '_yi', 'hardness=' + encodeURIComponent(r.hardness));
+          rect.on('pointermove', (ev) => window.AF.showTip(box, ev, [`${r.hardness} · ${name}`, `${fmt(v)} 亿美元，${r[k + '_n']} 份`])).on('pointerleave', () => window.AF.hideTip(box));
+          x0 += x(v) + 1;
+        });
+        g.append('text').attr('x', x0 + 6).attr('y', 19).attr('font-size', 12).attr('fill', 'var(--color-fg)').text(`${fmt(r.total_yi)}（${r.total_n} 份）`);
+      });
+    }
+    const C = rows('contract_terms');
+    if (C) table(document.getElementById('ctTable'), [{ f: 'id', label: '#' }, { f: 'provider', label: '提供方' }, { f: 'customer', label: '付款方' },
+      { f: 'value_yi', label: '金额', num: true, fmt: n0 }, { f: 'term', label: '年限' }, { f: 'hardness', label: '硬度', cls: (r) => 'h' + r.hardness_order },
+      { f: 'reason', label: '理由', wrap: true }, { f: 'payer_class', label: '付款方类别' }, { f: 'risk_bearer', label: '付款方走了谁承担', wrap: true },
+      { f: 'exit_rights', label: '退出权', wrap: true }, { f: 'backstop', label: '担保与兜底', wrap: true }, { f: 'pledged_to_debt', label: '抵押给哪笔债', wrap: true },
+      { f: 'renegotiation', label: '修改与重谈', wrap: true }, { f: 'source_type', label: '来源类型' }, { f: 'source_url', label: '出处', link: true }],
+      [...C].sort((a, b) => a.hardness_order - b.hardness_order || (+b.value_yi || 0) - (+a.value_yi || 0)), 'id');
+    const E = rows('sec_evidence');
+    if (E) table(document.getElementById('evTable'), [{ f: 'entity', label: '公司' }, { f: 'topic', label: '主题' }, { f: 'value', label: '数值', num: true, fmt: (v) => (v === '' ? '' : fmt(v)) },
+      { f: 'unit', label: '单位' }, { f: 'fact', label: '原文要点', wrap: true }, { f: 'filing', label: '文件' }, { f: 'source_date', label: '日期' }, { f: 'source_url', label: '出处', link: true }], E, 'id');
+  });
+
+  // ---------------- 循环融资
+  on('circular', () => {
+    text('circular', { lead: 'crLead', kpis: 'crKpis', points: 'crPoints', caveats: 'crCaveats' });
+    const R = rows('circular');
+    if (!R) return;
+    const P = R.filter((r) => r.kind === '配对' && r.multiple !== '' && !r.status).sort((a, b) => +b.flow_back_yi - +a.flow_back_yi);
+    const box = document.getElementById('crChart');
+    const cIn = dash.colors[0], cBack = 'var(--cds-chart-status-critical)';
+    legend(document.getElementById('crLegend'), [['入股或融资承诺', cIn], ['回流的采购承诺', cBack]]);
+    const rowH = 34, H = P.length * rowH + 8;
+    const [svg, W] = svgIn(box, H);
+    const lw = Math.min(170, W * 0.36), right = W - lw - 52, mid = lw;
+    const max = d3.max(P, (r) => Math.max(+r.invest_yi, +r.flow_back_yi)) || 1;
+    const half = Math.max(40, right * 0.28), xl = d3.scaleLinear([0, max], [0, half]), xr = d3.scaleLinear([0, max], [0, right - half]);
+    P.forEach((r, i) => {
+      const g = svg.append('g').attr('transform', `translate(0,${i * rowH + 4})`);
+      g.append('text').attr('y', 17).attr('font-size', 12).attr('fill', 'var(--color-fg)').text(`${r.investor} → ${r.investee}`);
+      const a = g.append('rect').attr('x', mid + half - xl(+r.invest_yi)).attr('y', 5).attr('height', 16).attr('width', Math.max(1, xl(+r.invest_yi))).attr('fill', cIn);
+      mark(a.node(), 'circular', 'invest_yi', 'id=' + r.id);
+      const b = g.append('rect').attr('x', mid + half + 2).attr('y', 5).attr('height', 16).attr('width', Math.max(1, xr(+r.flow_back_yi))).attr('fill', cBack);
+      mark(b.node(), 'circular', 'flow_back_yi', 'id=' + r.id);
+      [a, b].forEach((s) => s.on('pointermove', (ev) => window.AF.showTip(box, ev, [`${r.investor} → ${r.investee}`, `入股或融资：${fmt(r.invest_yi)} 亿（已到账 ${r.funded_yi === '' ? '未披露' : fmt(r.funded_yi)}）`, `回流采购：${fmt(r.flow_back_yi)} 亿（${r.flow_back.slice(0, 40)}）`])).on('pointerleave', () => window.AF.hideTip(box)));
+      const t = g.append('text').attr('x', mid + half + 6 + xr(+r.flow_back_yi)).attr('y', 17).attr('font-size', 12).attr('fill', 'var(--color-fg)').text('×' + r.multiple);
+      mark(t.node(), 'circular', 'multiple', 'id=' + r.id);
+    });
+    table(document.getElementById('crTable'), [{ f: 'id', label: '#' }, { f: 'investor', label: '投资人' }, { f: 'investee', label: '被投方' }, { f: 'invest_type', label: '方式', wrap: true },
+      { f: 'invest_yi', label: '承诺', num: true, fmt: n0 }, { f: 'funded_yi', label: '已到账', num: true, fmt: n0 }, { f: 'invest_date', label: '日期' },
+      { f: 'flow_back', label: '回流什么', wrap: true }, { f: 'flow_back_yi', label: '回流金额', num: true, fmt: n0 }, { f: 'multiple', label: '倍数', num: true },
+      { f: 'explicit_link', label: '挂钩' }, { f: 'reverse_flow', label: '反向的钱', wrap: true }, { f: 'status', label: '状态' }, { f: 'note', label: '说明', wrap: true }, { f: 'source_url', label: '出处', link: true }],
+      R.filter((r) => r.kind === '配对'), 'id');
+    table(document.getElementById('crSumTable'), [{ f: 'investor', label: '公司' }, { f: 'invest_type', label: '口径', wrap: true }, { f: 'invest_yi', label: '金额', num: true, fmt: n0 },
+      { f: 'invest_date', label: '时点' }, { f: 'flow_back', label: '内容', wrap: true }, { f: 'reverse_flow', label: '补充', wrap: true }, { f: 'source_type', label: '来源类型' }, { f: 'source_url', label: '出处', link: true }],
+      R.filter((r) => r.kind === '汇总'), 'id');
+  });
+})();
+</script>
+
+<script>
+(() => {
+  const { rows, on, show, table, fmt, params } = window.AF;
+  const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+  const mark = (e, src, field, where) => { e.dataset.source = src; e.dataset.field = field; e.dataset.where = where; return e; };
+  const n0 = (v) => (v === '' || v == null ? '' : fmt(v));
+  const n1 = (v) => (v === '' || v == null ? '' : d3.format(',.1f')(+v));
+  const n2 = (v) => (v === '' || v == null ? '' : d3.format(',.2f')(+v));
+  const STC = { 绿: 'var(--color-ok)', 黄: 'var(--color-warn)', 红: 'var(--color-bad)' };
+  const stOf = (score) => (score >= 67 ? '红' : score >= 34 ? '黄' : '绿');
+  const legend = (box, items) => box.replaceChildren(...items.map(([name, color, kind]) => {
+    const s = el('span'); const i = el('i', 'sw'); i.style.background = color;
+    if (kind === 'dash') { i.style.background = 'none'; i.style.borderTop = '2px dashed ' + color; i.style.height = '0'; }
+    if (kind === 'dot') { i.style.width = '0.6rem'; i.style.height = '0.6rem'; i.style.borderRadius = '50%'; }
+    s.append(i, document.createTextNode(name)); return s;
+  }));
+  const svgIn = (box, H) => { window.AF.clear(box); const W = box.clientWidth || 360; return [d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img'), W]; };
+  const UT = () => rows('upgrade_text') || [];
+  // 时间序列：series = [{label, color, pts: [{d, v, where}]}]，markers 同结构但画点
+  const tsChart = (box, series, { markers = [], yFmt = fmt, unit = '', H = 250, src = 'market_series' } = {}) => {
+    const [svg, W] = svgIn(box, H);
+    const m = { l: 46, r: 12, t: 10, b: 24 };
+    const all = [...series, ...markers].flatMap((s) => s.pts);
+    if (!all.length) return;
+    const x = d3.scaleUtc(d3.extent(all, (p) => p.d), [m.l, W - m.r]);
+    const lo = d3.min(all, (p) => p.v), hi = d3.max(all, (p) => p.v);
+    const y = d3.scaleLinear([Math.min(0, lo), hi * 1.06], [H - m.b, m.t]).nice();
+    y.ticks(5).forEach((t) => {
+      svg.append('line').attr('x1', m.l).attr('x2', W - m.r).attr('y1', y(t)).attr('y2', y(t)).attr('stroke', 'var(--cds-chart-grid)');
+      svg.append('text').attr('x', m.l - 6).attr('y', y(t) + 4).attr('text-anchor', 'end').attr('font-size', 11).attr('fill', 'var(--color-fg-muted)').text(yFmt(t));
+    });
+    x.ticks(5).forEach((t) => svg.append('text').attr('x', x(t)).attr('y', H - 6).attr('text-anchor', 'middle').attr('font-size', 11).attr('fill', 'var(--color-fg-muted)').text(d3.utcFormat('%Y-%m')(t)));
+    series.forEach((s) => {
+      const path = svg.append('path').attr('d', d3.line().x((p) => x(p.d)).y((p) => y(p.v))(s.pts)).attr('fill', 'none').attr('stroke', s.color).attr('stroke-width', 2).attr('stroke-linejoin', 'round');
+      mark(path.node(), src, 'value', 'series=' + encodeURIComponent(s.label));
+      const lastP = s.pts[s.pts.length - 1];
+      if (lastP) mark(svg.append('text').attr('x', W - m.r).attr('y', y(lastP.v) - 4).attr('text-anchor', 'end').attr('font-size', 11).attr('fill', s.color).text(yFmt(lastP.v)).node(), src, 'value', lastP.where);
+    });
+    markers.forEach((s) => s.pts.forEach((p) => {
+      const c = svg.append('circle').attr('cx', x(p.d)).attr('cy', y(p.v)).attr('r', 4.5).attr('fill', s.color).attr('stroke', 'var(--color-panel)');
+      if (p.src) mark(c.node(), p.src, p.field || 'value', p.where);
+      c.on('pointermove', (ev) => window.AF.showTip(box, ev, [s.label, `${p.d.toISOString().slice(0, 10)}：${yFmt(p.v)}${unit}`, p.tip || ''])).on('pointerleave', () => window.AF.hideTip(box));
+    }));
+    const bisect = d3.bisector((p) => p.d).left;
+    svg.append('rect').attr('x', m.l).attr('y', m.t).attr('width', W - m.l - m.r).attr('height', H - m.t - m.b).attr('fill', 'transparent')
+      .on('pointermove', (ev) => {
+        const [mx] = d3.pointer(ev); const d0 = x.invert(mx);
+        const lines = series.map((s) => { const i = Math.min(s.pts.length - 1, bisect(s.pts, d0)); const p = s.pts[i]; return p ? `${s.label}：${yFmt(p.v)}${unit}` : ''; });
+        window.AF.showTip(box, ev, [d3.utcFormat('%Y-%m-%d')(d0), ...lines]);
+      }).on('pointerleave', () => window.AF.hideTip(box)).lower();
+  };
+  const MS = () => rows('market_series') || [];
+  const ser = (name, k = 1) => MS().filter((r) => r.series === name).map((r) => ({ d: new Date(r.date), v: +r.value * k, where: `series=${encodeURIComponent(name)}&date=${r.date}` })).sort((a, b) => a.d - b.d);
+  const crwvMarkers = () => {
+    const P = rows('risk_prices') || [];
+    const sp = P.filter((r) => r.issuer === 'CoreWeave' && r.metric === '利差').map((r) => ({ d: new Date(r.date), v: +r.value, tip: r.instrument, src: 'risk_prices', where: 'id=' + r.id }));
+    const cds = P.filter((r) => r.issuer === 'CoreWeave' && r.metric === 'CDS').map((r) => ({ d: new Date(r.date), v: +r.value, tip: '5 年期 CDS', src: 'risk_prices', where: 'id=' + r.id }));
+    return [{ label: 'CoreWeave 无担保债利差', color: 'var(--cds-chart-status-critical)', pts: sp }, { label: 'CoreWeave 5Y CDS', color: dash.colors[4], pts: cds }];
+  };
+  const spreadChart = (box, leg) => {
+    const S = [['高收益整体 OAS', dash.colors[0]], ['CCC 级 OAS', dash.colors[3]], ['BBB 级 OAS', dash.colors[2]]].map(([n, c]) => ({ label: n, color: c, pts: ser(n, 100) }));
+    const M = crwvMarkers();
+    legend(leg, [...S.map((s) => [s.label, s.color]), ...M.map((s) => [s.label, s.color, 'dot'])]);
+    tsChart(box, S, { markers: M, unit: ' bp' });
+  };
+  const basketChart = (box, leg) => {
+    const S = [['Neocloud 与矿企转型篮子', 'var(--cds-chart-status-critical)'], ['大厂篮子', dash.colors[0]], ['芯片篮子', dash.colors[2]], ['纳斯达克 100', 'var(--cds-chart-muted)']].map(([n, c]) => ({ label: n, color: c, pts: ser(n) }));
+    legend(leg, S.map((s) => [s.label, s.color]));
+    tsChart(box, S, {});
+  };
+
+  // ---------------- 驾驶舱
+  on('cockpit', () => {
+    const T = UT();
+    const idx = T.find((r) => r.kind === 'index');
+    const gbox = document.getElementById('ckGauge');
+    if (idx) {
+      const v = +idx.value, H = 180;
+      const [svg, W] = svgIn(gbox, H);
+      const cx = W / 2, cy = 120, R = Math.min(110, W / 2 - 10);
+      const arc = d3.arc().innerRadius(R - 18).outerRadius(R);
+      const ang = (t) => -Math.PI / 2 + Math.PI * t / 100;
+      [[0, 33, 'var(--color-ok)'], [33, 66, 'var(--color-warn)'], [66, 100, 'var(--color-bad)']].forEach(([a, b, c]) =>
+        svg.append('path').attr('d', arc({ startAngle: ang(a), endAngle: ang(b) })).attr('transform', `translate(${cx},${cy})`).attr('fill', c).attr('opacity', 0.85));
+      const a = ang(v);
+      svg.append('line').attr('x1', cx).attr('y1', cy).attr('x2', cx + (R - 26) * Math.sin(a)).attr('y2', cy - (R - 26) * Math.cos(a)).attr('stroke', 'var(--color-fg)').attr('stroke-width', 3).attr('stroke-linecap', 'round');
+      svg.append('circle').attr('cx', cx).attr('cy', cy).attr('r', 5).attr('fill', 'var(--color-fg)');
+      mark(svg.append('text').attr('x', cx).attr('y', cy + 34).attr('text-anchor', 'middle').attr('font-size', 30).attr('font-family', 'var(--font-anthropic-serif)').attr('fill', 'var(--color-fg)').text(v).node(), 'upgrade_text', 'value', 'id=' + idx.id);
+      svg.append('text').attr('x', cx).attr('y', cy + 52).attr('text-anchor', 'middle').attr('font-size', 11).attr('fill', 'var(--color-fg-muted)').text(idx.title + '（0–100）');
+    }
+    const vt = T.find((r) => r.kind === 'verdict');
+    document.getElementById('ckTitle').textContent = vt ? vt.title : '';
+    document.getElementById('ckVerdict').textContent = vt ? vt.body : '';
+    const lb = document.getElementById('ckLayers'); lb.replaceChildren();
+    T.filter((r) => r.kind === 'layer').forEach((r) => {
+      const d = el('div', 'ck-layer'); d.style.borderTopColor = STC[stOf(+r.value)];
+      const b = mark(el('b', '', r.value), 'upgrade_text', 'value', 'id=' + r.id); d.append(b, document.createTextNode(r.title + '（' + r.label + '）')); lb.append(d);
+    });
+    const M = rows('monitor');
+    const sb = document.getElementById('ckSignals'); sb.replaceChildren();
+    (M || []).forEach((r) => {
+      const c = el('button', 'ck-sig st-' + ({ 绿: 'g', 黄: 'y', 红: 'r' })[r.status]); c.type = 'button';
+      const ly = el('span', 'ly'); const dot = el('i', 'dot'); dot.style.background = STC[r.status]; ly.append(dot, document.createTextNode(`${r.layer} · ${r.score} 分${r.trend ? ' · ' + r.trend : ''}`));
+      const vv = el('span', 'vv'); vv.append(mark(el('span', '', r.unit === '年' ? r.value : (Math.abs(+r.value) >= 100 ? fmt(r.value) : n2(r.value).replace(/\.?0+$/, ''))), 'monitor', 'value', 'id=' + r.id), document.createTextNode(' ' + r.unit));
+      const th = el('span', 'th', `绿 ${r.green} · 红 ${r.red}${r.prev !== '' ? ' · 三个月前 ' + r.prev : ''}`);
+      c.append(ly, el('span', 'nm', r.name), vv, th);
+      if (r.note) c.title = r.note;
+      c.addEventListener('click', () => { show(r.link); window.scrollTo(0, 0); });
+      sb.append(c);
+    });
+    spreadChart(document.getElementById('ckSpreadChart'), document.getElementById('ckSpreadLegend'));
+    basketChart(document.getElementById('ckEqChart'), document.getElementById('ckEqLegend'));
+    const pb = document.getElementById('ckPoints'); pb.replaceChildren();
+    T.filter((r) => r.page === 'cockpit' && r.kind === 'point').forEach((r) => { const d = el('div'); d.append(el('h3', '', r.title), el('p', '', r.body)); pb.append(d); });
+    const C = rows('catalysts');
+    const cb = document.getElementById('ckCal'); cb.replaceChildren();
+    let mo = '';
+    (C || []).forEach((r) => {
+      if (r.date.slice(0, 7) !== mo) { mo = r.date.slice(0, 7); cb.append(el('div', 'mo', mo.replace('-', ' 年 ') + ' 月')); }
+      const row = el('div', 'ck-ev'); row.dataset.key = r.id;
+      row.append(el('span', 'd', r.date.slice(5) + (r.date_status !== '确定' ? '（' + r.date_status + '）' : '')), el('span', 'c', r.category));
+      const det = el('details'); const sm = el('summary', '', (r.company ? r.company + '：' : '') + r.event);
+      det.append(sm, el('p', '', '为什么重要：' + r.why), el('p', '', '偏多信号：' + r.bullish_if), el('p', '', '偏空信号：' + r.bearish_if));
+      row.append(det); cb.append(row);
+    });
+  });
+
+  // ---------------- 市场与风险：新增的序列与违约距离
+  on('risk', () => {
+    spreadChart(document.getElementById('mkSpreadChart'), document.getElementById('mkSpreadLegend'));
+    const R = [['10 年期美债', dash.colors[0]], ['2 年期美债', dash.colors[2]]].map(([n, c]) => ({ label: n, color: c, pts: ser(n) }));
+    legend(document.getElementById('mkRateLegend'), R.map((s) => [s.label, s.color]));
+    tsChart(document.getElementById('mkRateChart'), R, { yFmt: (v) => d3.format('.2f')(v), unit: '%' });
+    const E = rows('equity_stats');
+    if (!E) return;
+    const P = E.filter((r) => r.pd_1y_pct !== '').sort((a, b) => +b.pd_1y_pct - +a.pd_1y_pct);
+    const box = document.getElementById('mkPdChart');
+    const rowH = 30, lw = 120, H = P.length * rowH + 8;
+    const [svg, W] = svgIn(box, H);
+    const x = d3.scaleLinear([0, d3.max(P, (r) => +r.pd_1y_pct) || 1], [0, W - lw - 70]);
+    P.forEach((r, i) => {
+      const g = svg.append('g').attr('transform', `translate(0,${i * rowH + 4})`);
+      g.append('text').attr('y', 15).attr('font-size', 12).attr('fill', 'var(--color-fg)').text(r.name);
+      const c = +r.pd_1y_pct >= 15 ? 'var(--color-bad)' : +r.pd_1y_pct >= 2 ? 'var(--color-warn)' : 'var(--color-ok)';
+      const b = g.append('rect').attr('x', lw).attr('y', 3).attr('height', 16).attr('width', Math.max(1, x(+r.pd_1y_pct))).attr('fill', c);
+      mark(b.node(), 'equity_stats', 'pd_1y_pct', 'code=' + r.code);
+      b.on('pointermove', (ev) => window.AF.showTip(box, ev, [r.name, `违约距离 ${r.dd}，1 年违约概率 ${r.pd_1y_pct}%`, `市值 ${fmt(r.mktcap_yi)} 亿 · 债务 ${fmt(r.debt_yi)} 亿 · 波动率 ${r.vol_120d_pct}%`])).on('pointerleave', () => window.AF.hideTip(box));
+      g.append('text').attr('x', lw + x(+r.pd_1y_pct) + 6).attr('y', 15).attr('font-size', 12).attr('fill', 'var(--color-fg)').text(r.pd_1y_pct + '%');
+    });
+    table(document.getElementById('mkEqTable'), [{ f: 'name', label: '公司' }, { f: 'group', label: '分组' }, { f: 'last', label: '最新价', num: true, fmt: n2 },
+      { f: 'drawdown_pct', label: '较高点', num: true, fmt: (v) => (v === '' ? '' : v + '%'), cls: (r) => (+r.drawdown_pct <= -40 ? 'lab' : '') },
+      { f: 'ret_3m_pct', label: '3 个月', num: true, fmt: (v) => (v === '' ? '' : v + '%') }, { f: 'ret_ytd_pct', label: '年初至今', num: true, fmt: (v) => (v === '' ? '' : v + '%') },
+      { f: 'vol_120d_pct', label: '波动率', num: true, fmt: (v) => (v === '' ? '' : v + '%') }, { f: 'mktcap_yi', label: '市值', num: true, fmt: n0 }, { f: 'debt_yi', label: '有息债务', num: true, fmt: n0 },
+      { f: 'debt_to_mktcap', label: '债务 / 市值', num: true }, { f: 'dd', label: '违约距离', num: true }, { f: 'pd_1y_pct', label: '1 年违约概率', num: true, fmt: (v) => (v === '' ? '' : v + '%') },
+      { f: 'last_date', label: '日期' }, { f: 'note', label: '说明', wrap: true }], E, 'code');
+  });
+
+  // ---------------- 压力传导
+  const LABS2 = ['OpenAI', 'Anthropic'], PCTS = [10, 30, 50, 100];
+  const sp = () => ({ lab: dash.params().shock_lab || 'OpenAI', pct: +(dash.params().shock_pct ?? 30) });
+  const segInit = (id, vals, key, lab) => {
+    const box = document.getElementById(id); if (box.childElementCount) return;
+    vals.forEach((v) => { const b = el('button', 'chip', lab(v)); b.type = 'button'; b.dataset.v = v; b.addEventListener('click', () => dash.setParams({ [key]: v })); box.append(b); });
+  };
+  on('stress', () => {
+    segInit('stLab', LABS2, 'shock_lab', (v) => v);
+    segInit('stPct', PCTS, 'shock_pct', (v) => v + '%');
+    const { lab, pct } = sp();
+    document.querySelectorAll('#stLab .chip').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.v === lab)));
+    document.querySelectorAll('#stPct .chip').forEach((b) => b.setAttribute('aria-pressed', String(+b.dataset.v === pct)));
+    const lead = UT().find((r) => r.page === 'stress' && r.kind === 'lead');
+    document.getElementById('stLead').textContent = lead ? lead.body : '';
+    const X = rows('exposure'); if (!X) return;
+    const L = X.filter((r) => r.lab === lab).map((r) => ({ ...r, base: +r.base_yi || 0, size: +r.size_yi || 0 }));
+    const f = pct / 100;
+    const hitOf = (r) => (r.party_type === '股权投资人' ? r.base : r.base * f);
+    const prov = L.filter((r) => r.party_type === '算力提供方').sort((a, b) => b.base - a.base);
+    const kb = document.getElementById('stKpis'); kb.replaceChildren();
+    const kpi = (t, v, u, lbl, where) => { const k = el('div', 'kpi'); k.append(el('span', 'k', t)); const vv = el('span', 'v'); vv.append(mark(el('span', '', v), 'exposure', 'base_yi', where)); k.append(vv, el('span', 'u', u), el('span', 'lbl2', lbl)); kb.append(k); };
+    const provHit = d3.sum(prov, hitOf);
+    const top = d3.max(prov.filter((r) => r.size), (r) => hitOf(r) / r.size) || 0;
+    const topR = prov.filter((r) => r.size).sort((a, b) => hitOf(b) / b.size - hitOf(a) / a.size)[0];
+    const debt = L.filter((r) => r.party_type === '项目债与贷款');
+    const guar = L.filter((r) => r.party_type === '担保方');
+    kpi('算力提供方损失的订单', fmt(provHit), '亿美元', `${lab} 削减 ${pct}% 的已签算力合同`, `lab=${lab}&party_type=算力提供方`);
+    kpi('订单簿受冲击最大的一家', topR ? (top * 100).toFixed(1) + '%' : '—', '', topR ? `${topR.party}：${fmt(hitOf(topR))} 亿 / ${topR.size_label}` : '', `lab=${lab}&party=${topR ? encodeURIComponent(topR.party) : ''}`);
+    kpi('直接依赖这些合同的债务', fmt(d3.sum(debt, (r) => r.base)), '亿美元', debt.map((r) => r.party).join('；'), `lab=${lab}&party_type=项目债与贷款`);
+    kpi('可能被触发的担保', fmt(d3.sum(guar, hitOf)), '亿美元', guar.map((r) => r.party + '：' + r.protection).join('；'), `lab=${lab}&party_type=担保方`);
+    const box = document.getElementById('stProvChart');
+    const rowH = 34, lw = 150, H = prov.length * rowH + 8;
+    const [svg, W] = svgIn(box, H);
+    const x = d3.scaleLinear([0, d3.max(prov, (r) => r.base) || 1], [0, W - lw - 120]);
+    prov.forEach((r, i) => {
+      const g = svg.append('g').attr('transform', `translate(0,${i * rowH + 4})`);
+      g.append('text').attr('y', 16).attr('font-size', 12).attr('fill', 'var(--color-fg)').text(r.party);
+      g.append('rect').attr('x', lw).attr('y', 4).attr('height', 16).attr('width', Math.max(1, x(r.base))).attr('fill', 'var(--cds-chart-grid)');
+      const b = g.append('rect').attr('x', lw).attr('y', 4).attr('height', 16).attr('width', Math.max(1, x(hitOf(r)))).attr('fill', 'var(--cds-chart-status-critical)');
+      mark(b.node(), 'exposure', 'base_yi', 'id=' + r.id);
+      b.on('pointermove', (ev) => window.AF.showTip(box, ev, [r.party, `合同 ${fmt(r.base)} 亿，按 ${pct}% 损失 ${fmt(hitOf(r))} 亿`, r.size_label || '', r.protection])).on('pointerleave', () => window.AF.hideTip(box));
+      g.append('text').attr('x', lw + x(r.base) + 6).attr('y', 16).attr('font-size', 12).attr('fill', 'var(--color-fg)').text(fmt(hitOf(r)) + (r.size ? `（${(hitOf(r) / r.size * 100).toFixed(1)}%）` : ''));
+    });
+    const fb = document.getElementById('stFlow'); fb.replaceChildren();
+    const ORD = { 1: '算力提供方：订单和收入减少', 2: '依赖这些合同的债务', 3: '担保与兜底方', 4: '股权投资人' };
+    [1, 2, 3, 4].forEach((o) => {
+      const rs = L.filter((r) => +r.order === o); if (!rs.length) return;
+      fb.append(el('div', 'mo', ORD[o]));
+      rs.forEach((r) => {
+        const st = el('div', 'st-step'); st.dataset.key = r.id;
+        const mid = el('span'); mid.append(el('b', '', r.party), document.createTextNode('　' + r.first_loss));
+        st.append(el('span', 'o', String(o)), mid, mark(el('span', 'a', fmt(hitOf(r)) + ' 亿'), 'exposure', 'base_yi', 'id=' + r.id));
+        fb.append(st);
+      });
+    });
+    table(document.getElementById('stTable'), [{ f: 'party_type', label: '类别' }, { f: 'party', label: '对象' }, { f: 'channel', label: '渠道', wrap: true },
+      { f: 'base_yi', label: '敞口', num: true, fmt: n0 }, { f: 'size_label', label: '参照规模', wrap: true }, { f: 'protection', label: '保护', wrap: true },
+      { f: 'first_loss', label: '谁先承担', wrap: true }, { f: 'linked_debt', label: '相关债务', wrap: true }, { f: 'source', label: '依据', wrap: true }], L, 'id');
+    const B = rows('bonds') || [];
+    const BL = B.filter((r) => r.payer === lab || (lab === 'OpenAI' && r.payer === 'CoreWeave') || (lab === 'Anthropic' && r.payer === 'Fluidstack'));
+    table(document.getElementById('stBondTable'), [{ f: 'issuer', label: '发行人' }, { f: 'instrument', label: '债券', wrap: true }, { f: 'payer', label: '最终付款人' },
+      { f: 'rating', label: '评级' }, { f: 'price', label: '价格', num: true, fmt: n1 }, { f: 'ytm', label: '收益率 %', num: true, fmt: n2 }, { f: 'as_of', label: '日期' }, { f: 'backstop', label: '兜底', wrap: true }], BL, 'id');
+    const KW = lab === 'OpenAI' ? /CoreWeave|DDTL|Abilene|Crusoe|Vantage|Frontier|Port Washington|Saline|Doña|Stargate|Oracle|OpenAI/i : /Anthropic|Fluidstack|TeraWulf|WULF|Cipher|Hut 8|River Bend|Meridian|Atlas|Apollo|Compute SPV|Nexus/i;
+    const HD = (rows('holders') || []).filter((r) => KW.test(r.deal + ' ' + r.instrument + ' ' + r.note));
+    table(document.getElementById('stHoldTable'), [{ f: 'section', label: '类别' }, { f: 'deal', label: '交易', wrap: true }, { f: 'instrument', label: '工具', wrap: true }, { f: 'holder', label: '持有人 / 出资人', wrap: true },
+      { f: 'holder_type', label: '类型' }, { f: 'principal_m', label: '本金（百万美元）', num: true, fmt: n0 }, { f: 'mark_pct', label: '标记 % 面值', num: true, fmt: n1 },
+      { f: 'prior_mark_pct', label: '上期标记', num: true, fmt: n1 }, { f: 'as_of', label: '截至' }, { f: 'source_url', label: '出处', link: true }], HD, 'id');
+  });
+
+  // ---------------- 定价地图
+  const PAYC = { OpenAI: () => 'var(--cds-chart-status-critical)', Anthropic: () => dash.colors[1], CoreWeave: () => dash.colors[3], Fluidstack: () => dash.colors[5],
+    Oracle: () => dash.colors[0], Meta: () => dash.colors[2], Microsoft: () => dash.colors[4], SpaceX: () => dash.colors[6], xAI: () => dash.colors[6] };
+  const pcol = (p) => (PAYC[p] ? PAYC[p]() : 'var(--cds-chart-muted)');
+  on('pricing', () => {
+    const T = UT().filter((r) => r.page === 'pricing');
+    const lead = T.find((r) => r.kind === 'lead');
+    document.getElementById('prLead').textContent = lead ? lead.body : '';
+    const kb = document.getElementById('prKpis'); kb.replaceChildren();
+    T.filter((r) => r.kind === 'kpi').forEach((r) => { const k = el('div', 'kpi'); k.append(el('span', 'k', r.title)); const v = el('span', 'v'); v.append(mark(el('span', '', /\d/.test(r.value) && Math.abs(+r.value) >= 1000 ? fmt(r.value) : r.value), 'upgrade_text', 'value', 'id=' + r.id)); k.append(v, el('span', 'u', r.unit), el('span', 'lbl2', r.label)); kb.append(k); });
+    const pb = document.getElementById('prPoints'); pb.replaceChildren();
+    T.filter((r) => r.kind === 'point').forEach((r) => { const d = el('div'); d.append(el('h3', '', r.title), el('p', '', r.body)); pb.append(d); });
+    const cv = document.getElementById('prCaveats'); cv.replaceChildren();
+    T.filter((r) => r.kind === 'caveat').forEach((r) => cv.append(el('li', '', r.body)));
+    const B = rows('bonds'); if (!B) return;
+    const P = B.filter((r) => r.in_fit === '是');
+    const fitRow = T.find((r) => r.kind === 'fit');
+    const [ic, sl] = fitRow ? fitRow.body.split(',').map(Number) : [null, null];
+    const payers = [...new Set(P.map((r) => r.payer))];
+    legend(document.getElementById('prLegend'), [...payers.map((p) => [p, pcol(p), 'dot']), ['拟合线（同等保护水平的平均利差）', 'var(--color-fg-muted)', 'dash']]);
+    const box = document.getElementById('prChart');
+    const H = 420, m = { l: 52, r: 16, t: 14, b: 36 };
+    const [svg, W] = svgIn(box, H);
+    const x = d3.scaleLinear([0, 10], [m.l, W - m.r]);
+    const y = d3.scaleLog([Math.max(40, d3.min(P, (r) => +r.spread_calc_bp) * 0.75), d3.max(P, (r) => +r.spread_calc_bp) * 1.25], [H - m.b, m.t]);
+    const rS = d3.scaleSqrt([0, d3.max(P, (r) => +r.amount_yi || 0) || 1], [4, 16]);
+    [50, 100, 200, 400, 800, 1600].filter((t) => t >= y.domain()[0] && t <= y.domain()[1]).forEach((t) => {
+      svg.append('line').attr('x1', m.l).attr('x2', W - m.r).attr('y1', y(t)).attr('y2', y(t)).attr('stroke', 'var(--cds-chart-grid)');
+      svg.append('text').attr('x', m.l - 6).attr('y', y(t) + 4).attr('text-anchor', 'end').attr('font-size', 11).attr('fill', 'var(--color-fg-muted)').text(fmt(t) + 'bp');
+    });
+    x.ticks(10).forEach((t) => svg.append('text').attr('x', x(t)).attr('y', H - m.b + 16).attr('text-anchor', 'middle').attr('font-size', 11).attr('fill', 'var(--color-fg-muted)').text(t));
+    svg.append('text').attr('x', W - m.r).attr('y', H - 4).attr('text-anchor', 'end').attr('font-size', 11).attr('fill', 'var(--color-fg-muted)').text('保护评分 →（越右越安全）');
+    svg.append('text').attr('x', m.l).attr('y', m.t - 2).attr('font-size', 11).attr('fill', 'var(--color-fg-muted)').text('对美债利差（对数刻度）');
+    if (ic !== null) {
+      const xs = d3.range(0, 10.01, 0.25).map((v) => [v, Math.exp(ic + sl * v)]).filter(([, v]) => v >= y.domain()[0] && v <= y.domain()[1]);
+      const path = svg.append('path').attr('d', d3.line().x((d) => x(d[0])).y((d) => y(d[1]))(xs)).attr('fill', 'none').attr('stroke', 'var(--color-fg-muted)').attr('stroke-dasharray', '5 4');
+      mark(path.node(), 'upgrade_text', 'body', 'id=' + fitRow.id);
+    }
+    [...P].sort((a, b) => (+b.amount_yi || 0) - (+a.amount_yi || 0)).forEach((r) => {
+      const c = svg.append('circle').attr('cx', x(+r.protection)).attr('cy', y(+r.spread_calc_bp)).attr('r', rS(+r.amount_yi || 0)).attr('fill', pcol(r.payer)).attr('fill-opacity', 0.75).attr('stroke', 'var(--color-panel)');
+      mark(c.node(), 'bonds', 'spread_calc_bp', 'id=' + r.id);
+      c.on('pointermove', (ev) => window.AF.showTip(box, ev, [`${r.issuer} ${r.instrument}`, `利差 ${fmt(r.spread_calc_bp)}bp（收益率 ${n2(r.ytm)}%，价格 ${n1(r.price)}）`, `保护评分 ${r.protection} · 相对拟合线 ${+r.residual_bp > 0 ? '+' : ''}${r.residual_bp}bp`, r.score_note])).on('pointerleave', () => window.AF.hideTip(box));
+    });
+    const seenLab = new Set();
+    [...P].sort((a, b) => Math.abs(+b.residual_bp) - Math.abs(+a.residual_bp)).filter((r) => Math.abs(+r.residual_bp) >= 120 && !seenLab.has(r.issuer) && seenLab.add(r.issuer)).forEach((r) => svg.append('text').attr('x', x(+r.protection) + 9).attr('y', y(+r.spread_calc_bp) + 4).attr('font-size', 10.5).attr('fill', 'var(--color-fg-muted)').text(r.issuer.replace(/（.*?）/g, '').replace(' Corporation', '').slice(0, 16)));
+    const cols = [{ f: 'issuer', label: '发行人' }, { f: 'instrument', label: '债券', wrap: true }, { f: 'payer', label: '最终付款人' }, { f: 'protection', label: '保护评分', num: true },
+      { f: 'spread_calc_bp', label: '利差 bp', num: true, fmt: n0 }, { f: 'fit', label: '同等保护的拟合利差', num: true, fmt: n0 }, { f: 'residual_bp', label: '偏离（bp）', num: true, cls: (r) => (+r.residual_bp > 0 ? 'lab' : '') }];
+    const R = P.filter((r) => r.residual_bp !== '');
+    table(document.getElementById('prHigh'), cols, [...R].sort((a, b) => +b.residual_bp - +a.residual_bp).slice(0, 8), 'id');
+    table(document.getElementById('prLow'), cols, [...R].sort((a, b) => +a.residual_bp - +b.residual_bp).slice(0, 8), 'id');
+    table(document.getElementById('prAll'), [{ f: 'id', label: '#' }, { f: 'issuer', label: '发行人' }, { f: 'instrument', label: '债券', wrap: true }, { f: 'payer', label: '最终付款人' },
+      { f: 'rating', label: '评级' }, { f: 'amount_yi', label: '规模（亿）', num: true, fmt: n0 }, { f: 'coupon', label: '票息' }, { f: 'maturity', label: '到期' },
+      { f: 'price', label: '价格', num: true, fmt: n1 }, { f: 'price_3m', label: '三个月前', num: true, fmt: n1 }, { f: 'ytm', label: '收益率 %', num: true, fmt: n2 },
+      { f: 'spread_calc_bp', label: '对美债利差 bp', num: true, fmt: n0 }, { f: 'spread_bp', label: '来源报价利差', num: true, fmt: n0 }, { f: 'spread_basis', label: '报价口径' },
+      { f: 'payer_score', label: '付款方分', num: true }, { f: 'structure_score', label: '结构分', num: true }, { f: 'backstop_score', label: '兜底分', num: true }, { f: 'protection', label: '保护评分', num: true },
+      { f: 'in_fit', label: '纳入拟合' }, { f: 'score_note', label: '评分说明', wrap: true }, { f: 'backstop', label: '兜底', wrap: true }, { f: 'as_of', label: '日期' },
+      { f: 'source_type', label: '来源类型' }, { f: 'source_url', label: '出处', link: true }], B, 'id');
+    table(document.getElementById('prCds'), [{ f: 'issuer', label: '公司' }, { f: 'spread_bp', label: '5Y CDS（bp）', num: true, fmt: n0 }, { f: 'as_of', label: '日期' },
+      { f: 'source_type', label: '来源类型' }, { f: 'note', label: '说明', wrap: true }, { f: 'source_url', label: '出处', link: true }], rows('cds_points') || [], 'id');
+  });
+})();
+</script>
+
+<script>
+dash.calc('tv_bond_snap', {
+  title: '债券最新快照',
+  description: '每只债最新一天的价格、到期收益率和利差，以及收益率相对 1 天、1 周、1 个月前的变动（bp）。',
+  inputs: ['tv_bonds'],
+  fn: (tv_bonds) => {
+    const by = new Map();
+    tv_bonds.filter((r) => r.ytm !== '' && r.ytm != null).forEach((r) => { if (!by.has(r.bond)) by.set(r.bond, []); by.get(r.bond).push(r); });
+    const r2 = (v) => Math.round(v * 100) / 100;
+    return Array.from(by, ([bond, rs]) => {
+      rs.sort((a, b) => (a.date < b.date ? -1 : 1));
+      const last = rs[rs.length - 1];
+      const ago = (days) => {
+        const t = new Date(Date.parse(last.date) - days * 864e5).toISOString().slice(0, 10);
+        const p = rs.filter((r) => r.date <= t).pop();
+        return p ? Math.round((+last.ytm - +p.ytm) * 100) : null;
+      };
+      const prev = rs[rs.length - 2];
+      return {
+        bond, issuer: last.issuer, type: last.type, date: last.date, price: r2(+last.price), ytm: r2(+last.ytm),
+        spread_bp: last.spread_bp === '' ? null : Math.round(+last.spread_bp),
+        chg_1d_bp: prev ? Math.round((+last.ytm - +prev.ytm) * 100) : null, chg_1w_bp: ago(7), chg_1m_bp: ago(30),
+      };
+    });
+  },
+});
+
+(() => {
+  const { rows, on, showTip, hideTip, clear, table } = window.AF;
+  const METRICS = [['ytm', '收益率', '%', '.2f'], ['spread_bp', '利差', ' bp', ',.0f'], ['price', '价格', '', '.1f']];
+  const RANGES = [[92, '3M'], [183, '6M'], [366, '1Y'], [0, '全部']];
+  const ANCHORS = { orcl: 'ORCL 5.7% 2036', crwv: 'CRWV 9.625% 2032' };
+  let metric = 'ytm', days = 183;
+  const chips = (box, items, isOn, pick) => box.replaceChildren(...items.map(([v, label]) => {
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'chip'; b.textContent = label;
+    b.setAttribute('aria-pressed', String(isOn(v))); b.addEventListener('click', () => { pick(v); draw(); }); return b;
+  }));
+  const sgn = (v) => (v == null ? '—' : (v > 0 ? '+' : '') + d3.format(',')(v));
+
+  const lineChart = (box, leg, series, fmtV, unit) => {
+    clear(box); hideTip(box);
+    leg.replaceChildren(...series.map((s) => { const sp = document.createElement('span'); const i = document.createElement('i'); i.className = 'sw'; i.style.background = s.color; sp.append(i, document.createTextNode(s.label)); return sp; }));
+    const all = series.flatMap((s) => s.pts);
+    if (!all.length) return;
+    const W = box.clientWidth || 360, H = 260;
+    const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img');
+    const [lo, hi] = d3.extent(all, (p) => p.v), pad = (hi - lo) * 0.06 || 1;
+    const y0 = d3.scaleLinear([lo - pad, hi + pad], [H - 24, 10]).nice();
+    const yt = y0.ticks(5);
+    const probe = svg.append('g').attr('font-size', 11);
+    const wMax = d3.max(yt, (t) => probe.append('text').text(fmtV(t)).node().getComputedTextLength()) || 20;
+    probe.remove();
+    const m = { l: Math.ceil(wMax) + 10, r: 10, t: 10, b: 24 };
+    const x = d3.scaleUtc(d3.extent(all, (p) => p.d), [m.l, W - m.r]);
+    const y = y0.copy();
+    yt.forEach((t) => {
+      svg.append('line').attr('x1', m.l).attr('x2', W - m.r).attr('y1', y(t)).attr('y2', y(t)).attr('stroke', 'var(--cds-chart-grid)');
+      svg.append('text').attr('x', m.l - 6).attr('y', y(t) + 4).attr('text-anchor', 'end').attr('font-size', 11).attr('fill', 'var(--color-fg-muted)').text(fmtV(t));
+    });
+    const [d0, d1] = x.domain(), span = (d1 - d0) / 864e5;
+    const tf = d3.utcFormat(span <= 200 ? '%m-%d' : '%Y-%m');
+    x.ticks(Math.max(2, Math.floor((W - m.l) / 90))).forEach((t) => svg.append('text').attr('x', x(t)).attr('y', H - 6).attr('text-anchor', 'middle').attr('font-size', 11).attr('fill', 'var(--color-fg-muted)').text(tf(t)));
+    series.forEach((s) => svg.append('path').attr('d', d3.line().x((p) => x(p.d)).y((p) => y(p.v))(s.pts)).attr('fill', 'none').attr('stroke', s.color).attr('stroke-width', 2).attr('stroke-linejoin', 'round').attr('stroke-linecap', 'round'));
+    const rule = svg.append('line').attr('y1', m.t).attr('y2', H - m.b).attr('stroke', 'var(--cds-chart-axis)').attr('visibility', 'hidden');
+    const dots = series.map((s) => svg.append('circle').attr('r', 4).attr('fill', s.color).attr('stroke', 'var(--color-panel)').attr('stroke-width', 2).attr('visibility', 'hidden'));
+    const bisect = d3.bisector((p) => p.d).right;
+    svg.append('rect').attr('x', m.l).attr('y', m.t).attr('width', W - m.l - m.r).attr('height', H - m.t - m.b).attr('fill', 'transparent')
+      .on('pointermove', (ev) => {
+        const at = x.invert(d3.pointer(ev)[0]);
+        const lines = [d3.utcFormat('%Y-%m-%d')(at)];
+        rule.attr('x1', x(at)).attr('x2', x(at)).attr('visibility', 'visible');
+        series.forEach((s, k) => {
+          const p = s.pts[bisect(s.pts, at) - 1];
+          if (!p || at - p.d > 7 * 864e5) { dots[k].attr('visibility', 'hidden'); return; }
+          dots[k].attr('cx', x(p.d)).attr('cy', y(p.v)).attr('visibility', 'visible');
+          lines.push(`${s.label}：${fmtV(p.v)}${unit}`);
+        });
+        showTip(box, ev, lines);
+      })
+      .on('pointerleave', () => { hideTip(box); rule.attr('visibility', 'hidden'); dots.forEach((c) => c.attr('visibility', 'hidden')); });
+  };
+
+  const draw = () => {
+    chips(document.getElementById('tvMetric'), METRICS.map(([k, n]) => [k, n]), (v) => v === metric, (v) => { metric = v; });
+    chips(document.getElementById('tvRange'), RANGES, (v) => v === days, (v) => { days = v; });
+    const B = rows('tv_bonds');
+    const S = dash.data('tv_bond_snap').status === 'ok' ? dash.data('tv_bond_snap').data : null;
+    const [, , unit, f] = METRICS.find(([k]) => k === metric);
+    const fmtV = d3.format(f);
+    [['Oracle', 'tvOrclChart', 'tvOrclLeg'], ['CoreWeave', 'tvCrwvChart', 'tvCrwvLeg']].forEach(([iss, cid, lid]) => {
+      const box = document.getElementById(cid), leg = document.getElementById(lid);
+      if (!B) { clear(box); leg.replaceChildren(); return; }
+      const mine = B.filter((r) => r.issuer === iss && r.type !== 'convert' && r[metric] !== '' && r[metric] != null);
+      const lastDay = d3.max(mine, (r) => r.date);
+      const from = days && lastDay ? new Date(Date.parse(lastDay) - days * 864e5).toISOString().slice(0, 10) : '';
+      const groups = d3.groups(mine.filter((r) => r.date >= from), (r) => r.bond);
+      const series = groups.map(([label, rs], k) => ({ label, color: dash.colors[k % dash.colors.length], pts: rs.map((r) => ({ d: new Date(r.date), v: +r[metric] })).sort((a, b) => a.d - b.d) }));
+      lineChart(box, leg, series, fmtV, unit);
+    });
+    const take = document.getElementById('tvBondTake'); take.replaceChildren();
+    if (S) {
+      const part = (bond, lead) => {
+        const r = S.find((x) => x.bond === bond); if (!r) return [];
+        const yv = document.createElement('b'); yv.textContent = d3.format('.2f')(r.ytm) + '%';
+        Object.assign(yv.dataset, { source: 'tv_bond_snap', field: 'ytm', where: 'bond=' + encodeURIComponent(bond) });
+        const ch = document.createElement('b'); ch.textContent = sgn(r.chg_1m_bp) + ' bp';
+        Object.assign(ch.dataset, { source: 'tv_bond_snap', field: 'chg_1m_bp', where: 'bond=' + encodeURIComponent(bond) });
+        return [document.createTextNode(lead), yv, document.createTextNode('，一个月变动 '), ch];
+      };
+      take.append(...part(ANCHORS.orcl, 'Oracle 10 年期（5.7% 2036）收益率 '), document.createTextNode('；'), ...part(ANCHORS.crwv, 'CoreWeave 9.625% 2032 收益率 '), document.createTextNode('。'));
+    }
+    const fx = (fmtS) => (v) => (v == null || v === '' ? '—' : d3.format(fmtS)(v));
+    const tone = (k) => (r) => (r[k] == null ? '' : r[k] > 0 ? 'up' : r[k] < 0 ? 'dn' : '');
+    table(document.getElementById('tvBondTable'), [
+      { f: 'bond', label: '债券' }, { f: 'date', label: '日期' },
+      { f: 'price', label: '价格', num: true, fmt: fx('.2f') }, { f: 'ytm', label: '收益率 %', num: true, fmt: fx('.2f') },
+      { f: 'spread_bp', label: '利差 bp', num: true, fmt: fx(',') },
+      { f: 'chg_1d_bp', label: '1 天', num: true, fmt: sgn, cls: tone('chg_1d_bp') },
+      { f: 'chg_1w_bp', label: '1 周', num: true, fmt: sgn, cls: tone('chg_1w_bp') },
+      { f: 'chg_1m_bp', label: '1 个月', num: true, fmt: sgn, cls: tone('chg_1m_bp') },
+    ], S || [], 'bond');
+  };
+  on('risk', draw);
+})();
+</script>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,13 @@
+id,lab,item,amount_yi,status,date,source_type,source_url,note
+L01,OpenAI,现金及有价证券,730,已到账,2026-03-31,低可信转载,https://thenextweb.com/news/openai-burned-3-7-billion-q1-2026,The Information 据股东文件，经转述
+L02,OpenAI,软银第二批股权 300 亿（3 月 31 日之后到账）,300,已到账,2026-10-01,公司披露,https://group.softbank/en/news/press/20261001,4 月、7 月、10 月各 100 亿
+L03,OpenAI,NVIDIA 股权剩余两期,200,据报道已到账,2026-02-25,主流媒体,https://www.reuters.com/business/retail-consumer/amazons-50-billion-openai-investment-may-depend-ipo-or-agi-milestone-information-2026-02-26/,300 亿分三期一年内付清；后两期按 3 月 31 日之后到账计
+L04,OpenAI,循环信用额度（未提取）,47,信用额度,2026-03-31,公司披露,https://openai.com/index/accelerating-the-next-phase-ai/,另有美银 5.2 亿额度，未计
+L05,OpenAI,亚马逊附条件股权,350,附条件,2028-12-31,公司披露,https://www.sec.gov/Archives/edgar/data/1018724/000110465926021050/tm267374d1_ex10-1.htm,达到合同约定的里程碑或在美国上市时强制出资，2028 年底到期
+L06,Anthropic,现金及短期投资,203,已到账,2025-12-31,主流媒体,https://www.cnbc.com/2026/09/28/anthropics-ipo-prospectus-shows-sweeping-ai-vision-surging-costs-reuters.html,招股书草案
+L07,Anthropic,2026 年股权：G 轮 300 亿 + 谷歌首期 100 亿 + H 轮 650 亿,1050,已到账,2026-05-28,公司披露,https://www.anthropic.com/news/anthropic-raises-30-billion-series-g-funding-380-billion-post-money-valuation,H 轮含此前承诺的超大云厂商投资 150 亿，已避免重复计算；实际到账节奏未披露
+L08,Anthropic,信用额度（150 亿 pre-IPO 额度 + 25 亿旧额度）,175,信用额度,2026-09-04,主流媒体,https://www.bloomberg.com/news/videos/2026-09-04/anthropic-finalizing-15-billion-pre-ipo-credit-facility-video,提取额未披露
+L09,Anthropic,谷歌、亚马逊、AMD 附条件股权,550,附条件,,主流媒体,https://www.cnbc.com/2026/04/24/google-to-invest-up-to-40-billion-in-anthropic-as-search-giant-spreads-its-ai-bets.html,谷歌最多 300 亿、亚马逊最多 200 亿（均与里程碑挂钩）、AMD 最多 50 亿
+L10,Anthropic,"IPO（计划 11 月，目标最多 1,000 亿）",1000,计划中,2026-11,主流媒体,https://www.ifre.com/equities/2499407/anthropic-pushes-ahead-with-mid-november-ipo,IFR 2026-10-17 报道；未计入已锁定资金
+L11,xAI,SpaceX 合并口径现金及有价证券,1000,已到账,2026-06-30,公司披露,https://www.sec.gov/Archives/edgar/data/1181412/000162828026052515/earningsreleaseq22608042.htm,集团现金，同时支撑星舰与星链；含 IPO 净募资约 857 亿
+L12,xAI,SpaceX 循环信用额度（未提取）,15,信用额度,2026-06-30,公司披露,https://www.sec.gov/Archives/edgar/data/1181412/000162828026052535/spcx-20260630.htm,

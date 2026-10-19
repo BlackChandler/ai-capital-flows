@@ -1,0 +1,16 @@
+id,layer,name,value,unit,green,red,score,status,prev,trend,link,src,field,where,note
+S01,根部,OpenAI 现有资金可用到,2029,年,2031,2027,50,黄,,,gap,research_text,value,title=OpenAI 现有资金用完的年份,按公司 2026-02 版逐年形状为 2028 年
+S02,根部,已签算力合同年化应付 ÷ 实验室收入（2026E）,102,%,60,130,60,黄,,,labs,flow,value,line=total_contract_due&year=2026,应付 900 亿 / 收入 881 亿
+S03,根部,三家实验室融资占全球 AI 风投（2026 年至今）,48,%,25,60,66,黄,,,gap,equity_supply,value_yi,id=M2-049,"2,370 亿 / 4,956 亿（CB Insights 前三季度）"
+S04,根部,供应商入股承诺 ÷ 实验室收入,1.87,倍,0.5,2.0,91,红,,,circular,research_text,value,title=供应商对两家实验室的入股承诺,越高说明实验室的钱越依赖供应商自己
+S05,大厂,大厂资本开支 − 经营现金流（2026E）,948,亿美元,0,2000,47,黄,,,providers,flow,value,line=bigtech_gap&year=2026,
+S06,大厂,Oracle 5 年期 CDS,282,bp,80,300,92,红,215.0,恶化,risk,cds_points,spread_bp,issuer=Oracle,
+S07,融资窗口与价格,CoreWeave 无担保债最高收益率,15.06,%,8,13,100,红,,,coreweave,risk_prices,value,issuer=CoreWeave&metric=到最差收益率,
+S08,融资窗口与价格,CoreWeave 5 年期 CDS,1038,bp,300,1000,100,红,452.0,恶化,risk,cds_points,spread_bp,issuer=CoreWeave,
+S09,融资窗口与价格,Neocloud 与矿企股票篮子较 52 周高点回撤,55.2,%,15,50,100,红,,,risk,market_series,value,series=Neocloud 与矿企转型篮子,
+S10,融资窗口与价格,Neocloud 与矿企股价隐含 1 年违约概率（中位数）,19.2,%,2,15,100,红,,,risk,equity_stats,pd_1y_pct,group=Neocloud,简化 Merton 模型；高波动成长股会高估，适合看相对高低和变化
+S11,融资窗口与价格,以实验室或 Neocloud 为租户的项目债最低价格,89.75,美元,100,85,68,红,,,pricing,bonds,price,id=B12,Edged Compute LLC 7.500% 2031
+S12,宏观与市场,高收益整体 OAS,3.23,%,3.5,6.0,0,绿,2.69,恶化,risk,market_series,value,series=高收益整体 OAS&date=2026-10-15,
+S13,宏观与市场,CCC 级 OAS,12.78,%,8,15,68,红,9.7,恶化,risk,market_series,value,series=CCC 级 OAS&date=2026-10-15,
+S14,宏观与市场,10 年期美债,5.1,%,4.0,5.5,73,红,4.56,恶化,risk,market_series,value,series=10 年期美债&date=2026-10-15,
+S15,宏观与市场,VIX,16.46,点,15,30,10,绿,15.03,恶化,risk,market_series,value,series=VIX&date=2026-10-15,

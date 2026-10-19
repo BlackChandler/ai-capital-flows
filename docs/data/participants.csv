@@ -1,0 +1,229 @@
+key,layer,participant,metric,2024A,2025A,2026最新,2026E,2027E,latest_note
+Anthropic|REV,AI 实验室,Anthropic,收入,,46.0,116.0,180.0,550.0,2026Q2单季收入（转述WSJ），环比翻倍以上，报告调整后经营利润为正；2026Q1未找到可打开的来源；2026Q1收入4730（Bloomberg看到的文件，CNBC 2026-08-15转述，https://www.cnbc.com/
+Anthropic|REV_RUNRATE,AI 实验室,Anthropic,期末年化收入,,90.0,650.0,,,截至2026-07末年化收入650亿（Anthropic告知投资人）；此前：2026-02 140亿、2026-04 300亿、2026-05 470亿（公司披露）；Anthropic口径含云合作伙伴销售（毛口径）
+Anthropic|OPINC,AI 实验室,Anthropic,经营利润,-29.8,-80.6,,,,
+Anthropic|NI,AI 实验室,Anthropic,净利润,,-420.0,,,,
+Anthropic|CASH,AI 实验室,Anthropic,期末现金,,202.8,,,,
+Anthropic|EQ_VALUE,AI 实验室,Anthropic,估值 / 市值,,,9650.0,,,H轮投后估值；2026-02 G轮为3800亿
+OpenAI|REV,AI 实验室,OpenAI,收入,37.0,130.7,124.0,360.0,620.0,2026上半年实际收入（转述WSJ）：Q1 5700、Q2 6700；Q2环比+18%
+OpenAI|REV_RUNRATE,AI 实验室,OpenAI,期末年化收入,,,500.0,,,截至2026-09末年化收入约500亿（OpenAI净额口径，FT首报、CNBC证实）；此前报道的680-700亿为含云合作伙伴销售的毛口径，不作主行；2026-03公司称月收入20亿（年化约240亿）
+OpenAI|OPINC,AI 实验室,OpenAI,经营利润,-87.8,-209.2,-216.0,,,2026上半年经营亏损（含股权激励，转述WSJ）：Q1 -9300、Q2 -12300
+OpenAI|NI,AI 实验室,OpenAI,净利润,-50.9,-385.0,,,,
+OpenAI|FCF,AI 实验室,OpenAI,自由现金流,,-80.0,-37.0,-250.0,-570.0,2026Q1烧钱37亿（口径为现金消耗），同期收入57亿；上半年数未找到
+OpenAI|CASH,AI 实验室,OpenAI,期末现金,,400.0,730.0,,,2026-03-31现金及有价证券超730亿（The Information看到的股东文件），2025年末为400亿；增量主要来自3月融资
+OpenAI|EQ_RAISE,AI 实验室,OpenAI,股权融资（当期）,66.0,410.0,1220.0,,,2026-03轮1220亿“承诺资本”，非全部到账；明细见表B
+OpenAI|EQ_VALUE,AI 实验室,OpenAI,估值 / 市值,,,8520.0,,,1220亿融资轮投后估值；2026-08员工股份出售仍按8520亿
+OpenAI|DEBT_ONBS,AI 实验室,OpenAI,表内有息债务,,,0.0,,,截至2026-03-31有息债务为零（The Information看到的财务报表）；租赁负债低于7.5亿；约6650亿采购承诺在表外；47亿循环贷未提款
+SoftBank|CASH,AI 实验室,SoftBank,期末现金,,,241.8,,,"SBG合并口径2026-06-30现金及现金等价物3,927,072百万日元，按期末汇率162.39折算；非仅OpenAI相关"
+SoftBank|EQ_VALUE,AI 实验室,SoftBank,估值 / 市值,,,896.0,,,注意：非软银自身估值，为所持OpenAI权益的公允价值（2026-06-30），累计投资446亿、累计投资收益450亿；估值与上财年末持平；2026-07再投100亿
+SoftBank|DEBT_ONBS,AI 实验室,SoftBank,表内有息债务,,,1640.8,,,"SBG合并口径2026-06-30有息债务（流动7,559,173+非流动19,085,685百万日元），按162.39折算；其中OpenAI过桥贷款（融资子公司部分）余额1,119.3十亿日元，对SBG有追索"
+SoftBank|LEASE_ONBS,AI 实验室,SoftBank,表内租赁负债,,,60.6,,,"SBG合并口径租赁负债（流动212,501+非流动933,369百万日元），按162.39折算"
+xAI|REV,AI 实验室,xAI,收入,,,33.8,,,SpaceX 10-Q：AI分部2026上半年收入（xAI于2026-02-02并入SpaceX，AI分部含xAI与X）；2025上半年为1465
+xAI|OPINC,AI 实验室,xAI,经营利润,,,-37.3,,,SpaceX 10-Q：AI分部2026上半年经营亏损
+xAI|CAPEX,AI 实验室,xAI,资本开支,,,235.5,,,SpaceX 10-Q：AI分部2026上半年资本开支（SpaceX合计28476）；2025上半年AI分部为3316
+xAI|CASH,AI 实验室,xAI,期末现金,,,935.2,,,SpaceX合并口径2026-06-30现金及现金等价物（另有有价证券6487），非xAI单独
+xAI|EQ_VALUE,AI 实验室,xAI,估值 / 市值,,2300.0,,,,
+xAI|DEBT_ONBS,AI 实验室,xAI,表内有息债务,,95.0,133.3,,,SpaceX 10-Q：与Valor的GPU设备租赁按售后回租失败记为债务（流动2039+非流动11290），属AI分部；SpaceX合并总债务本金38433（含2026-06发行的250亿无担保票据）
+Alphabet|REV,大厂,Alphabet,收入,3500.2,4028.4,2296.9,,,期间：2026上半年；2026上半年
+Alphabet|OPINC,大厂,Alphabet,经营利润,1123.9,1290.4,804.7,,,期间：2026上半年；2026上半年
+Alphabet|NI,大厂,Alphabet,净利润,1001.2,1321.7,,,,
+Alphabet|OCF,大厂,Alphabet,经营现金流,1253.0,1647.1,1856.8,,,期间：TTM截至2026-06-30；TTM截至2026-06-30
+Alphabet|CAPEX,大厂,Alphabet,资本开支,525.4,914.5,1324.0,2000.0,,期间：TTM截至2026-06-30；TTM截至2026-06-30
+Alphabet|FCF,大厂,Alphabet,自由现金流,727.6,732.7,532.7,,,期间：TTM截至2026-06-30；TTM截至2026-06-30
+Alphabet|INT,大厂,Alphabet,利息支出,,,12.8,,,期间：仅2026Q2；仅2026Q2利息支出（上半年合计未披露于该表）
+Alphabet|BACKLOG,大厂,Alphabet,合同积压 / RPO,,,5140.0,,,期间：2026-06-30；Google Cloud backlog
+Alphabet|CASH,大厂,Alphabet,期末现金,956.6,1268.4,2424.7,,,期间：TTM截至2026-06-30；2026-06-30 现金+有价证券
+Alphabet|EQ_RAISE,大厂,Alphabet,股权融资（当期）,,,495.6,,,期间：2026上半年；普通股30499+强制可转换优先股19063（净额）
+Alphabet|DEBT_ONBS,大厂,Alphabet,表内有息债务,108.8,465.5,981.6,,,期间：TTM截至2026-06-30；2026-06-30 长期债
+Alphabet|GUARANTEE,大厂,Alphabet,对外担保 / 兜底,,,49.3,,,Google为Fluidstack租约兜底合计：TeraWulf 3200（1800+1400）+ Cipher 1733（1400+333）；Hut 8 River Bend兜底金额未披露（覆盖15年基础租期租金，租约基础期价值7000）
+Alphabet|PAYOUT,大厂,Alphabet,回购 + 分红,,,52.3,,,期间：2026上半年；2026上半年仅分红5231，回购为0
+Amazon|REV,大厂,Amazon,收入,6379.6,7169.2,7756.8,,,期间：TTM截至2026-06-30；TTM截至2026-06-30
+Amazon|OPINC,大厂,Amazon,经营利润,,799.8,937.1,,,期间：TTM截至2026-06-30；TTM
+Amazon|NI,大厂,Amazon,净利润,,776.7,1352.8,,,期间：TTM截至2026-06-30；TTM，含Anthropic投资大额非经营收益
+Amazon|OCF,大厂,Amazon,经营现金流,1158.8,1395.1,1614.0,,,期间：TTM截至2026-06-30；TTM
+Amazon|CAPEX,大厂,Amazon,资本开支,776.6,1283.2,1690.1,2200.0,,期间：TTM截至2026-06-30；TTM 净购置PP&E
+Amazon|FCF,大厂,Amazon,自由现金流,382.2,111.9,-76.0,,,期间：TTM截至2026-06-30；TTM 公司口径
+Amazon|INT,大厂,Amazon,利息支出,,,21.1,,,期间：2026上半年；2026上半年利息支出
+Amazon|BACKLOG,大厂,Amazon,合同积压 / RPO,,,4960.0,,,期间：2026-06-30；AWS backlog（Q2电话会Jassy口述）
+Amazon|CASH,大厂,Amazon,期末现金,1012.0,1230.3,1229.9,,,期间：TTM截至2026-06-30；2026-06-30 现金78213+有价证券44775
+Amazon|DEBT_ONBS,大厂,Amazon,表内有息债务,526.2,656.5,1288.9,,,期间：TTM截至2026-06-30；2026-06-30 长期债
+Amazon|LEASE_ONBS,大厂,Amazon,表内租赁负债,,873.4,943.4,,,期间：TTM截至2026-06-30；2026-06-30 长期租赁负债（不含流动部分）
+Amazon|OFFBS_LEASE,大厂,Amazon,未起租租赁承诺（表外）,,,1372.1,,,期间：2026-06-30；10-Q合同义务表Leases not yet commenced（未折现）
+Meta|REV,大厂,Meta,收入,1645.0,2009.7,1171.1,,,2026上半年(2026-01-01至06-30)；Q2 10-Q
+Meta|OPINC,大厂,Meta,经营利润,693.8,832.8,416.5,,,2026上半年(2026-01-01至06-30)；Q2 10-Q
+Meta|NI,大厂,Meta,净利润,623.6,604.6,426.2,,,2026上半年(2026-01-01至06-30)；Q2 10-Q
+Meta|OCF,大厂,Meta,经营现金流,913.3,1158.0,640.9,,,2026上半年(2026-01-01至06-30)；Q2 10-Q
+Meta|CAPEX,大厂,Meta,资本开支,372.6,696.9,491.1,1375.0,2250.0,2026上半年(2026-01-01至06-30)；Q2 10-Q；购置PP&E现金支出，不含融资租赁本金
+Meta|FCF,大厂,Meta,自由现金流,540.7,461.1,149.8,,,2026上半年；OCF 64088 − CAPEX 49113
+Meta|INT,大厂,Meta,利息支出,7.2,11.7,,,,
+Meta|CASH,大厂,Meta,期末现金,438.9,358.7,154.6,,,2026-06-30 季末；现金及等价物，不含有价证券
+Meta|DEBT_ONBS,大厂,Meta,表内有息债务,288.3,587.4,836.6,,,2026-06-30 季末；长期债账面值，面值84000
+Meta|LEASE_ONBS,大厂,Meta,表内租赁负债,209.4,263.4,,,,
+Meta|OFFBS_LEASE,大厂,Meta,未起租租赁承诺（表外）,,1037.7,2789.9,,,2026-06-30 季末；未起租租赁义务，2026-2036起租；不含2026年7月新签约约68000(见表B)
+Meta|OFFBS_DEBT,大厂,Meta,表外 SPV / 项目 / 合资债务,,272.9,125.0,,,洽谈，未交割（已检索Meta 8-K/10-Q及新闻稿，未找到交割确认；公告称数日内交割，10-Q称预计2026年三季度交割）；2026-07-28公告；El Paso合资(BlackRock 80%/Meta 20%)债务融资；交割预计2
+Meta|GUARANTEE,大厂,Meta,对外担保 / 兜底,,280.0,130.0,,,洽谈，未交割（已检索Meta 8-K/10-Q及新闻稿，未找到交割确认；公告称数日内交割，10-Q称预计2026年三季度交割）；2026-07-28公告；El Paso合资RVG门槛约13000，为Hyperion 28000之外的新增
+Meta|PAYOUT,大厂,Meta,回购 + 分红,352.0,315.7,27.0,,,2026上半年；回购0+分红2699
+Microsoft|REV,大厂,Microsoft,收入,2451.2,2817.2,3318.4,,,期间：FY26截至2026-06-30；FY26（截至2026-06-30）
+Microsoft|OPINC,大厂,Microsoft,经营利润,,1285.3,1552.4,,,期间：FY26截至2026-06-30；FY26
+Microsoft|NI,大厂,Microsoft,净利润,,1018.3,1337.5,,,期间：FY26截至2026-06-30；FY26 GAAP，含OpenAI投资收益4963
+Microsoft|OCF,大厂,Microsoft,经营现金流,1185.5,1361.6,1829.3,,,期间：FY26截至2026-06-30；FY26
+Microsoft|CAPEX,大厂,Microsoft,资本开支,444.8,645.5,1159.5,1750.0,,期间：FY26截至2026-06-30；FY26 现金capex，不含融资租赁
+Microsoft|FCF,大厂,Microsoft,自由现金流,740.7,716.1,669.9,,,期间：FY26截至2026-06-30；OCF 182935 - 现金capex 115948
+Microsoft|BACKLOG,大厂,Microsoft,合同积压 / RPO,,,6780.0,,,期间：FY26截至2026-06-30；商业RPO，同比+84%
+Microsoft|CASH,大厂,Microsoft,期末现金,755.4,945.6,768.4,,,期间：FY26截至2026-06-30；2026-06-30 现金+短期投资
+Microsoft|DEBT_ONBS,大厂,Microsoft,表内有息债务,516.3,431.5,402.9,,,期间：FY26截至2026-06-30；2026-06-30 长期债31067+一年内到期9227
+Microsoft|LEASE_ONBS,大厂,Microsoft,表内租赁负债,,,885.2,,,期间：2026-06-30（FY26 10-K）；经营租赁21925+融资租赁66594；旧值：2025-09-30融资租赁负债54434（FY26Q1 10-Q）
+Microsoft|OFFBS_LEASE,大厂,Microsoft,未起租租赁承诺（表外）,,,3291.0,,,期间：2026-06-30（FY26 10-K）；未起租租赁（主要数据中心，部分附条件），FY2027-FY2033起租，期限1-20年；旧值：2025-09-30为106200
+Microsoft|PAYOUT,大厂,Microsoft,回购 + 分红,390.2,425.0,487.2,,,期间：FY26截至2026-06-30；回购22271+分红26445
+Oracle|REV,大厂,Oracle,收入,529.6,574.0,673.6,,900.0,Oracle FY2026（2026-05 止，2025-06-01至2026-05-31）；FY2026 10-K
+Oracle|OPINC,大厂,Oracle,经营利润,153.5,176.8,206.1,,,Oracle FY2026（2026-05 止，2025-06-01至2026-05-31）；FY2026 10-K
+Oracle|NI,大厂,Oracle,净利润,104.7,124.4,170.9,,,Oracle FY2026（2026-05 止，2025-06-01至2026-05-31）；FY2026 10-K
+Oracle|OCF,大厂,Oracle,经营现金流,186.7,208.2,319.8,,,Oracle FY2026（2026-05 止，2025-06-01至2026-05-31）；FY2026 10-K
+Oracle|CAPEX,大厂,Oracle,资本开支,68.7,212.2,556.6,,925.0,Oracle FY2026（2026-05 止，2025-06-01至2026-05-31）；FY2026 10-K
+Oracle|FCF,大厂,Oracle,自由现金流,118.1,-3.9,-236.9,,,Oracle FY2026（2026-05 止，2025-06-01至2026-05-31）；公司口径FCF=OCF−CAPEX
+Oracle|INT,大厂,Oracle,利息支出,35.1,35.8,46.0,,,Oracle FY2026（2026-05 止，2025-06-01至2026-05-31）；FY2026 10-K
+Oracle|BACKLOG,大厂,Oracle,合同积压 / RPO,979.0,1378.0,6640.0,,,2026-08-31 季末（Oracle FY2027Q1末）；RPO；FY2026末(2026-05-31)为638000
+Oracle|CASH,大厂,Oracle,期末现金,104.5,107.9,363.7,,,2026-08-31 季末（Oracle FY2027Q1末）；现金及等价物
+Oracle|EQ_RAISE,大厂,Oracle,股权融资（当期）,,,49.5,,,Oracle FY2026（2026-05 止，2025-06-01至2026-05-31）；6.50% D系列强制可转优先股净额(另FY27Q1 ATM 19909见表B)
+Oracle|DEBT_ONBS,大厂,Oracle,表内有息债务,872.0,929.2,1253.4,,,2026-08-31 季末（Oracle FY2027Q1末）；流动7625+非流动117712应付票据及借款；2026-05-31借款面值130105；FY2026 末（2026-05-31）为 129541（应付票据及借款账面净额）
+Oracle|LEASE_ONBS,大厂,Oracle,表内租赁负债,75.5,163.8,438.1,,,2026-08-31 季末（Oracle FY2027Q1末）；经营34621+融资9185
+Oracle|OFFBS_LEASE,大厂,Oracle,未起租租赁承诺（表外）,,,2880.0,,,2026-08-31 季末（Oracle FY2027Q1末）；未起租租赁承诺，主要为数据中心，FY27Q2至FY2029起租，租期15-19年；2026-05-31为260000
+Oracle|OFFBS_DEBT,大厂,Oracle,表外 SPV / 项目 / 合资债务,,,794.0,,,截至2026-04-24公开报道；以Oracle为租户的项目债合计=Vantage TX 23250+WI 14750+NM Jupiter 18000+Michigan 14000+Abilene 2300+7100；明细见表B；与第4/
+Oracle|GUARANTEE,大厂,Oracle,对外担保 / 兜底,,,33.0,,,2026-05-31 财年末（Oracle FY2026）；为某租约出租方借款提供最高3300担保，该借款2026年9月到期(季末2026-08-31未见更新数)
+Oracle|PREPAY,大厂,Oracle,客户预付款,,,45.9,,,Oracle FY2026（2026-05 止，2025-06-01至2026-05-31）；含重大融资成分客户预付(全部发生在FY26Q4)；FY27Q1另有11363见表B
+Oracle|PAYOUT,大厂,Oracle,回购 + 分红,55.9,53.4,58.8,,,Oracle FY2026（2026-05 止，2025-06-01至2026-05-31）；回购95+分红5787(含优先股)
+CoreWeave|REV,Neocloud,CoreWeave,收入,19.1,51.3,46.5,128.0,,2026上半年合计（Q1 2078+Q2 2575）
+CoreWeave|EBITDA,Neocloud,CoreWeave,调整后 EBITDA,12.2,30.9,,,,
+CoreWeave|OPINC,Neocloud,CoreWeave,经营利润,3.2,-0.5,,10.6,,
+CoreWeave|NI,Neocloud,CoreWeave,净利润,-8.6,-11.7,,,,
+CoreWeave|OCF,Neocloud,CoreWeave,经营现金流,27.5,30.6,36.6,,,2026上半年（10-Q）
+CoreWeave|CAPEX,Neocloud,CoreWeave,资本开支,87.0,103.1,141.2,370.0,,2026上半年购置物业设备现金支出（10-Q）；与公司口径资本开支不同
+CoreWeave|FCF,Neocloud,CoreWeave,自由现金流,-59.5,-72.5,-104.5,,,算法：OCF 3663 减 购置物业设备现金支出 14117（2026上半年）
+CoreWeave|INT,Neocloud,CoreWeave,利息支出,3.6,12.3,,,,
+CoreWeave|BACKLOG,Neocloud,CoreWeave,合同积压 / RPO,,668.0,1040.0,,,截至2026-06-30收入积压；不含Q3初新增超250亿美元客户承诺
+CoreWeave|CASH,Neocloud,CoreWeave,期末现金,13.6,31.3,55.2,,,2026-06-30现金及等价物（含受限现金为6904）
+CoreWeave|EQ_RAISE,Neocloud,CoreWeave,股权融资（当期）,11.7,14.9,29.8,,,2026上半年私募配售所得（现金流量表）
+CoreWeave|DEBT_ONBS,Neocloud,CoreWeave,表内有息债务,79.3,213.7,355.5,,,2026-06-30债务工具账面合计（10-Q债务附注）
+Crusoe|REV,Neocloud,Crusoe,收入,2.5,,,20.0,,
+Crusoe|BACKLOG,Neocloud,Crusoe,合同积压 / RPO,,,1400.0,,,口径为总合同价值TCV（超过1400亿美元）
+Crusoe|EQ_RAISE,Neocloud,Crusoe,股权融资（当期）,6.0,13.8,39.0,,,F轮（首次交割）
+Crusoe|EQ_VALUE,Neocloud,Crusoe,估值 / 市值,,100.0,309.0,,,F轮投后估值
+Fluidstack|REV,Neocloud,Fluidstack,收入,,2.0,,6.6,,
+Fluidstack|EQ_RAISE,Neocloud,Fluidstack,股权融资（当期）,,,22.5,,,算法：2026-04约750+2026-09约1500
+Fluidstack|EQ_VALUE,Neocloud,Fluidstack,估值 / 市值,,,180.0,,,Jane Street领投轮估值
+IREN|REV,Neocloud,IREN,收入,1.9,5.0,7.1,,,财年截至2026-06-30（FY26）；其中AI云128.8
+IREN|REV_RUNRATE,Neocloud,IREN,期末年化收入,,,10.0,40.0,,截至2026-08-26运营中ARR
+IREN|EBITDA,Neocloud,IREN,调整后 EBITDA,,2.7,2.5,,,FY26调整后EBITDA
+IREN|OPINC,Neocloud,IREN,经营利润,,0.2,-10.5,,,FY26；含减值638.8
+IREN|NI,Neocloud,IREN,净利润,,0.9,-7.0,,,FY26
+IREN|OCF,Neocloud,IREN,经营现金流,0.5,2.5,21.0,,,FY26；含递延收入（客户预付）增加1841.7
+IREN|CAPEX,Neocloud,IREN,资本开支,4.8,13.7,43.3,,,FY26：PP&E支出2998.0+计算硬件1335.1
+IREN|FCF,Neocloud,IREN,自由现金流,-4.3,-11.3,-22.3,,,算法：FY26 OCF 2100.4 减 CAPEX 4333.1
+IREN|INT,Neocloud,IREN,利息支出,,0.1,0.6,,,FY26 finance expense
+IREN|CASH,Neocloud,IREN,期末现金,4.0,5.6,59.0,,,2026-06-30现金及等价物；另有受限现金1724.0
+IREN|DEBT_ONBS,Neocloud,IREN,表内有息债务,0.0,9.6,75.9,,,2026-06-30：流动169.4+非流动7423.6
+IREN|LEASE_ONBS,Neocloud,IREN,表内租赁负债,,,2.5,,,融资租赁243.8+经营租赁2.8
+IREN|PREPAY,Neocloud,IREN,客户预付款,,,18.4,,,递延收入（流动46.5+非流动1796.1）；主要为客户预付
+Lambda|REV,Neocloud,Lambda,收入,4.2,7.0,,15.0,,
+Lambda|REV_RUNRATE,Neocloud,Lambda,期末年化收入,,7.6,,,,
+Lambda|BACKLOG,Neocloud,Lambda,合同积压 / RPO,,,500.0,,,TechCrunch援引WSJ所见投资人信：2026-09积压500亿（2026-06为150亿）；含Anthropic约350亿
+Lambda|EQ_RAISE,Neocloud,Lambda,股权融资（当期）,,19.8,,,,
+Lambda|EQ_VALUE,Neocloud,Lambda,估值 / 市值,,25.0,145.0,,,洽谈，未交割；新一轮投前估值（WSJ）
+Nebius|REV,Neocloud,Nebius,收入,0.9,5.3,5.8,32.0,,2026年Q2单季收入；上半年合计981.3
+Nebius|REV_RUNRATE,Neocloud,Nebius,期末年化收入,,12.5,,80.0,,
+Nebius|OCF,Neocloud,Nebius,经营现金流,-2.7,4.0,45.0,,,2026上半年；主要来自客户预付（递延收入增加4395.0）
+Nebius|CAPEX,Neocloud,Nebius,资本开支,8.1,40.7,81.3,225.0,,2026上半年购置物业设备及无形资产
+Nebius|FCF,Neocloud,Nebius,自由现金流,-10.8,-36.6,-36.3,,,算法：2026上半年OCF 4504.1 减 CAPEX 8130.3
+Nebius|BACKLOG,Neocloud,Nebius,合同积压 / RPO,,,400.0,,,下限值：披露为超过400亿美元来自Microsoft、Meta等投资级客户的额外合同收入
+Nebius|CASH,Neocloud,Nebius,期末现金,24.3,36.8,80.4,,,2026-06-30现金及等价物（6-K Ex99.1中期财务报表）
+Nebius|DEBT_ONBS,Neocloud,Nebius,表内有息债务,0.1,41.0,85.5,,,2026-06-30债务：流动46.7+非流动8499.0
+Nscale|REV,Neocloud,Nscale,收入,0.2,0.3,1.4,,,S-1：截至2026-06-30的6个月（上年同期10.4）
+Nscale|NI,Neocloud,Nscale,净利润,,,-10.2,,,S-1：截至2026-06-30的6个月净亏损
+Nscale|BACKLOG,Neocloud,Nscale,合同积压 / RPO,,,564.0,,,按总纲定义BACKLOG（合同积压或RPO）采用此行RPO 56400；S-1披露
+Nscale|EQ_RAISE,Neocloud,Nscale,股权融资（当期）,,15.3,15.7,,,算法：C轮2000含已于2025年计入的SAFE 433，扣除后1567；不含2026-09可转换贷款票据
+Nscale|EQ_VALUE,Neocloud,Nscale,估值 / 市值,,,146.0,,,C轮估值
+Nscale|DEBT_ONBS,Neocloud,Nscale,表内有息债务,,,80.0,,,下限：超过80亿美元债务；不含与Dell的融资安排
+Aligned|EQ_RAISE,开发商,Aligned,股权融资（当期）,,50.0,50.0,,,收购交割时财团承诺的增长资本；收购对应企业价值约40000（EV，非EQ_VALUE）
+Applied Digital|REV,开发商,Applied Digital,收入,1.7,2.3,6.1,,,原财年FY2026（2025-06-01至2026-05-31）全年
+Applied Digital|OCF,开发商,Applied Digital,经营现金流,0.1,-1.2,0.9,,,原财年FY2026（2025-06-01至2026-05-31）全年
+Applied Digital|CAPEX,开发商,Applied Digital,资本开支,1.4,6.8,28.7,,,原财年FY2026（2025-06-01至2026-05-31）全年；PaymentsToAcquireProductiveAssets
+Applied Digital|FCF,开发商,Applied Digital,自由现金流,-1.3,-8.0,-27.8,,,原财年FY2026（2025-06-01至2026-05-31）全年；算法=OCF 89.7 − CAPEX 2865.8
+Applied Digital|BACKLOG,开发商,Applied Digital,合同积压 / RPO,,67.6,357.3,,,截至2026-08-31；出租方，经营租赁未来应收租金合计（含CoreWeave、Oracle等租户）
+Applied Digital|CASH,开发商,Applied Digital,期末现金,0.0,0.4,29.5,,,截至2026-08-31（FY2027 Q1 10-Q）；不含受限现金；含受限现金为3677.9
+Applied Digital|EQ_RAISE,开发商,Applied Digital,股权融资（当期）,1.3,3.9,10.1,,,原财年FY2026；算法=普通股所得196.4 + 优先股所得815.0（含Macquarie HPC优先股）
+Applied Digital|DEBT_ONBS,开发商,Applied Digital,表内有息债务,1.3,6.9,63.8,,,截至2026-08-31；算法=LongTermNotesPayable 6263.9 + NotesPayableCurrent 112.6（账面值）
+Cipher|REV,开发商,Cipher,收入,1.5,2.2,0.6,,,2026上半年
+Cipher|OCF,开发商,Cipher,经营现金流,-0.9,-2.1,-1.5,,,2026上半年
+Cipher|CAPEX,开发商,Cipher,资本开支,1.4,4.9,9.6,,,2026上半年
+Cipher|FCF,开发商,Cipher,自由现金流,-2.3,-7.0,-11.2,,,2026上半年；算法=OCF -152.0 − CAPEX 964.3
+Cipher|BACKLOG,开发商,Cipher,合同积压 / RPO,,,93.3,,,算法=已公告租约初始期合同额合计：Fluidstack/Google Barber Lake约3000+扩容约830+AWS约5500；未含Stingray AWS租约金额（未披露）；公司未披露合计数
+Cipher|CASH,开发商,Cipher,期末现金,0.1,6.3,8.3,,,截至2026-06-30
+Cipher|EQ_RAISE,开发商,Cipher,股权融资（当期）,2.2,2.0,1.3,,,2026上半年普通股发行所得
+Cipher|DEBT_ONBS,开发商,Cipher,表内有息债务,0.0,32.1,60.2,,,截至2026-06-30本金；含Black Pearl 2000、Stingray 810
+CleanSpark|REV,开发商,CleanSpark,收入,3.8,7.7,4.6,,,原财年FY2026前9个月（2025-10-01至2026-06-30）；算法=9个月收入542.7 − 2025-10至12月季度87.1（按10-Q披露口径推算），待核
+CleanSpark|OCF,开发商,CleanSpark,经营现金流,-2.3,-4.6,-4.1,,,原财年FY2026前9个月（2025-10-01至2026-06-30）
+CleanSpark|CAPEX,开发商,CleanSpark,资本开支,0.7,1.4,0.8,,,原财年FY2026前9个月（2025-10-01至2026-06-30）；同左口径
+CleanSpark|FCF,开发商,CleanSpark,自由现金流,-3.0,-6.1,-4.9,,,原财年FY2026前9个月（2025-10-01至2026-06-30）；算法=OCF -409.3 − CAPEX 80.6（CAPEX口径可能偏窄）
+CleanSpark|BACKLOG,开发商,CleanSpark,合同积压 / RPO,,,66.0,,,出租方；Sandersville 175MW 20年NNN租约初始期合同收入；含续期约11600
+CleanSpark|CASH,开发商,CleanSpark,期末现金,1.2,0.4,2.0,,,截至2026-06-30
+CleanSpark|EQ_RAISE,开发商,CleanSpark,股权融资（当期）,12.3,1.9,0.0,,,原财年FY2026前9个月；现金流量表无普通股发行所得
+CleanSpark|DEBT_ONBS,开发商,CleanSpark,表内有息债务,0.7,8.4,18.1,,,截至2026-06-30（LoansPayable）；不含2026-09发行的CSDC票据2276
+CleanSpark|PAYOUT,开发商,CleanSpark,回购 + 分红,,1.4,4.6,,,原财年FY2026前9个月（2025-10-01至2026-06-30）；向可转债投资者回购股票
+Core Scientific|REV,开发商,Core Scientific,收入,5.1,3.2,2.8,,,2026上半年（2026-01-01至06-30）
+Core Scientific|OCF,开发商,Core Scientific,经营现金流,0.4,2.8,2.3,,,2026上半年（2026-01-01至06-30）
+Core Scientific|CAPEX,开发商,Core Scientific,资本开支,0.9,7.3,9.5,,,2026上半年（2026-01-01至06-30）
+Core Scientific|FCF,开发商,Core Scientific,自由现金流,-0.5,-4.5,-7.2,,,2026上半年（2026-01-01至06-30）；算法=OCF 230.9 − CAPEX 954.2
+Core Scientific|BACKLOG,开发商,Core Scientific,合同积压 / RPO,,17.7,60.9,,,截至2026-06-30；出租方，已起租经营租赁未来应收，另有未起租不可撤销租约约3100未计入；与第4组CoreWeave同笔
+Core Scientific|CASH,开发商,Core Scientific,期末现金,8.4,3.1,17.7,,,截至2026-06-30；含受限现金为2551.4
+Core Scientific|EQ_RAISE,开发商,Core Scientific,股权融资（当期）,0.6,0.0,,,,
+Core Scientific|DEBT_ONBS,开发商,Core Scientific,表内有息债务,10.9,10.8,43.9,,,截至2026-06-30本金：2031担保债3300 + 可转债1085；账面值4298.0
+Galaxy|REV,开发商,Galaxy,收入,426.0,604.1,186.0,,,2026上半年；总收入含数字资产销售（毛额）；数据中心租赁收入仅18.9
+Galaxy|OCF,开发商,Galaxy,经营现金流,-2.1,-3.2,2.9,,,2026上半年
+Galaxy|CAPEX,开发商,Galaxy,资本开支,0.6,11.9,7.4,,,2026上半年
+Galaxy|FCF,开发商,Galaxy,自由现金流,-2.6,-15.1,-4.5,,,2026上半年；算法=OCF 288.6 − CAPEX 736.7
+Galaxy|BACKLOG,开发商,Galaxy,合同积压 / RPO,,,47.5,,,截至2026-06-30；出租方，经营租赁未来最低租金合计（10-Q租赁附注）；与第4组CoreWeave同笔
+Galaxy|CASH,开发商,Galaxy,期末现金,4.6,12.5,9.0,,,截至2026-06-30
+Galaxy|EQ_RAISE,开发商,Galaxy,股权融资（当期）,1.3,8.5,0.2,,,2026上半年股权发行所得
+Galaxy|DEBT_ONBS,开发商,Galaxy,表内有息债务,13.6,29.1,35.5,,,截至2026-06-30；算法=2825.8 + 437.0 + 286.7；不含2026-07-28发行的Helios II票据3507
+Hut 8|REV,开发商,Hut 8,收入,1.6,2.4,1.5,,,2026上半年
+Hut 8|OCF,开发商,Hut 8,经营现金流,-0.7,-1.4,-0.3,,,2026上半年
+Hut 8|CAPEX,开发商,Hut 8,资本开支,1.2,2.0,6.2,,,2026上半年；同左
+Hut 8|FCF,开发商,Hut 8,自由现金流,-1.9,-3.4,-6.5,,,2026上半年；算法=OCF -32.8 − CAPEX 616.2
+Hut 8|BACKLOG,开发商,Hut 8,合同积压 / RPO,,70.0,,,,
+Hut 8|CASH,开发商,Hut 8,期末现金,0.8,0.4,2.3,,,截至2026-06-30；含受限现金为7020.7（River Bend票据募资）
+Hut 8|EQ_RAISE,开发商,Hut 8,股权融资（当期）,1.6,7.6,2.6,,,2026H1；算法=Hut 8 2025 ATM所得120.1 + ABTC ATM 144.1（不含期权行权10.3）
+Hut 8|DEBT_ONBS,开发商,Hut 8,表内有息债务,3.0,4.1,77.4,,,截至2026-06-30本金；含River Bend IG担保债3250
+QTS|REV,开发商,QTS,收入,,42.0,,,,
+Related Digital|EQ_RAISE,开发商,Related Digital,股权融资（当期）,,,20.0,,,Saline项目约2bn股权（Related Digital+Blackstone）；与第3组Oracle租户视角同笔
+STACK|REV,开发商,STACK,收入,,,1.9,,,口径：Blue Owl Digital Infrastructure Trust（STACK ABS发行人母公司，持12处STACK运营物业）2026H1租金收入189.8m，非STACK全平台；2025-12-01起运营无可比期
+STACK|EQ_RAISE,开发商,STACK,股权融资（当期）,,,2.5,,,同上信托口径，2026H1发行普通股所得250.8m；Jupiter 3bn股权见表B
+STACK|DEBT_ONBS,开发商,STACK,表内有息债务,,,25.8,,,同上信托口径，截至2026-06-30：ABS/CMBS 2379.1m（加权5.40%固定）+VFN 52m(S+1.75%)+无担保信贷150m(S+1.95%)
+TeraWulf|REV,开发商,TeraWulf,收入,1.4,1.7,0.8,,,2026上半年
+TeraWulf|OCF,开发商,TeraWulf,经营现金流,-0.2,-1.2,-1.5,,,2026上半年
+TeraWulf|CAPEX,开发商,TeraWulf,资本开支,2.7,10.6,13.8,,,2026上半年
+TeraWulf|FCF,开发商,TeraWulf,自由现金流,-2.9,-11.8,-15.3,,,2026上半年；算法=OCF -154.3 − CAPEX 1378.5
+TeraWulf|BACKLOG,开发商,TeraWulf,合同积压 / RPO,,,14.6,,,截至2026-06-30；出租方，已起租经营租赁未来应收（未起租部分未计入）；与第4组Fluidstack同笔
+TeraWulf|CASH,开发商,TeraWulf,期末现金,2.7,32.7,26.2,,,截至2026-06-30
+TeraWulf|EQ_RAISE,开发商,TeraWulf,股权融资（当期）,1.9,0.0,12.0,,,2026上半年普通股发行所得；含2026-04公开增发
+TeraWulf|DEBT_ONBS,开发商,TeraWulf,表内有息债务,4.9,46.8,57.2,,,截至2026-06-30本金合计；算法=WULF Compute 7.75%担保票据3200 + 2030可转债500 + 2031可转债1000 + 2032可转债1025；250循环信贷未见提款
+Vantage|EQ_RAISE,开发商,Vantage,股权融资（当期）,92.0,16.0,,,,
+AMD|REV,芯片厂,AMD,收入,257.9,346.4,217.9,,,2026上半年
+AMD|OCF,芯片厂,AMD,经营现金流,30.4,64.9,53.2,,,2026上半年持续经营业务
+AMD|CAPEX,芯片厂,AMD,资本开支,6.4,9.7,8.1,,,仅2026Q2单季
+AMD|FCF,芯片厂,AMD,自由现金流,24.1,55.2,15.6,,,仅2026Q2单季
+AMD|CASH,芯片厂,AMD,期末现金,51.3,105.5,131.1,,,截至2026-06-27
+AMD|DEBT_ONBS,芯片厂,AMD,表内有息债务,17.2,32.2,32.3,,,总债务截至2026-06-27
+AMD|GUARANTEE,芯片厂,AMD,对外担保 / 兜底,,,41.0,,,商业伙伴数据中心租约担保最大总敞口，期限最长15年
+Broadcom|REV,芯片厂,Broadcom,收入,515.7,638.9,295.9,580.0,1150.0,仅FY26Q3单季（截至2026-08-02）
+Broadcom|OCF,芯片厂,Broadcom,经营现金流,199.6,275.4,329.5,,,FY26前三季累计
+Broadcom|CAPEX,芯片厂,Broadcom,资本开支,5.5,6.2,10.1,,,FY26前三季累计
+Broadcom|FCF,芯片厂,Broadcom,自由现金流,194.1,269.1,319.4,,,FY26前三季累计
+Broadcom|CASH,芯片厂,Broadcom,期末现金,93.5,161.8,240.0,,,截至2026-08-02
+Broadcom|DEBT_ONBS,芯片厂,Broadcom,表内有息债务,663.0,619.8,571.7,,,仅长期债务；电话会称固定利率债务本金59.6bn、加权票息4%
+NVIDIA|REV,芯片厂,NVIDIA,收入,1305.0,2159.4,1778.4,4116.5,6922.1,FY27上半年（Q1 81615+Q2 96221）
+NVIDIA|OCF,芯片厂,NVIDIA,经营现金流,640.9,1027.2,744.2,,,FY27上半年
+NVIDIA|CAPEX,芯片厂,NVIDIA,资本开支,32.4,60.4,44.3,,,FY27上半年
+NVIDIA|FCF,芯片厂,NVIDIA,自由现金流,607.2,965.8,699.0,,,FY27上半年
+NVIDIA|CASH,芯片厂,NVIDIA,期末现金,432.1,625.6,566.0,,,现金+有价债券；截至2026-07-26
+NVIDIA|DEBT_ONBS,芯片厂,NVIDIA,表内有息债务,84.6,84.7,333.7,,,10-Q截至2026-07-26：短期1000+长期32366（FY27上半年新发债约24.9bn）
+NVIDIA|GUARANTEE,芯片厂,NVIDIA,对外担保 / 兜底,,,1085.0,,,10-Q最大总敞口：AI云LPS担保3.5bn+SB Energy担保105bn

@@ -1,0 +1,20 @@
+id,issuer,spread_bp,as_of,source_type,source_url,note
+D01,CoreWeave,1038.0,2026-10-15,主流媒体,https://www.cnbc.com/2026/10/15/coreweave-credit-default-swaps-hit-distress-levels-as-investors-sour-on-ai-debt.html,"最新：'last stood at nearly 1,038'，盘中一度 >1,140，周环比 +16%、同比 +164%；Reuters 同日称突破 1,100（S&P Global MI）"
+D02,CoreWeave,881.0,2025-12,主流媒体,https://thenextweb.com/news/coreweave-credit-rebound-applied-digital-junk-bond-data-center,2025-12 峰值 8.81 个百分点；具体日期未披露；另有 Substack 称 2025-12-12 约 773bp（低可信）
+D03,CoreWeave,532.0,2026-03-17,低可信转载,https://www.garrettsignal.com/p/the-three-body-problem-when-ai-debt,Substack 作者称'撰写时'水平；未注明数据源
+D04,CoreWeave,452.0,2026-06,主流媒体,https://thenextweb.com/news/coreweave-credit-rebound-applied-digital-junk-bond-data-center,'earlier this month' 低点 4.52 个百分点（6 月初），较 12 月峰值降 49%
+D05,CoreWeave,810.9,2026-09-24,主流媒体,https://en.oninvest.com/article/protection-against-big-tech-defaults-has-become-2-5-times-more-expensive-are-ai-related-debts-no-longer-safe,Oninvest 引 Freedom Finance Global 数据；另 Capitalbolsa 2026-09-03 称再度 >800bp、7 月底曾 >900bp、8 月中财报后 671.75bp
+D06,Oracle,282.0,2026-10-15,主流媒体,https://www.cnbc.com/2026/10/15/coreweave-credit-default-swaps-hit-distress-levels-as-investors-sour-on-ai-debt.html,最新：CNBC 称 last 282bp（周 +10%）；其他来源称 10-15 为 288bp、Reuters 称接近 300bp；IFR 称 10-08 为 257bp（2009 年以来最高）
+D07,Oracle,139.0,2025-12-11,主流媒体,https://www.marketscreener.com/news/oracle-5-year-cds-surge-to-139-bps-up-nearly-12-bps-from-last-close-s-p-global-market-intelligence-ce7d50dbd880f124,Reuters 快讯，S&P Global MI 数据，单日 +12bp
+D08,Oracle,198.18,2026-03-27,低可信转载,https://news.futunn.com/en/post/70774864/ai-debt-risk-barometer-oracle-bond-cds-hits-record-high,华尔街见闻/富途转载 ICE 数据，创纪录；Bloomberg 2026-03-11 称曾回落至约 152bp
+D09,Oracle,215.0,2026-07-27,主流媒体,https://en.sedaily.com/international/2026/07/28/ai-investment-fears-grow-as-big-tech-cds-premiums-hit,Seoul Economic Daily 引 FT；年初约 144bp；未找到 2026-06 具体点，用 7 月末替代
+D10,Oracle,214.7,2026-09-24,主流媒体,https://en.oninvest.com/article/protection-against-big-tech-defaults-has-become-2-5-times-more-expensive-are-ai-related-debts-no-longer-safe,Freedom Finance Global 数据；IFR 另称 9 月中旬为 182bp，两者存在出入
+D11,Broadcom,133.0,2026-10-09,主流媒体,https://www.ifre.com/people-and-markets/2496665/hyperscaler-and-chipmaker-cds-widen-to-record-levels,IFR 2654 期：'周五报 133bp'，2009 年以来最高，为 5 月末的 3 倍以上；as_of 按'周五'推定为 10-09；无 2025-12/2026-03/06/09 具体点
+D12,SoftBank Group,424.0,2026-10-15,低可信转载,https://www.webull.com/news/15750506058097664,Webull 转载 Reuters 标题（S&P Global MI），单日 +23bp；页面显示'2天前'
+D13,SoftBank Group,302.0,2025-11-27,主流媒体,https://www.bloomberg.com/news/articles/2025-11-27/softbank-cds-widens-rakuten-narrows-as-credit-views-diverge,据检索摘要（Bloomberg 付费墙未读原文）；未找到 2025-12 精确点，用 11 月末近似
+D14,SoftBank Group,331.0,2026-03-17,低可信转载,https://www.garrettsignal.com/p/the-three-body-problem-when-ai-debt,Substack 作者称'撰写时'水平；Bloomberg 2026-09-16 称 SoftBank CDS 徘徊于 3 年高位（无数值）
+D15,Meta,90.0,2026-07,低可信转载,https://cardanocapital.substack.com/p/when-bond-investors-start-buying,Substack 读 FT 图表：截至 7 月末 'pushed past 90bp'（约值）；Oninvest 称 2026-09 低于 100bp；Reuters 称 2026-10-15 创纪录（无数值）
+D16,Microsoft,,2026-09,主流媒体,https://en.oninvest.com/article/protection-against-big-tech-defaults-has-become-2-5-times-more-expensive-are-ai-related-debts-no-longer-safe,未找到可核实的具体报价：仅称 2026-09 低于 100bp；检索摘要称 Reuters 2025-11-17 报约 34bp（付费墙未核实，未填）
+D17,NVIDIA,87.0,2026-09,主流媒体,https://www.ifre.com/people-and-markets/2496665/hyperscaler-and-chipmaker-cds-widen-to-record-levels,IFR：9 月末创历史高位 87bp，10 月初仍在附近，较 6 月初高约 50bp；具体日期未披露
+D18,NVIDIA,79.0,2026-07-27,主流媒体,https://en.sedaily.com/international/2026/07/28/ai-investment-fears-grow-as-big-tech-cds-premiums-hit,Seoul Economic Daily 引 FT，当日纪录高位
+D19,SpaceX,197.0,2026-10,主流媒体,https://www.ifre.com/people-and-markets/2496665/hyperscaler-and-chipmaker-cds-widen-to-record-levels,清单外追加：2026-06 起交易，较 9 月中走阔 50bp 至纪录 197bp（具体日期未披露）

@@ -1,0 +1,26 @@
+id,series,year,value_yi,scope,partial,source_type,source_url,source_date,note
+M2-043,三家实验室融资（宣布额）,2019,10,OpenAI+Anthropic+xAI 宣布额,,公司披露,https://openai.com/index/microsoft-invests-in-and-partners-with-openai/,2019-07-22,微软向OpenAI投资10亿（Anthropic/xAI尚未成立）
+M2-046,三家实验室融资（宣布额）,2023,164,OpenAI+Anthropic+xAI 宣布额（计算）,,主流媒体,https://siliconangle.com/2023/12/27/pitchbook-tech-giants-invested-generative-ai-startups-vcs-year/,2023-12-27,微软→OpenAI约100+亚马逊→Anthropic最高40+谷歌→Anthropic最高20+Anthropic C轮4.5亿
+M2-047,三家实验室融资（宣布额）,2024,226,OpenAI+Anthropic+xAI 宣布额（CB Insights列示）,,数据机构,https://www.cbinsights.com/research/report/venture-trends-2024/,2025-01-07,OpenAI 6.6、xAI 6+6、Anthropic 4
+M2-048,三家实验室融资（宣布额）,2025,863,CB Insights：OpenAI+Anthropic+xAI,,数据机构,https://www.cbinsights.com/research/report/ai-trends-2025/,2026-01-13,三家合计
+M2-049,三家实验室融资（宣布额）,2026,2370,OpenAI+Anthropic+xAI 宣布额（计算，截至2026-10-18）,是,公司披露,https://openai.com/index/accelerating-the-next-phase-ai/,2026-03-31,OpenAI 122（2026-03-31）+Anthropic G轮30+H轮65+xAI E轮20
+M2-022,全球 AI 风投（CB Insights）,2022,458,CB Insights 全球AI,,数据机构,https://www.cbinsights.com/research/report/artificial-intelligence-trends-2022/,2023-03-16,
+M2-023,全球 AI 风投（CB Insights）,2023,425,CB Insights 全球AI,,数据机构,https://www.cbinsights.com/research/report/ai-trends-2023/,2024-02-01,美国占73%
+M2-024,全球 AI 风投（CB Insights）,2024,1004,CB Insights 全球AI,,数据机构,https://www.cbinsights.com/research/report/ai-trends-2024/,2025-01-30,占全球VC 37%；美国占76%；13笔$1B+交易
+M2-025,全球 AI 风投（CB Insights）,2025,2258,CB Insights 全球AI,,数据机构,https://www.cbinsights.com/research/report/ai-trends-2025/,2026-01-13,约占全球VC 48%（225.8/469.3，计算）
+M2-026,全球 AI 风投（CB Insights）,2026,4956,CB Insights 全球AI（2026Q1-Q3）,是,低可信转载,https://bebeez.eu/2026/10/12/global-venture-capital-firms-pour-698-billion-us-dollars-in-startups-at-the-end-of-3q26-cb-insights/,2026-10-12,Q2 153.1、Q3 103.3；占全球VC 71%
+M2-009,全球风投总额（CB Insights）,2022,4151,CB Insights 全球,,数据机构,https://www.cbinsights.com/research/report/venture-trends-2022/,2023-01-11,
+M2-010,全球风投总额（CB Insights）,2023,2484,CB Insights 全球,,数据机构,https://www.cbinsights.com/research/report/venture-trends-2023/,2024-01-04,
+M2-011,全球风投总额（CB Insights）,2024,2746,CB Insights 全球,,数据机构,https://www.cbinsights.com/reports/CB-Insights_Venture-Report-2024.pdf,2025-01-07,AI占37%
+M2-012,全球风投总额（CB Insights）,2025,4693,CB Insights 全球,,数据机构,https://www.cbinsights.com/research/report/venture-trends-2025/,2026-01-08,2026-10 Q3报告回溯2025为484.1（据BeBeez转述）
+M2-013,全球风投总额（CB Insights）,2026,6983,CB Insights 全球（2026Q1-Q3）,是,数据机构,https://www.cbinsights.com/research/briefing/webinar-venture-trends-q3-2026/,2026-10-05,全年按节奏预计931+
+M2-132,美国 IPO 募资（Renaissance）,2019,463,Renaissance Capital 美国（市值≥5000万，不含SPAC/封闭式基金）,,数据机构,https://www.renaissancecapital.com/review/2025USReview_Public.pdf,2026-01-02,数值读自年报图表
+M2-133,美国 IPO 募资（Renaissance）,2020,782,Renaissance Capital 美国（市值≥5000万，不含SPAC/封闭式基金）,,数据机构,https://www.renaissancecapital.com/review/2025USReview_Public.pdf,2026-01-02,数值读自年报图表
+M2-134,美国 IPO 募资（Renaissance）,2021,1424,Renaissance Capital 美国（市值≥5000万，不含SPAC/封闭式基金）,,数据机构,https://www.renaissancecapital.com/review/2025USReview_Public.pdf,2026-01-02,数值读自年报图表
+M2-135,美国 IPO 募资（Renaissance）,2022,77,Renaissance Capital 美国（市值≥5000万，不含SPAC/封闭式基金）,,数据机构,https://www.renaissancecapital.com/review/2025USReview_Public.pdf,2026-01-02,数值读自年报图表
+M2-136,美国 IPO 募资（Renaissance）,2023,195,Renaissance Capital 美国（市值≥5000万，不含SPAC/封闭式基金）,,数据机构,https://www.renaissancecapital.com/review/2025USReview_Public.pdf,2026-01-02,数值读自年报图表
+M2-137,美国 IPO 募资（Renaissance）,2024,296,Renaissance Capital 美国（市值≥5000万，不含SPAC/封闭式基金）,,数据机构,https://www.renaissancecapital.com/review/2025USReview_Public.pdf,2026-01-02,数值读自年报图表
+M2-138,美国 IPO 募资（Renaissance）,2025,440,Renaissance Capital 美国（市值≥5000万，不含SPAC/封闭式基金）,,数据机构,https://www.renaissancecapital.com/review/2025USReview_Public.pdf,2026-01-02,202宗
+M2-139,美国 IPO 募资（Renaissance）,2026,1475,Renaissance Capital 美国（2026Q1-Q3，计算）,是,数据机构,https://www.renaissancecapital.com/review/3Q26USReview_Press.pdf,2026-10-01,Q1 9.932+Q2 104.781（含SpaceX 75）+Q3 32.756（含SK hynix美国发行26.5）
+M2-068,主权基金投向 AI 与数字化（Global SWF）,2024,279,Global SWF：主权投资者“数字化”（数据中心+数字基建+AI+太空）,,低可信转载,https://lcbackerblog.blogspot.com/2025/01/sovereign-wealth-funds-in-2024-analysis.html,2025-01-02,年度主题
+M2-069,主权基金投向 AI 与数字化（Global SWF）,2025,660,Global SWF：主权投资者AI与数字化,,主流媒体,https://gulfnews.com/business/markets/sovereign-wealth-funds-pour-66-billion-into-ai-as-assets-hit-15-trillion-1.500395812,2026-01-01,穆巴达拉12.9、KIA 6、QIA 4

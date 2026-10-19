@@ -1,0 +1,35 @@
+/* Design tokens the page expects from the Claude dashboard host. */
+:root {
+  color-scheme: light;
+  --font-anthropic-sans: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Segoe UI", sans-serif;
+  --font-anthropic-serif: "Songti SC", "STSong", "Noto Serif SC", Georgia, serif;
+  --color-bg: #f7f7f5; --color-panel: #ffffff; --color-fg: #1f1e1d; --color-fg-muted: #6b6a66; --color-border-line: #e5e4df;
+  --color-ok: #1f8a4c; --color-warn: #b26a00; --color-bad: #c62828;
+  --cds-chart-grid: #ecebe7; --cds-chart-axis: #c9c8c2; --cds-chart-reference: #8f8e88; --cds-chart-muted: #b9b8b2; --cds-chart-status-critical: #d03b3b;
+  --cds-surface-popover: #ffffff; --cds-border: #e5e4df; --cds-shadow-popover: 0 4px 16px rgba(0, 0, 0, .12); --cds-text-secondary: #6b6a66;
+  --cds-font-size-caption: 12px; --cds-font-size-body: 14px; --cds-font-size-heading: 16px; --cds-font-size-title: 26px; --cds-font-weight-medium: 500;
+  --cds-gap-xs: 4px; --cds-gap-sm: 8px; --cds-gap-md: 12px; --cds-gap-lg: 20px; --cds-gap-xl: 32px;
+  --cds-pad-xs: 4px; --cds-pad-sm: 8px; --cds-pad-md: 12px; --cds-pad-lg: 16px; --cds-pad-xl: 24px;
+  --cds-radius: 8px; --cds-dur-slow: 300ms; --cds-ease-out: cubic-bezier(.2, .8, .2, 1);
+  --dash-color-1: #2a78d6; --dash-color-2: #eb6834; --dash-color-3: #1baf7a; --dash-color-4: #eda100;
+  --dash-color-5: #e87ba4; --dash-color-6: #008300; --dash-color-7: #6250d6; --dash-color-8: #e34948;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --color-bg: #1a1a19; --color-panel: #232322; --color-fg: #ecebe7; --color-fg-muted: #a3a29c; --color-border-line: #3a3936;
+    --color-ok: #5cc28a; --color-warn: #e0a43c; --color-bad: #ef6b6b;
+    --cds-chart-grid: #2f2f2d; --cds-chart-axis: #4a4945; --cds-chart-reference: #8f8e88; --cds-chart-muted: #5d5c58; --cds-chart-status-critical: #e66767;
+    --cds-surface-popover: #2b2b29; --cds-border: #3a3936; --cds-shadow-popover: 0 4px 16px rgba(0, 0, 0, .5); --cds-text-secondary: #a3a29c;
+    --dash-color-1: #3987e5; --dash-color-2: #d95926; --dash-color-3: #199e70; --dash-color-4: #c98500;
+    --dash-color-5: #d55181; --dash-color-6: #008300; --dash-color-7: #9085e9; --dash-color-8: #e66767;
+  }
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--color-bg); color: var(--color-fg); font-family: var(--font-anthropic-sans); font-size: var(--cds-font-size-body); line-height: 1.5; }
+#dash-root { --dash-gutter: clamp(16px, 4vw, 40px); padding: 0 var(--dash-gutter) var(--cds-gap-xl); max-width: 1400px; margin-inline: auto; }
+#dash-root b, #dash-root strong { font-weight: 700; }
+#dash-root a { color: inherit; }
+.dash-skeleton { color: transparent !important; background: var(--color-border-line); border-radius: var(--cds-radius); min-height: 1em; }
+.site-bar { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--cds-gap-sm); padding: var(--cds-pad-sm) var(--dash-gutter, 16px); max-width: 1400px; margin-inline: auto;
+  color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); border-bottom: 1px solid var(--color-border-line); }

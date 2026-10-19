@@ -1,0 +1,27 @@
+id,lab,party,party_type,channel,base_yi,size_yi,size_label,protection,first_loss,linked_debt,order,source
+X01,OpenAI,Oracle,算力提供方,"OCI 算力合同（约 3,000 亿 / 5 年）",3000,6640,"Oracle 未履约合同（RPO）6,640 亿",条款未公开,"Oracle：为承接需求另签 2,880 亿未起租的数据中心租约，并已有 1,253 亿有息债务",Stargate 各园区建设贷款与项目债 805 亿（租户为 Oracle）,1,Oracle 10-Q FY27Q1；WSJ
+X02,OpenAI,Microsoft,算力提供方,"Azure 承诺消费 2,500 亿",2500,6780,"微软商业 RPO 6,780 亿（FY26Q4）",条款未公开,微软（AAA，资产负债表可吸收）,,1,OpenAI 公告；微软 10-K
+X03,OpenAI,Amazon（AWS）,算力提供方,"AWS 合同 380 亿 + 1,000 亿",1380,4960,"AWS backlog 4,960 亿",条款未公开,亚马逊（AA，资产负债表可吸收）,,1,亚马逊 8-K、10-Q
+X04,OpenAI,CoreWeave,算力提供方,三份合同合计 224 亿,224,1037,"CoreWeave RPO 1,037 亿",只能因违约或破产终止；合同已质押给 DDTL 3.0,CoreWeave：先是 DDTL 3.0 贷款人（有合同和 GPU 抵押），再到母公司无担保债和可转债持有人,DDTL 3.0 22 亿,1,CoreWeave 8-K Ex10.1
+X05,OpenAI,Cerebras,算力提供方,推理算力合同（超过 200 亿）,200,,,只能因违约或破产终止；OpenAI 反向借给 Cerebras 约 10 亿,Cerebras,,1,Cerebras S-1
+X06,OpenAI,Stargate 园区贷款人与票据持有人,项目债与贷款,以 Oracle 租约为偿债来源,805,,,租户是 Oracle；Saline 由 Oracle 母公司担保,Oracle 先承担（租约照付），贷款人排在 Oracle 之后,Abilene、Frontier、Port Washington、Saline、Doña Ana,2,debt_instruments S01–S13
+X07,OpenAI,CoreWeave DDTL 3.0 贷款人,项目债与贷款,以 OpenAI 合同和 GPU 为抵押,22,,,母公司担保；合同实现率契约 ≥0.85 倍,CoreWeave 母公司先承担（担保），其次是 GPU 残值,DDTL 3.0（SOFR+4.00%，2030 年到期）,2,CoreWeave 8-K
+X08,OpenAI,NVIDIA,担保方,俄亥俄 PORTS 园区租金和电费担保,1050,,,起租后生效（预计 2028 年起），只覆盖部分付款；OpenAI 获满意评级后终止,"NVIDIA（担保上限 1,050 亿）",SB Energy PORTS 园区,3,NVIDIA 10-Q FY27Q2
+X09,OpenAI,软银,股权投资人,股权,646,,,股权，排在所有债务之后,累计投资 646 亿，持股约 13%；其 SB Energy 也是 OpenAI 的房东,,4,circular / funding_locked
+X10,OpenAI,微软,股权投资人,股权,119,,,股权，排在所有债务之后,已出资约 119 亿，持股约 27%,,4,circular / funding_locked
+X11,OpenAI,NVIDIA,股权投资人,股权,300,,,股权，排在所有债务之后,2026 年轮次 300 亿,,4,circular / funding_locked
+X12,OpenAI,亚马逊,股权投资人,股权,150,,,股权，排在所有债务之后,已到账 150 亿，另有 350 亿附条件,,4,circular / funding_locked
+X13,Anthropic,Broadcom（设备租赁）,算力提供方,"与 Broadcom 相关的设备租赁 1,612 亿（不可撤销）",1612,,,不可撤销；Broadcom 为芯片租赁平台高级档提供残值支持（最大潜在负债约 290 亿）,芯片租赁平台：B 档投资人先受损，高级档靠芯片残值和 Broadcom 支持,Apollo/Atlas 芯片租赁平台首批 345 亿,1,招股书草案（Reuters 转述）；K1
+X14,Anthropic,芯片租赁平台出资人（Apollo / Atlas）,项目债与贷款,以 Anthropic 的芯片租金为偿债来源,345,,,高级档（A1 60 亿、A2 240 亿）有 Broadcom 残值支持；B 档 45 亿没有,B 档投资人先受损，其次是芯片残值，最后是 Broadcom 的残值支持,Compute SPV A1 / A2 / B 档,2,debt_instruments AN-07–AN-09
+X15,Anthropic,Google Cloud,算力提供方,"谷歌云合同 1,111 亿（不足须补差）",1111,,,补差义务,谷歌（AA，资产负债表可吸收）,,1,招股书草案（Reuters 转述）
+X16,Anthropic,Amazon（AWS）,算力提供方,"AWS 合同 1,100 亿",1100,4960,"AWS backlog 4,960 亿",条款未公开,亚马逊（AA）,,1,招股书草案；亚马逊公告
+X17,Anthropic,Microsoft,算力提供方,Azure 314 亿,314,6780,"微软商业 RPO 6,780 亿",条款未公开,微软（AAA）,,1,招股书草案
+X18,Anthropic,SpaceX（xAI Colossus）,算力提供方,Colossus 算力，最高 845 亿（90 天可终止）,845,,,任一方 90 天通知可终止,SpaceX：可取消合同，不构成硬性损失,,1,招股书草案
+X19,Anthropic,AMD,算力提供方,算力供应，预计超过 200 亿,200,,,条款未公开,AMD,,1,招股书草案
+X20,Anthropic,Fluidstack 园区票据持有人,项目债与贷款,以 Fluidstack 租约为偿债来源,165,,,谷歌兜底，起租后生效；Hut 8 River Bend 全额兜底，其余部分兜底,建设期由开发商和票据持有人承担；起租后谷歌兜底,WULF、Flash、Cipher、Hut 8 River Bend、Meridian Arc、Nexus,2,debt_instruments AN-01–AN-14
+X21,Anthropic,谷歌（兜底）,担保方,Fluidstack 各园区租约兜底,132,,,起租后生效，只覆盖付款违约或破产,谷歌,,3,TeraWulf、Cipher、Hut 8 8-K
+X22,Anthropic,Broadcom（残值支持）,担保方,芯片租赁平台高级档的残值支持,290,,,Anthropic 违约后出售芯片，不足部分由 Broadcom 补足,Broadcom（10-Q 披露最大潜在负债约 290 亿）,,3,Broadcom 10-Q（K1 转述）
+X23,Anthropic,谷歌,股权投资人,股权,130,,,股权，排在所有债务之后,2023–2025 年约 30 亿 + 2026 年 100 亿，另有 300 亿附条件,,4,circular / funding_locked
+X24,Anthropic,亚马逊,股权投资人,股权,180,,,股权，排在所有债务之后,可转债 80 亿 + 2026 年 100 亿，另有 200 亿附条件,,4,circular / funding_locked
+X25,Anthropic,NVIDIA,股权投资人,股权,100,,,股权，排在所有债务之后,最多 100 亿,,4,circular / funding_locked
+X26,Anthropic,微软,股权投资人,股权,50,,,股权，排在所有债务之后,最多 50 亿,,4,circular / funding_locked

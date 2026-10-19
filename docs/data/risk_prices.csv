@@ -1,0 +1,43 @@
+id,date,instrument,issuer,metric,value,unit,source,note
+1,2026-09-17,CoreWeave 9.25% 2030,CoreWeave,利差,653,bp,美银 2026-09-21《Technology High Yield Weekly》Ex.6（经旧报告转引）,OAS/利差口径，与 G-spread 不完全可比
+2,2026-10-13,CoreWeave 9.25% 2030,CoreWeave,利差,793,bp,Bondterminal 2026-10-13 https://bondterminal.com/issuers/coreweave-inc,G-spread
+3,2026-10-13,CoreWeave 9.25% 2030,CoreWeave,到最差收益率,12.86,%,Bondterminal 2026-10-13 https://bondterminal.com/issuers/coreweave-inc,
+4,2026-10-13,CoreWeave 9.25% 2030,CoreWeave,价格,89.683,美元/百元面值,Bondterminal 2026-10-13 https://bondterminal.com/issuers/coreweave-inc,
+5,2026-09-17,CoreWeave 9.00% 2031,CoreWeave,利差,718,bp,美银 2026-09-21《Technology High Yield Weekly》Ex.6（经旧报告转引）,OAS/利差口径，与 G-spread 不完全可比
+6,2026-10-13,CoreWeave 9.00% 2031,CoreWeave,利差,867,bp,Bondterminal 2026-10-13 https://bondterminal.com/issuers/coreweave-inc,G-spread
+7,2026-10-13,CoreWeave 9.00% 2031,CoreWeave,到最差收益率,13.64,%,Bondterminal 2026-10-13 https://bondterminal.com/issuers/coreweave-inc,
+8,2026-10-13,CoreWeave 9.00% 2031,CoreWeave,价格,85.139,美元/百元面值,Bondterminal 2026-10-13 https://bondterminal.com/issuers/coreweave-inc,
+9,2026-09-17,CoreWeave 9.75% 2031,CoreWeave,利差,792,bp,美银 2026-09-21《Technology High Yield Weekly》Ex.6（经旧报告转引）,OAS/利差口径，与 G-spread 不完全可比
+10,2026-10-13,CoreWeave 9.75% 2031,CoreWeave,利差,978,bp,Bondterminal 2026-10-13 https://bondterminal.com/issuers/coreweave-inc,G-spread
+11,2026-10-13,CoreWeave 9.75% 2031,CoreWeave,到最差收益率,14.78,%,Bondterminal 2026-10-13 https://bondterminal.com/issuers/coreweave-inc,
+12,2026-10-13,CoreWeave 9.75% 2031,CoreWeave,价格,82.688,美元/百元面值,Bondterminal 2026-10-13 https://bondterminal.com/issuers/coreweave-inc,
+13,2026-09-17,CoreWeave 9.625% 2032,CoreWeave,利差,783,bp,美银 2026-09-21《Technology High Yield Weekly》Ex.6（经旧报告转引）,OAS/利差口径，与 G-spread 不完全可比
+14,2026-10-13,CoreWeave 9.625% 2032,CoreWeave,利差,984,bp,Bondterminal 2026-10-13 https://bondterminal.com/issuers/coreweave-inc,G-spread
+15,2026-10-13,CoreWeave 9.625% 2032,CoreWeave,到最差收益率,14.88,%,Bondterminal 2026-10-13 https://bondterminal.com/issuers/coreweave-inc,
+16,2026-10-13,CoreWeave 9.625% 2032,CoreWeave,价格,80.036,美元/百元面值,Bondterminal 2026-10-13 https://bondterminal.com/issuers/coreweave-inc,
+17,2026-09-17,CoreWeave 8.5% 2032（欧元）,CoreWeave,利差,831,bp,美银 2026-09-21《Technology High Yield Weekly》Ex.6（经旧报告转引）,10 月报价未找到
+18,2026-10-14,CoreWeave 9.625% 2032,CoreWeave,到最差收益率,15.06,%,Barron's 经 Forbes 转述,价格约 79.5；Bloomberg 引 TRACE 称跌破 80
+19,2026-06-30,CoreWeave 5 年 CDS,CoreWeave,CDS,547,bp,财联社引道琼斯（未核实）,
+20,2026-07-29,CoreWeave 5 年 CDS,CoreWeave,CDS,855,bp,TechTimes 引 24/7 Wall St,
+21,2026-09-05,CoreWeave 5 年 CDS,CoreWeave,CDS,800,bp,MarketWatch 引 FactSet：9 月初回到 800bp 以上,
+22,2026-10-12,CoreWeave 5 年 CDS,CoreWeave,CDS,881,bp,财联社引道琼斯（未核实）,
+23,2025-09-28,Oracle 5 年 CDS,Oracle,CDS,57,bp,Oracle 底稿 oracle_debt.csv,
+24,2026-08-04,Oracle 5 年 CDS,Oracle,CDS,215,bp,Oracle 底稿 oracle_debt.csv,
+25,2026-10-08,Oracle 5 年 CDS,Oracle,CDS,260,bp,大摩 2026-10-08《ORCL Credit: Chips Ahoy!》,
+26,2025-12-31,Oracle 5.2% 2035,Oracle,利差,161,bp,Oracle 底稿 oracle_debt.csv,
+27,2025-12-31,Oracle 5.95% 2055,Oracle,利差,205,bp,Oracle 底稿 oracle_debt.csv,
+28,2026-03-31,Oracle 5.2% 2035,Oracle,利差,180,bp,Oracle 底稿 oracle_debt.csv,
+29,2026-07-13,Oracle 5.2% 2035,Oracle,利差,186,bp,Oracle 底稿 oracle_debt.csv,
+30,2026-07-13,Oracle 5.95% 2055,Oracle,利差,251,bp,Oracle 底稿 oracle_debt.csv,
+31,2026-10-08,Oracle 5.2% 2035,Oracle,利差,224,bp,Oracle 底稿 oracle_debt.csv,
+32,2026-10-08,Oracle 5.95% 2055,Oracle,利差,278,bp,Oracle 底稿 oracle_debt.csv,
+33,2026-09-17,APLD ComputeCo LLC (Bloomberg: APLD 9.25,项目债（租户 CoreWeave）,到最差收益率,7.56,%,美银 2026-09-21 Ex.6,7.56%(YTW;价105.471;利差270bp)
+34,2026-09-17,APLD ComputeCo 3 LLC (Bloomberg: ELNFOR ,项目债（租户 CoreWeave）,到最差收益率,8.16,%,美银 2026-09-21 Ex.6,8.16%(YTW;价95.795;利差329bp)
+35,2026-09-17,Core Scientific Finance I LLC (BofA: Cor,项目债（租户 CoreWeave）,到最差收益率,8.3,%,美银 2026-09-21 Ex.6,8.30%(YTW;价98.003;利差344bp)
+36,2026-09-17,Edged Compute LLC (Bloomberg: EDGCOM 7.5,项目债（租户 CoreWeave）,到最差收益率,9.19,%,美银 2026-09-21 Ex.6,9.19%(YTW;价94.455;利差433bp)
+37,2026-09-17,Elk Grove Village Property LLC (Bloomber,项目债（租户 CoreWeave）,到最差收益率,8.65,%,美银 2026-09-21 Ex.6,8.65%(YTW;价96.015;利差379bp)
+38,2026-09-17,Galaxy Helios Data Centers II LLC (BofA:,项目债（租户 CoreWeave）,到最差收益率,9.95,%,美银 2026-09-21 Ex.6,9.95%(YTW;价99.689;利差509bp)
+39,2026-09-23,DDC 01 Propco LLC,项目债（租户 CoreWeave）,到最差收益率,9.25,%,美银 2026-09-21 Ex.6,"9.25%(发行收益率,二手)"
+40,2026-09-17,CoreWeave 股价,CoreWeave,股价,79.88,美元,公司公告、24/7 Wall St、Motley Fool,
+41,2026-10-08,CoreWeave 股价,CoreWeave,股价,81.58,美元,公司公告、24/7 Wall St、Motley Fool,
+42,2026-10-14,CoreWeave 股价,CoreWeave,股价,65.78,美元,公司公告、24/7 Wall St、Motley Fool,

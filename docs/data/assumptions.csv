@@ -1,0 +1,21 @@
+id,value,description
+openai_rev_2030_plan,350,"OpenAI 2030 年收入，公司计划（2026-07 投资人材料，FT）；2026-02 版为 2,800 亿"
+openai_compute_cum_2026_2030,856,"OpenAI 2026–2030 算力与基础设施累计支出（2026-07 版材料）；2026-02 版为 6,000 亿"
+openai_compute_2026,52,OpenAI 2026 年算力支出：训练约 320 亿（媒体报道）+ 推理约 200 亿（按 2025 年营业成本占收入 57% 外推）
+anthropic_compute_to_rev_2026,0.8,Anthropic 2026 年算力支出 / 收入：2025 年为 1.6；2026 年二季度报道调整后经营利润转正，取 0.8
+anthropic_compute_to_rev_2027p,0.6,Anthropic 2027 年起算力支出 / 收入，且不低于已签算力合同的年化额
+anthropic_other_cost_2026,10,Anthropic 2026 年非算力成本（人员、销售等），2025 年约 53 亿，按翻倍估
+anthropic_rev_2028,195,"Anthropic 2028 年收入，IPO 相关预测 1,900–2,000 亿取中值（Reuters 2026-08，毛额口径）"
+conservative_growth_factor,0.5,保守情景：2027–2030 年实验室收入增速为公司计划增速的一半
+bigtech_ocf_growth,0.15,大厂经营现金流 2026–2027 年增速假设（2025 年实际增速约 30%）
+contract_OpenAI_Oracle_2027,300 / 5 年，自 2027,"OpenAI → Oracle：约 3,000 亿 / 5 年，2027 年约 300 亿、逐年爬坡到 2031 年约 900 亿（WSJ 经转述），中间年份线性插值"
+contract_OpenAI_Microsoft_2026,250 / 7 年，自 2026,"OpenAI → Microsoft：Azure 增量 2,500 亿，年限未披露，假设 7 年"
+contract_OpenAI_AWS_2025,38 / 7 年，自 2025,OpenAI → AWS：380 亿 / 7 年（2025-11）
+contract_OpenAI_AWS_2026,100 / 8 年，自 2026,"OpenAI → AWS：追加 1,000 亿 / 8 年（2026-02）"
+contract_OpenAI_CoreWeave_2025,22.4 / 6 年，自 2025,OpenAI → CoreWeave：三份合同合计 224 亿，至 2030-10/2031-05
+contract_OpenAI_Cerebras_2026,20 / 4 年，自 2026,OpenAI → Cerebras：200 亿，3–4 年
+contract_Anthropic_Google_2026,111.1 / 8 年，自 2026,"Anthropic → Google：Google Cloud 1,111 亿，7–10 年取 8 年；实际支出不足须补差（招股书草案）。媒体此前报道的约 2,000 亿未获确认"
+contract_Anthropic_AWS_2026,110 / 8 年，自 2026,"Anthropic → AWS：AWS 1,100 亿，7–10 年取 8 年（招股书草案；2026-04 公告为超过 1,000 亿 / 10 年）"
+contract_Anthropic_Microsoft_2027,31.4 / 7 年，自 2027,Anthropic → Microsoft：Azure 314 亿，2026-11 至 2033（招股书草案）
+contract_Anthropic_Broadcom_2027,161.2 / 6 年，自 2027,"Anthropic → Broadcom：与 Broadcom 相关的设备租赁 1,612 亿，不可撤销；期限未披露，按芯片租赁 6 年估（经 Broadcom 的约 3.5GW 自 2027 年起）"
+contract_Anthropic_AMD_2027,20 / 4 年，自 2027,Anthropic → AMD：AMD 算力预计超过 200 亿，期限未披露，按 4 年估
